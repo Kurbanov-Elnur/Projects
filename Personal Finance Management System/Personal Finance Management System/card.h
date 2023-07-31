@@ -1,20 +1,23 @@
-#include "personalData.h"
 #include "dateOfExpiry.h"
-
+#include "personalData.h"
 
 class card
 {
 protected:
-	uint16_t* cardNumber{};
+	std::string cardNumber{};
 	uint16_t* CVV{};
+	uint16_t* balance{};
 public:
 	personalData* ownerData{};
-	dateOfExpiry* dateExpiry;
+	dateOfExpiry* dateExpiry{};
 
-	card(std::string&, std::string&, std::string&, uint16_t&, uint16_t&, uint16_t&, uint16_t&, uint16_t&, uint16_t&, uint16_t&);
+	card(personalData&, std::string&, uint16_t&, uint16_t&, dateOfExpiry&);
 
-	uint16_t getCardNumber() const;
+	void addBalance(uint16_t amount);
+
+	std::string getCardNumber() const;
 	uint16_t getCVV() const;
+	uint16_t getBalance() const;
 
-	~card();
+	//~card();
 };

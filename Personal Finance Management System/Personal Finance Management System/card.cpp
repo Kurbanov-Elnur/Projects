@@ -1,27 +1,38 @@
 #include "card.h"
 
-card::card(std::string& _name, std::string& _surname, std::string& _patronomic,uint16_t& _dayOfBirth, uint16_t& _monthOfBirth,
-	uint16_t& _yearOfBirth, uint16_t& _cardNumber, uint16_t& _CVV, uint16_t& _monthOfExpiry, uint16_t& _yearOfExpiry)
+card::card(personalData& _ownerData, std::string& _cardNumber, uint16_t& _CVV, uint16_t& _balance, dateOfExpiry& _dataOfExpiry)
 {
-	this->ownerData = new personalData{ _name, _surname, _patronomic, _dayOfBirth, _monthOfBirth, _yearOfBirth };
-	this->cardNumber = new uint16_t{ _cardNumber };
+	this->ownerData = new personalData (_ownerData);
+	this->cardNumber = _cardNumber ;
 	this->CVV = new uint16_t{ _CVV };
-	this->dateExpiry = new dateOfExpiry{ _monthOfExpiry, _yearOfExpiry };
+	this->dateExpiry = new dateOfExpiry (_dataOfExpiry);
+	this->balance = new uint16_t{ _balance };
 }
 
-uint16_t card::getCardNumber() const
+void card::addBalance(uint16_t amount)
 {
-	return *this->cardNumber;
+	this->balance += amount;
 }
+
+std::string card::getCardNumber() const
+{
+	return this->cardNumber;
+}
+
 uint16_t card::getCVV() const
 {
 	return *this->CVV;
 }
 
-card::~card()
+uint16_t card::getBalance() const
 {
-	delete this->cardNumber;
-	delete this->CVV;
-	delete this->ownerData;
-	delete this->dateExpiry;
+	return *this->balance;
 }
+
+//card::~card()
+//{
+//	delete this->balance;
+//	delete this->CVV;
+//	delete this->ownerData;
+//	delete this->dateExpiry;
+//}

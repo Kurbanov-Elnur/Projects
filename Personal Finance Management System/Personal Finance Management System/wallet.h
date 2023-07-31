@@ -1,24 +1,30 @@
-#include "personalData.h"
+#include "card.h"
 
 class wallet
 {
 private:
 	uint16_t* ID{};
 	uint16_t* securityCode{};
-public:
-	personalData* ownerData{};
 	uint16_t* balance{};
+public:
+	uint16_t* cardsCount = new uint16_t{};
+	card** cards = new card*[10];
+	personalData* ownerData{};
 	std::string ownerEmail{};
 	std::string ownerPhone{};
 	std::string currency{};
-	uint16_t* transactionLimit{};
-	uint16_t* dailyLimit{};
+	uint16_t* dailySpendingLimit{};
 
-	wallet(std::string&, std::string&, std::string&, uint16_t&, uint16_t&, uint16_t&, std::string&, std::string&, std::string&, uint16_t&
-		, uint16_t&, uint16_t&, uint16_t&, uint16_t&);
+	wallet() = default;
 
+	wallet(personalData&, std::string&, std::string&, std::string&, uint16_t&, uint16_t&, uint16_t&);
+
+	void addCard();
+	void cardReplenishment();
+
+	uint16_t getBalance() const;
 	uint16_t getID() const;
 	uint16_t getSecurityCode() const;
 
-	~wallet();
+	//~wallet();
 };
