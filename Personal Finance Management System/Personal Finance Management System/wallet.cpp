@@ -1,14 +1,14 @@
 #include "Functions.h"
 
 wallet::wallet(personalData& _ownerData, std::string& _ownerEmail, std::string& _ownerPhone, std::string& _currency,
-	uint16_t& _ID, uint16_t& _securityCode, uint16_t& _balance)
+	uint16_t& _ID, uint16_t& _securityCode, float& _balance)
 {
 	this->ownerData = new personalData(_ownerData);
 	this->ID = new uint16_t{ _ID };
 	this->securityCode = new uint16_t{ _securityCode };
 	this->ownerEmail = _ownerEmail;
 	this->ownerPhone = _ownerPhone;
-	this->balance = new uint16_t{ _balance };
+	this->balance = new float{ _balance };
 	this->currency = _currency;
 }
 
@@ -31,7 +31,7 @@ void wallet::addCard()
 	
 	std::cout << "Enter balance: " << std::endl; std::cin >> checkData[1];
 	functions::myCheck(checkData[1], std::regex("[0-9]{1,6}"));
-	uint16_t balance = std::stoi(checkData[1]);
+	float balance = std::stoi(checkData[1]);
 
 	this->cards[*this->cardsCount] = new card(person, cardNumber, CVV, balance, dateOFExpiry);
 
@@ -54,7 +54,7 @@ void wallet::cardReplenishment()
 	std::cout << "Enter amount for replenishment: "; std::cin >> amount;
 	functions::myCheck(amount, std::regex("[0-9]{1,6}"));
 
-	this->cards[std::stoi(choice)]->addBalance(std::stoi(amount));
+	this->cards[std::stoi(choice)]->setBalance(this->cards[std::stoi(choice)]->getBalance() + std::stoi(amount));
 }
 
 uint16_t wallet::getBalance() const
@@ -71,19 +71,3 @@ uint16_t wallet::getSecurityCode() const
 {
 	return *this->securityCode;
 }
-
-//wallet::~wallet()
-//{
-//	delete this->ownerData;
-//	delete this->ID;
-//	delete this->securityCode;
-//	delete this->balance;
-//	delete this->transactionLimit;
-//	delete this->dailyLimit;
-//	delete this->balance;
-//	for (int i = 0; i < *this->cardsCount; ++i) {
-//		delete cards[i];
-//	}
-//	delete[] cards;
-//	delete this->cardsCount;
-//}

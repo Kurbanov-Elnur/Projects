@@ -41,8 +41,8 @@ wallet functions::addWallet()
 	uint16_t securityCode = std::stoi(checkData[1]);
 
 	std::cout << "Enter balance: " << std::endl; std::cin >> checkData[2];
-	functions::myCheck(checkData[2], std::regex("[0-9]{1,6}"));
-	uint16_t balance = std::stoi(checkData[2]);
+	functions::myCheck(checkData[2], std::regex("[0-9]{1,4}[.]?[0-9]{1,2}"));
+	float balance = std::stoi(checkData[2]);
 
 	wallet w(person, ownerEmail, ownerPhone, currency, ID, securityCode, balance);
 

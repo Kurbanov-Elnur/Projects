@@ -1,5 +1,6 @@
 #include "wallet.h"
 #include <regex>
+#pragma once
 
 namespace functions
 {
