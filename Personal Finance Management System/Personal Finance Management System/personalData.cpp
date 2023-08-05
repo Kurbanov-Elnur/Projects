@@ -6,9 +6,9 @@ personalData::personalData(std::string& _name, std::string& _surname, std::strin
 	this->name = _name;
 	this->surname = _surname;
 	this->patronomic = _patronomic;
-	*this->dayOfBirth = _dayOfBirth;
-	*this->monthOfBirth = _monthOfBirth;
-	*this->yearOfBirth = _yearOfBirth;
+	this->dayOfBirth = new uint16_t { _dayOfBirth };
+	this->monthOfBirth = new uint16_t { _monthOfBirth };
+	this->yearOfBirth = new uint16_t { _yearOfBirth };
 }
 
 std::string personalData::getName() const
