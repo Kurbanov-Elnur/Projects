@@ -21,27 +21,34 @@ namespace functions
 	}
 
 	template <typename T>
-	void loadFromFile(T**& downloadData, std::string fileName)
+	bool loadFromFile(T**& downloadData, std::string fileName, uint16_t& count)
 	{
 		fileName += ".txt";
 
-		std::ifstream file("fileName", std::ios::in);
+		std::ifstream file(fileName);
 
-		std::string data{};
-		std::stringstream ss;
+		T data{};
 
 		if (file.is_open())
 		{
-			while (std::getline(file, data))
+			for (size_t i = 0; file >> data; i++)
 			{
-				ss << data;
+				downloadData[i] = new T(data);
+				count++;
 			}
-
+			count--;
 		}
+		else
+		{
+			file.close();
+			return false;
+		}
+		file.close();
 
-		else throw std::invalid_argument("File not found!");
+		return true;
 	}
 
+	std::string checkWallets(wallet** _wallet, uint16_t& count);
 	void formationOfRatings(wallet wallets);
 	void top3cost(wallet wallets);
 	void top3category(wallet wallets);

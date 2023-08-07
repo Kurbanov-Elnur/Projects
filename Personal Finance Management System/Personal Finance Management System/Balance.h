@@ -7,9 +7,11 @@ private:
 	int right{};
 	int left{};
 public:
-	Balance() = default;
-
 	Balance(int _left, int _right);
+
+	Balance();
+
+	Balance(const Balance& _other);
 
 	void operator+=(const Balance _Balance)
 	{
@@ -50,6 +52,7 @@ public:
 			os
 				<< _Balance.left << std::endl
 				<< _Balance.right << std::endl;
+			return os;
 		}
 		os << _Balance.left << '.' << _Balance.right;
 		return os;

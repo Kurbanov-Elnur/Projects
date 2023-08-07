@@ -10,6 +10,10 @@ private:
 public:
 	dateOfExpiry(uint16_t&, uint16_t&);
 
+	dateOfExpiry();
+
+	dateOfExpiry(const dateOfExpiry& _other);
+
 	friend std::ostream& operator << (std::ostream& os, dateOfExpiry _dateOfExpiry)
 	{
 		if (typeid(os) == typeid(std::ofstream))

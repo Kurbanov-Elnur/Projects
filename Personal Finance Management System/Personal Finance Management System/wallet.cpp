@@ -12,6 +12,24 @@ wallet::wallet(personalData& _ownerData, std::string& _ownerEmail, std::string& 
 	this->currency = _currency;
 }
 
+wallet::wallet()
+{
+	this->ownerData = new personalData{};
+	this->securityCode = new uint16_t{};
+	this->balance = new Balance{};
+}
+
+wallet::wallet(const wallet& _other)
+{
+	this->ownerData = new personalData(*_other.ownerData);
+	this->ID = _other.ID;
+	this->securityCode = new uint16_t(*_other.securityCode);
+	this->ownerEmail = _other.ownerEmail;
+	this->ownerPhone = _other.ownerPhone;
+	this->balance = new Balance(*_other.balance);
+	this->currency = _other.currency;
+}
+
 void wallet::addCard()
 {
 	std::string cardNumber{};
@@ -33,6 +51,18 @@ void wallet::addCard()
 	functions::myCheck(checkData[1], std::regex("[0-9]{1,4}[.]?[0-9]{1,2}"));
 	Balance* balance{};
 	balance = new Balance{ *balance->checkAmount(checkData[1]) };
+
+	if (*this->cardsCount == sizeof(this->cards) / sizeof(this->cards[0]))
+	{
+		card** newCards = new card * [(sizeof(this->cards) / sizeof(this->cards[0])) * 2];
+
+		for (size_t i = 0; i < (sizeof(this->cards) / sizeof(this->cards[0])); ++i) {
+			newCards[i] = cards[i];
+		}
+
+		delete[] cards;
+		this->cards = newCards;
+	}
 
 	this->cards[*this->cardsCount] = new card(*person, cardNumber, CVV, *balance, *dateOFExpiry);
 

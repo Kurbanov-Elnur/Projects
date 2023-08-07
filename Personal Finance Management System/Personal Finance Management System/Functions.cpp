@@ -2,6 +2,44 @@
 #include "Functions.h"
 #include <ctime>
 
+std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
+{
+	std::string currentWallet = "0";
+	if (_wallets[0] == nullptr)
+	{
+		_wallets[0] = functions::addWallet();
+		functions::saveInFile(*_wallets[0], "wallets");
+		count++;
+		system("cls");
+	}
+	else
+	{
+		while (true)
+		{
+			std::cout << "Enter current wallet: " << std::endl;
+			for (size_t i = 0; i < count; i++)
+			{
+				std::cout << i + 1 << ". " << _wallets[i]->getID() << std::endl;
+			}
+			while (std::stoi(currentWallet) <= 0 || std::stoi(currentWallet) > count)
+			{
+				std::cin >> currentWallet;
+				functions::myCheck(currentWallet, std::regex("[0-9]{1,}"));
+			}
+			std::string security{};
+			std::cout << "Enter security code: "; std::cin >> security;
+			functions::myCheck(security, std::regex("[0-9]{4}"));
+
+			if (_wallets[std::stoi(currentWallet)]->getSecurityCode() == std::stoi(security))
+				break;
+			system("cls");
+			continue;
+		}
+	}
+
+	return currentWallet;
+}
+
 void functions::formationOfRatings(wallet wallet)
 {
 	std::string startDay = "0", startMonth = "0", endDay = "0", endMonth = "0";

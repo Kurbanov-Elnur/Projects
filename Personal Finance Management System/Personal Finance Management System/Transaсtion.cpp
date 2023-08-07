@@ -12,6 +12,26 @@ Transaction::Transaction(std::string& _senderID, std::string& _recipientID, uint
 	this->category = new uint16_t{ _category };
 }
 
+Transaction::Transaction()
+{
+	this->sendDay = new uint16_t{};
+	this->sendMonth = new uint16_t{};
+	this->sendYear = new uint16_t{};
+	this->sendAmount = new Balance{};
+	this->category = new uint16_t{};
+}
+
+Transaction::Transaction(const Transaction& _other)
+{
+	this->senderID = _other.senderID;
+	this->recipientID = _other.recipientID;
+	this->sendDay = new uint16_t{ *_other.sendDay };
+	this->sendMonth = new uint16_t{ *_other.sendMonth };
+	this->sendYear = new uint16_t{ *_other.sendYear };
+	this->sendAmount = new Balance{ *_other.sendAmount };
+	this->category = new uint16_t{ *_other.category };
+}
+
 std::string Transaction::getSenderID() const
 {
 	return this->senderID;

@@ -16,9 +16,13 @@ public:
 	std::string currency{};
 	uint16_t* dailySpendingLimit{};
 	Transaction** Transactions = new Transaction*[50]{};
-	uint16_t* tranasctionCount = new uint16_t{};
+	uint16_t* tranasctionCount = new uint16_t{50};
 
 	wallet(personalData&, std::string&, std::string&, std::string&, std::string&, uint16_t&, Balance&);
+
+	wallet();
+
+	wallet(const wallet& _other);
 
 	friend std::ostream& operator << (std::ostream& os, const wallet _wallet)
 	{
@@ -55,7 +59,8 @@ public:
 
 	friend std::istream& operator>>(std::istream& is, wallet& _wallet)
 	{
-		is >> *_wallet.ownerData >> _wallet.ownerPhone >> _wallet.ID >> *_wallet.securityCode >> _wallet.currency >> *_wallet.balance;
+		is >> *_wallet.ownerData >> _wallet.ownerEmail >> _wallet.ownerPhone >>  _wallet.ID >> *_wallet.securityCode >> _wallet.currency >> *_wallet.balance;
+		return is;
 	}
 
 	void addCard();

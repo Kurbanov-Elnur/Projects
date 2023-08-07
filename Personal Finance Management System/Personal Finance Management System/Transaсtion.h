@@ -16,6 +16,10 @@ public:
 	std::string categories[8]{ "Food", "Utilities", "Transport", "Health", "Education", "Entertainments", "Clothes", "Communications" };
 
 	Transaction(std::string&, std::string&, uint16_t&, uint16_t&, uint16_t&, Balance&, uint16_t&);
+
+	Transaction();
+
+	Transaction(const Transaction& _other);
 	
 	friend std::ostream& operator << (std::ostream& os, const Transaction _Transaction)
 	{

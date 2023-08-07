@@ -15,6 +15,10 @@ public:
 
 	card(personalData&, std::string&, uint16_t&, Balance&, dateOfExpiry&);
 
+	card();
+
+	card(const card& _other);
+
 	friend std::ostream& operator <<(std::ostream& os, const card _card)
 	{
 		if (typeid(os) == typeid(std::ofstream))

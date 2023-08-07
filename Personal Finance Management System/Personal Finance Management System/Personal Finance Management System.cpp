@@ -5,39 +5,13 @@ int main()
 	uint16_t walletsCount{};
 	wallet** wallets = new wallet*[10]{};
 
-	std::string choice{}, currentWallet = "0";
-
-	if (wallets[0] == nullptr)
+	if (functions::loadFromFile(wallets, "wallets", walletsCount))
 	{
-		wallets[0] = functions::addWallet();
-		functions::saveInFile(*wallets[0], "wallets");
-		walletsCount++;
-		system("cls");
+		functions::loadFromFile(wallets[0]->cards, "cards", *wallets[0]->cardsCount);
+		functions::loadFromFile(wallets[0]->Transactions, "transaction", *wallets[0]->tranasctionCount);
 	}
-	else
-	{
-		while (true)
-		{
-			std::cout << "Enter current wallet: " << std::endl;
-			for (size_t i = 0; i < walletsCount; i++)
-			{
-				std::cout << i + 1 << ". " << wallets[i]->getID() << std::endl;
-			}
-			while (std::stoi(currentWallet) <= 0 || std::stoi(currentWallet) > walletsCount)
-			{
-				std::cin >> currentWallet;
-				functions::myCheck(currentWallet, std::regex("[0-9]{1,}"));
-			}
-			std::string security{};
-			std::cout << "Enter security code: "; std::cin >> security;
-			functions::myCheck(security, std::regex("[0-9]{4}"));
 
-			if (wallets[std::stoi(currentWallet)]->getSecurityCode() == std::stoi(security))
-				break;
-			system("cls");
-			continue;
-		}
-	}
+	std::string choice{}, currentWallet = functions::checkWallets(wallets, walletsCount);
 
 	while (true)
 	{
@@ -81,6 +55,17 @@ int main()
 				system("cls");
 				break;
 			case 5:
+				if (*wallets[std::stoi(currentWallet)]->tranasctionCount == sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0]))
+				{
+					Transaction** newCards = new Transaction * [(sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0])) * 2];
+
+					for (size_t i = 0; i < sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0]); ++i) {
+						newCards[i] = wallets[std::stoi(currentWallet)]->Transactions[i];
+					}
+
+					delete[] wallets[std::stoi(currentWallet)]->Transactions;
+					wallets[std::stoi(currentWallet)]->Transactions = newCards;
+				}
 				wallets[std::stoi(currentWallet)]->Transactions[*wallets[std::stoi(currentWallet)]->tranasctionCount] = functions::addTransaction();
 				functions::saveInFile(*wallets[std::stoi(currentWallet)]->Transactions[*wallets[std::stoi(currentWallet)]->tranasctionCount], "transaction");
 				(*wallets[std::stoi(currentWallet)]->tranasctionCount)++;

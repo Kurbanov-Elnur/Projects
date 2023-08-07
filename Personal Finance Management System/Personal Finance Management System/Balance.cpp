@@ -6,6 +6,18 @@ Balance::Balance(int _left, int _right)
     this->right = _right ;
 }
 
+Balance::Balance()
+{
+    this->left = 0;
+    this->right = 0;
+}
+
+Balance::Balance(const Balance& _other)
+{
+    this->left = _other.left;
+    this->right = _other.right;
+}
+
 Balance* Balance::checkAmount(std::string amount)
 {
     int checkRightLeft[3]{};

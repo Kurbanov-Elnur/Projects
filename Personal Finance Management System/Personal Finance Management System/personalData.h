@@ -14,6 +14,10 @@ private:
 public:
 	personalData(std::string&, std::string&, std::string&, uint16_t&, uint16_t&, uint16_t&);
 
+	personalData();
+
+	personalData(const personalData& other);
+
 	friend std::ostream& operator <<(std::ostream& os, const personalData _personalData)
 	{
 		if (typeid(os) == typeid(std::ofstream))
