@@ -21,15 +21,6 @@ public:
 
 	friend std::ostream& operator <<(std::ostream& os, const card _card)
 	{
-		if (typeid(os) == typeid(std::ofstream))
-		{
-			os
-				<< *_card.ownerData
-				<< _card.cardNumber << std::endl
-				<< *_card.CVV << std::endl
-				<< *_card.dateExpiry
-				<< *_card.balance << std::endl;
-		}
 		os
 			<< *_card.ownerData
 			<< "Card number: " << _card.cardNumber << std::endl
@@ -38,14 +29,34 @@ public:
 			<< "Balance: " << * _card.balance << std::endl;
 		return os;
 	}
+
+	friend json& operator <<(json& jsonData, const card _card)
+	{
+		jsonData << *_card.ownerData;
+		jsonData["cardNumber"] = _card.cardNumber;
+		jsonData["CVV"] = *_card.CVV;
+		jsonData << *_card.dateExpiry;
+		jsonData << *_card.balance;
+
+		return jsonData;
+	}
+
+	friend json& operator >>(json& jsonData, card& _card)
+	{
+		jsonData >> *_card.ownerData;
+		_card.cardNumber = jsonData["cardNumber"];
+		*_card.CVV = jsonData["CVV"];
+		jsonData >> *_card.dateExpiry;
+		jsonData >> *_card.balance;
+
+		return jsonData;
+	}
 	
 	friend std::istream& operator>>(std::istream& is, card& _card)
 	{
 		is >> *_card.ownerData >> _card.cardNumber >> *_card.CVV >> *_card.dateExpiry >> *_card.balance;
 		return is;
 	}
-
-
 
 	std::string getCardNumber() const;
 	uint16_t getCVV() const;

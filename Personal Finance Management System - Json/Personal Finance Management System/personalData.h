@@ -1,5 +1,7 @@
 #include <iostream>
-#include <fstream>
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 #pragma once
 
 struct personalData
@@ -20,23 +22,34 @@ public:
 
 	friend std::ostream& operator <<(std::ostream& os, const personalData _personalData)
 	{
-		if (typeid(os) == typeid(std::ofstream))
-		{
-			os
-				<< _personalData.name << std::endl
-				<< _personalData.surname << std::endl
-				<< _personalData.patronomic << std::endl
-				<< *_personalData.dayOfBirth << std::endl
-				<< *_personalData.monthOfBirth << std::endl
-				<< *_personalData.yearOfBirth << std::endl;
-			return os;
-		}
 		os
 			<< "Owner name: " << _personalData.name << std::endl
 			<< "Owner surname: " << _personalData.surname << std::endl
 			<< "Owner patronomic: " << _personalData.patronomic << std::endl
 			<< "Owner date of birth: " << *_personalData.dayOfBirth << '.' << *_personalData.monthOfBirth << '.' << *_personalData.yearOfBirth << std::endl;
 		return os;
+	}
+
+	friend json operator <<(json& jsonData, const personalData _personalData)
+	{
+		jsonData["name"] = _personalData.name;
+		jsonData["surname"] = _personalData.surname;
+		jsonData["patronomic"] = _personalData.patronomic;
+		jsonData["dayOfBirth"] = *_personalData.dayOfBirth;
+		jsonData["monthOfBirth"] = *_personalData.monthOfBirth;
+		jsonData["yearOfBirth"] = *_personalData.yearOfBirth;
+		return jsonData;
+	}
+
+	friend json operator >> (json& jsonData, personalData& _personalData)
+	{
+		_personalData.name = jsonData["name"];
+		_personalData.surname = jsonData["surname"];
+		_personalData.patronomic = jsonData["patronomic"];
+		*_personalData.dayOfBirth = jsonData["dayOfBirth"];
+		*_personalData.monthOfBirth = jsonData["monthOfBirth"];
+		*_personalData.yearOfBirth = jsonData["yearOfBirth"];
+		return jsonData;
 	}
 
 	friend std::istream& operator>>(std::istream& is, personalData& _personalData)

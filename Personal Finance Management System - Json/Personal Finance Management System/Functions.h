@@ -1,6 +1,5 @@
-#include "wallet.h"
-#include <sstream>
-#include <string>
+#include "wallet.h" 
+#include <fstream>
 #include <regex>
 #pragma once
 
@@ -9,41 +8,47 @@ namespace functions
 	template<typename T>
 	void saveInFile(T data, std::string fileName)
 	{
-		fileName += ".txt";
+		fileName += ".json";
 
-		std::ofstream file(fileName, std::ios::app);
+		json jsonData;
+		jsonData << data;
 
-		if (file.is_open())
-			file << data;
-		else throw std::invalid_argument("File not found!");
+		std::ofstream outputFile(fileName);
 
-		file.close();
+		if (!outputFile.is_open()) {
+			std::cerr << "Error" << std::endl;
+			return;
+		}
+
+		outputFile << jsonData;
+
+		outputFile.close();
 	}
 
 	template <typename T>
 	bool loadFromFile(T**& downloadData, std::string fileName, uint16_t& count)
 	{
-		fileName += ".txt";
+		fileName += ".json";
 
-		std::ifstream file(fileName);
+		std::ifstream inputFile(fileName);
 
-		T data{};
-
-		if (file.is_open())
-		{
-			for (size_t i = 0; file >> data; i++)
-			{
-				downloadData[i] = new T(data);
-				count++;
-			}
-			count--;
-		}
-		else
-		{
-			file.close();
+		if (!inputFile.is_open()) {
 			return false;
 		}
-		file.close();
+
+		json inputData;
+
+		try {
+		for (int i{}; inputFile >> inputData; i++)
+		{
+			T data; 
+			inputData >> data;
+			downloadData[i] = new T(data); 
+			count++;
+		}
+		}
+		catch (...) {};
+		inputFile.close();
 
 		return true;
 	}

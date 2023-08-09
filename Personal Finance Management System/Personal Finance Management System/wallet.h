@@ -16,7 +16,7 @@ public:
 	std::string currency{};
 	uint16_t* dailySpendingLimit{};
 	Transaction** Transactions = new Transaction*[50]{};
-	uint16_t* tranasctionCount = new uint16_t{50};
+	uint16_t* tranasctionCount = new uint16_t{};
 
 	wallet(personalData&, std::string&, std::string&, std::string&, std::string&, uint16_t&, Balance&);
 

@@ -22,18 +22,6 @@ public:
 	
 	friend std::ostream& operator << (std::ostream& os, const Transaction _Transaction)
 	{
-		if (typeid(os) == typeid(std::ofstream))
-		{
-			os
-				<< _Transaction.senderID << std::endl
-				<< _Transaction.recipientID << std::endl
-				<< *_Transaction.sendDay << std::endl
-				<< *_Transaction.sendMonth << std::endl
-				<< *_Transaction.sendYear << std::endl
-				<< *_Transaction.sendAmount
-				<< *_Transaction.category << std::endl;
-			return os;
-		}
 		os
 			<< "Sender ID: " << _Transaction.senderID << std::endl
 			<< "Recipient ID: " << _Transaction.recipientID << std::endl
@@ -41,6 +29,31 @@ public:
 			<< "Send amount: " << *_Transaction.sendAmount << std::endl
 			<< "Category: " << _Transaction.categories[*_Transaction.category - 1] << std::endl;
 		return os;
+	}
+
+	friend json& operator << (json& jsonData, const Transaction _Transaction)
+	{
+		jsonData["senderID"] = _Transaction.senderID;
+		jsonData["recipientID"] = _Transaction.recipientID;
+		jsonData["sendDay"] = *_Transaction.sendDay;
+		jsonData["sendMonth"] = *_Transaction.sendMonth;
+		jsonData["sendYear"] = *_Transaction.sendYear;
+		jsonData["sendAmount"] << *_Transaction.sendAmount;
+		jsonData["category"] = *_Transaction.category;
+		return jsonData;
+	}
+
+	friend json& operator >> (json& jsonData, Transaction& _Transaction)
+	{
+		_Transaction.senderID = jsonData["senderID"];
+		_Transaction.recipientID = jsonData["recipientID"];
+		*_Transaction.sendDay = jsonData["sendDay"];
+		*_Transaction.sendMonth = jsonData["sendMonth"];
+		*_Transaction.sendYear = jsonData["sendYear"];
+		jsonData >> *_Transaction.sendAmount;
+		*_Transaction.category = jsonData["category"];
+
+		return jsonData;
 	}
 
 	friend std::istream& operator>>(std::istream& is, Transaction& _Transaction)

@@ -30,7 +30,7 @@ std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
 			std::cout << "Enter security code: "; std::cin >> security;
 			functions::myCheck(security, std::regex("[0-9]{4}"));
 
-			if (_wallets[std::stoi(currentWallet)]->getSecurityCode() == std::stoi(security))
+			if (_wallets[std::stoi(currentWallet) - 1]->getSecurityCode() == std::stoi(security))
 				break;
 			system("cls");
 			continue;

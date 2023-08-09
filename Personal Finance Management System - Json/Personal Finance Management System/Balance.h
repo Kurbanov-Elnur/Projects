@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
-#include <fstream>
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 class Balance
 {
 private:
@@ -12,6 +14,7 @@ public:
 	Balance();
 
 	Balance(const Balance& _other);
+
 
 	void operator+=(const Balance _Balance)
 	{
@@ -47,15 +50,23 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Balance _Balance)
 	{
-		if (typeid(os) == typeid(std::ofstream))
-		{
-			os
-				<< _Balance.left << std::endl
-				<< _Balance.right << std::endl;
-			return os;
-		}
 		os << _Balance.left << '.' << _Balance.right;
 		return os;
+	}
+
+	friend json& operator<<(json& jsonData, const Balance _Balance)
+	{
+
+		jsonData["left"] = _Balance.left;
+		jsonData["right"] = _Balance.right;
+		return jsonData;
+	}
+
+	friend json& operator >>(json& jsonData, Balance& _Balance)
+	{
+		_Balance.left = jsonData["left"];
+		_Balance.right = jsonData["right"];
+		return jsonData;
 	}
 
 	friend std::istream& operator>>(std::istream& is, Balance& _Balance)

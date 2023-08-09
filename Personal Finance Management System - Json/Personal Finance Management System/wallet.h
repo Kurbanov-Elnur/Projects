@@ -16,7 +16,7 @@ public:
 	std::string currency{};
 	uint16_t* dailySpendingLimit{};
 	Transaction** Transactions = new Transaction*[50]{};
-	uint16_t* tranasctionCount = new uint16_t{};
+	uint16_t* tranasctionCount = new uint16_t{50};
 
 	wallet(personalData&, std::string&, std::string&, std::string&, std::string&, uint16_t&, Balance&);
 
@@ -26,21 +26,6 @@ public:
 
 	friend std::ostream& operator << (std::ostream& os, const wallet _wallet)
 	{
-		if (typeid(os) == typeid(std::ofstream))
-		{
-			os
-				<< *_wallet.ownerData
-				<< _wallet.ownerEmail << std::endl
-				<< _wallet.ownerPhone << std::endl
-				<< _wallet.ID << std::endl
-				<< *_wallet.securityCode << std::endl
-				<< _wallet.currency << std::endl
-				<< *_wallet.balance << std::endl;
-			for (size_t i = 0; i < *_wallet.cardsCount; i++)
-			{
-				os << _wallet.cards[i]->getCardNumber();
-			}return os;
-		}
 		os
 			<< *_wallet.ownerData
 			<< "Owner email: " << _wallet.ownerEmail << std::endl
@@ -55,6 +40,31 @@ public:
 			os << "Card number: " << _wallet.cards[i]->getCardNumber();
 		}
 		return os;
+	}
+
+	friend json& operator << (json& jsonData, const wallet _wallet)
+	{
+		jsonData << *_wallet.ownerData;
+		jsonData["email"] = _wallet.ownerEmail;
+		jsonData["phone"] = _wallet.ownerPhone;
+		jsonData["ID"] = _wallet.ID;
+		jsonData["securityCode"] = *_wallet.securityCode;
+		jsonData["currency"] = _wallet.currency;
+		jsonData << *_wallet.balance;
+
+		return jsonData;
+	}
+
+	friend json& operator>>(json& jsonData, wallet& _wallet)
+	{
+		jsonData >> *_wallet.ownerData;
+		_wallet.ownerEmail = jsonData["email"];
+		_wallet.ownerPhone = jsonData["phone"];
+		_wallet.ID = jsonData["ID"];
+		*_wallet.securityCode = jsonData["securityCode"];
+		_wallet.currency = jsonData["currency"];
+		jsonData >> *_wallet.balance;
+		return jsonData;
 	}
 
 	friend std::istream& operator>>(std::istream& is, wallet& _wallet)

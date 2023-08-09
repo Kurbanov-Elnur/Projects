@@ -10,6 +10,7 @@ std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
 		_wallets[0] = functions::addWallet();
 		functions::saveInFile(*_wallets[0], "wallets");
 		count++;
+		currentWallet = "1";
 		system("cls");
 	}
 	else
@@ -30,7 +31,7 @@ std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
 			std::cout << "Enter security code: "; std::cin >> security;
 			functions::myCheck(security, std::regex("[0-9]{4}"));
 
-			if (_wallets[std::stoi(currentWallet)]->getSecurityCode() == std::stoi(security))
+			if (_wallets[std::stoi(currentWallet) - 1]->getSecurityCode() == std::stoi(security))
 				break;
 			system("cls");
 			continue;
@@ -40,7 +41,7 @@ std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
 	return currentWallet;
 }
 
-void functions::formationOfRatings(wallet wallet)
+void functions::formationOfRatings(wallet* wallet)
 {
 	std::string startDay = "0", startMonth = "0", endDay = "0", endMonth = "0";
 
@@ -59,24 +60,25 @@ void functions::formationOfRatings(wallet wallet)
 	} while (std::stoi(endDay) <= 0 || std::stoi(endDay) > 31 || std::stoi(endMonth) <= 0 || std::stoi(endMonth) > 12);
 
 	Balance amounts[8]{};
-	for (size_t i = 0; i < *wallet.tranasctionCount; i++)
+	for (size_t i = 0; i < *wallet->tranasctionCount; i++)
 	{
-		if(wallet.Transactions[i]->getSendDay() >= std::stoi(startDay) && wallet.Transactions[i]->getSendDay() <= std::stoi(endDay) && 
-			wallet.Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallet.Transactions[i]->getSendMonth() <= std::stoi(endMonth))
+		if(wallet->Transactions[i]->getSendDay() >= std::stoi(startDay) && wallet->Transactions[i]->getSendDay() <= std::stoi(endDay) &&
+			wallet->Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallet->Transactions[i]->getSendMonth() <= std::stoi(endMonth))
 		{
-			amounts[wallet.Transactions[i]->getCategory() - 1] += *wallet.Transactions[i]->getSendAmount();
+			amounts[wallet->Transactions[i]->getCategory() - 1] += *wallet->Transactions[i]->getSendAmount();
 		}
 	}
 
 	for (size_t i = 0; i < 8; i++)
 	{
-		std::cout << wallet.Transactions[0]->categories[i] << ' ' << amounts[i] << std::endl;
+		std::cout << wallet->Transactions[0]->categories[i] << ' ' << amounts[i] << std::endl;
 	}
 }
 
-void functions::top3cost(wallet wallets)
+void functions::top3cost(wallet* wallets)
 {
 	std::string startDay = "0", startMonth = "0", endDay = "0", endMonth = "0";
+	std::cout << wallets->Transactions[0]->getSendDay();
 
 	do {
 		std::cout << "Enter start day: "; std::cin >> startDay;
@@ -94,24 +96,24 @@ void functions::top3cost(wallet wallets)
 
 	Balance top3[3]{};
 
-	for (size_t i = 0; i < *wallets.tranasctionCount; i++)
+	for (size_t i = 0; i < *wallets->tranasctionCount; i++)
 	{
-		if (wallets.Transactions[i]->getSendDay() >= std::stoi(startDay) && wallets.Transactions[i]->getSendDay() <= std::stoi(endDay) &&
-			wallets.Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallets.Transactions[i]->getSendMonth() <= std::stoi(endMonth))
+		if (wallets->Transactions[i]->getSendDay() >= std::stoi(startDay) && wallets->Transactions[i]->getSendDay() <= std::stoi(endDay) &&
+			wallets->Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallets->Transactions[i]->getSendMonth() <= std::stoi(endMonth))
 		{
-			if (*wallets.Transactions[i]->getSendAmount() > top3[0])
+			if (*wallets->Transactions[i]->getSendAmount() > top3[0])
 			{
 				top3[2] = top3[1];
 				top3[1] = top3[0];
-				top3[0] = *wallets.Transactions[i]->getSendAmount();
+				top3[0] = *wallets->Transactions[i]->getSendAmount();
 			}
-			else if (*wallets.Transactions[i]->getSendAmount() > top3[1])
+			else if (*wallets->Transactions[i]->getSendAmount() > top3[1])
 			{
 				top3[2] = top3[1];
-				top3[1] = *wallets.Transactions[i]->getSendAmount();
+				top3[1] = *wallets->Transactions[i]->getSendAmount();
 			}
-			else if (*wallets.Transactions[i]->getSendAmount() > top3[2])
-				top3[2] = *wallets.Transactions[i]->getSendAmount();
+			else if (*wallets->Transactions[i]->getSendAmount() > top3[2])
+				top3[2] = *wallets->Transactions[i]->getSendAmount();
 		}
 	}
 
@@ -121,7 +123,7 @@ void functions::top3cost(wallet wallets)
 	}
 }
 
-void functions::top3category(wallet wallets)
+void functions::top3category(wallet* wallets)
 {
 	std::string startDay = "0", startMonth = "0", endDay = "0", endMonth = "0";
 
@@ -141,12 +143,12 @@ void functions::top3category(wallet wallets)
 
 	Balance amounts[8]{};
 
-	for (size_t i = 0; i < *wallets.tranasctionCount; i++)
+	for (size_t i = 0; i < *wallets->tranasctionCount; i++)
 	{
-		if (wallets.Transactions[i]->getSendDay() >= std::stoi(startDay) && wallets.Transactions[i]->getSendDay() <= std::stoi(endDay) &&
-			wallets.Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallets.Transactions[i]->getSendMonth() <= std::stoi(endMonth))
+		if (wallets->Transactions[i]->getSendDay() >= std::stoi(startDay) && wallets->Transactions[i]->getSendDay() <= std::stoi(endDay) &&
+			wallets->Transactions[i]->getSendMonth() >= std::stoi(startMonth) && wallets->Transactions[i]->getSendMonth() <= std::stoi(endMonth))
 		{
-			amounts[wallets.Transactions[i]->getCategory() - 1] += *wallets.Transactions[i]->getSendAmount();
+			amounts[wallets->Transactions[i]->getCategory() - 1] += *wallets->Transactions[i]->getSendAmount();
 		}
 	}
 
@@ -163,7 +165,7 @@ void functions::top3category(wallet wallets)
 			}
 		}
 		amounts[index] = Balance{};
-		std::cout << i + 1 << '.' << wallets.Transactions[0]->categories[index] << std::endl;
+		std::cout << i + 1 << '.' << wallets->Transactions[0]->categories[index] << std::endl;
 	}
 }
 

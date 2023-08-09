@@ -10,7 +10,7 @@ int main()
 		functions::loadFromFile(wallets[0]->cards, "cards", *wallets[0]->cardsCount);
 		functions::loadFromFile(wallets[0]->Transactions, "transaction", *wallets[0]->tranasctionCount);
 	}
-
+	
 	std::string choice{}, currentWallet = functions::checkWallets(wallets, walletsCount);
 
 	while (true)
@@ -36,17 +36,17 @@ int main()
 				system("cls");
 				break;
 			case 2:
-				wallets[std::stoi(currentWallet)]->addCard();
-				functions::saveInFile(*wallets[std::stoi(currentWallet)]->cards[*wallets[std::stoi(currentWallet)]->cardsCount - 1], "cards");
+				wallets[std::stoi(currentWallet) - 1]->addCard();
+				functions::saveInFile(*wallets[std::stoi(currentWallet) - 1]->cards[*wallets[std::stoi(currentWallet) - 1]->cardsCount - 1], "cards");
 				system("cls");
 				break;
 			case 3:
-				wallets[std::stoi(currentWallet)]->walletReplenishment();
+				wallets[std::stoi(currentWallet) - 1]->walletReplenishment();
 				system("cls");
 				break;
 			case 4:
 				try {
-					wallets[std::stoi(currentWallet)]->cardReplenishment();
+					wallets[std::stoi(currentWallet) - 1]->cardReplenishment();
 				}
 				catch (std::exception& e)
 				{
@@ -55,31 +55,31 @@ int main()
 				system("cls");
 				break;
 			case 5:
-				if (*wallets[std::stoi(currentWallet)]->tranasctionCount == sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0]))
+				if (*wallets[std::stoi(currentWallet) - 1]->tranasctionCount == sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions) / sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions[0]))
 				{
-					Transaction** newCards = new Transaction * [(sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0])) * 2];
+					Transaction** newCards = new Transaction * [(sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions) / sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions[0])) * 2];
 
-					for (size_t i = 0; i < sizeof(wallets[std::stoi(currentWallet)]->Transactions) / sizeof(wallets[std::stoi(currentWallet)]->Transactions[0]); ++i) {
-						newCards[i] = wallets[std::stoi(currentWallet)]->Transactions[i];
+					for (size_t i = 0; i < sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions) / sizeof(wallets[std::stoi(currentWallet) - 1]->Transactions[0]); ++i) {
+						newCards[i] = wallets[std::stoi(currentWallet) - 1]->Transactions[i];
 					}
 
-					delete[] wallets[std::stoi(currentWallet)]->Transactions;
-					wallets[std::stoi(currentWallet)]->Transactions = newCards;
+					delete[] wallets[std::stoi(currentWallet) - 1]->Transactions;
+					wallets[std::stoi(currentWallet) - 1]->Transactions = newCards;
 				}
-				wallets[std::stoi(currentWallet)]->Transactions[*wallets[std::stoi(currentWallet)]->tranasctionCount] = functions::addTransaction();
-				functions::saveInFile(*wallets[std::stoi(currentWallet)]->Transactions[*wallets[std::stoi(currentWallet)]->tranasctionCount], "transaction");
-				(*wallets[std::stoi(currentWallet)]->tranasctionCount)++;
+				wallets[std::stoi(currentWallet) - 1]->Transactions[*wallets[std::stoi(currentWallet) - 1]->tranasctionCount] = functions::addTransaction();
+				functions::saveInFile(*wallets[std::stoi(currentWallet) - 1]->Transactions[*wallets[std::stoi(currentWallet) - 1]->tranasctionCount], "transaction");
+				(*wallets[std::stoi(currentWallet) - 1]->tranasctionCount)++;
 				system("cls");
 				break;
 			case 6:
-				functions::formationOfRatings(*wallets[std::stoi(currentWallet)]);
+				functions::formationOfRatings(wallets[std::stoi(currentWallet) - 1]);
 				system("cls");
 				break;
 			case 7:
-				functions::top3cost(*wallets[std::stoi(currentWallet)]);
+				functions::top3cost(wallets[std::stoi(currentWallet) - 1]);
 				break;
 			case 8:
-				functions::top3category(*wallets[std::stoi(currentWallet)]);
+				functions::top3category(wallets[std::stoi(currentWallet) - 1]);
 				break;
 		}
 	}
