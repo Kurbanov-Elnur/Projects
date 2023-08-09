@@ -78,7 +78,6 @@ void functions::formationOfRatings(wallet* wallet)
 void functions::top3cost(wallet* wallets)
 {
 	std::string startDay = "0", startMonth = "0", endDay = "0", endMonth = "0";
-	std::cout << wallets->Transactions[0]->getSendDay();
 
 	do {
 		std::cout << "Enter start day: "; std::cin >> startDay;

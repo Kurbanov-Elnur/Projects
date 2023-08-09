@@ -38,7 +38,7 @@ public:
 		jsonData["sendDay"] = *_Transaction.sendDay;
 		jsonData["sendMonth"] = *_Transaction.sendMonth;
 		jsonData["sendYear"] = *_Transaction.sendYear;
-		jsonData["sendAmount"] << *_Transaction.sendAmount;
+		jsonData << *_Transaction.sendAmount;
 		jsonData["category"] = *_Transaction.category;
 		return jsonData;
 	}

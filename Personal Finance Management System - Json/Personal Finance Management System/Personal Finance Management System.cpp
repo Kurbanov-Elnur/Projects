@@ -72,14 +72,14 @@ int main()
 				system("cls");
 				break;
 			case 6:
-				functions::formationOfRatings(*wallets[std::stoi(currentWallet) - 1]);
+				functions::formationOfRatings(wallets[std::stoi(currentWallet) - 1]);
 				system("cls");
 				break;
 			case 7:
-				functions::top3cost(*wallets[std::stoi(currentWallet) - 1]);
+				functions::top3cost(wallets[std::stoi(currentWallet) - 1]);
 				break;
 			case 8:
-				functions::top3category(*wallets[std::stoi(currentWallet) - 1]);
+				functions::top3category(wallets[std::stoi(currentWallet) - 1]);
 				break;
 		}
 	}

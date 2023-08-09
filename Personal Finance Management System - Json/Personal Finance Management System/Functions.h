@@ -54,9 +54,9 @@ namespace functions
 	}
 
 	std::string checkWallets(wallet** _wallet, uint16_t& count);
-	void formationOfRatings(wallet wallets);
-	void top3cost(wallet wallets);
-	void top3category(wallet wallets);
+	void formationOfRatings(wallet* wallets);
+	void top3cost(wallet* wallets);
+	void top3category(wallet* wallets);
 	int getCurrentYear();
 	void myCheck(std::string& str, std::regex regexCheck);
 	wallet* addWallet();

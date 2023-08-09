@@ -1,1 +1,15 @@
-{"ID":"31264587","currency":"ASD","dayOfBirth":12,"email":"ASD@ASD/ASD","left":100,"monthOfBirth":12,"name":"ASD","patronomic":"DAS","phone":"+994773450167","right":0,"securityCode":2341,"surname":"ASD","yearOfBirth":2004}
+{
+  "ID": "31264587",
+  "currency": "ASD",
+  "dayOfBirth": 12,
+  "email": "ASD@ASD/ASD",
+  "left": 100,
+  "monthOfBirth": 12,
+  "name": "ASD",
+  "patronomic": "DAS",
+  "phone": "+994773450167",
+  "right": 0,
+  "securityCode": 2341,
+  "surname": "ASD",
+  "yearOfBirth": 2004
+}
