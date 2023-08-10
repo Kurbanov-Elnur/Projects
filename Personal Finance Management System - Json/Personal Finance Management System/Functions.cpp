@@ -8,7 +8,6 @@ std::string functions::checkWallets(wallet** _wallets, uint16_t& count)
 	if (_wallets[0] == nullptr)
 	{
 		_wallets[0] = functions::addWallet();
-		functions::saveInFile(*_wallets[0], "wallets");
 		count++;
 		currentWallet = "1";
 		system("cls");

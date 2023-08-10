@@ -6,12 +6,15 @@
 namespace functions
 {
 	template<typename T>
-	void saveInFile(T data, std::string fileName)
+	void saveInFile(T**& data, std::string fileName, uint16_t count)
 	{
 		fileName += ".json";
 
-		json jsonData;
-		jsonData << data;
+		json* jsonData = new json[count];
+		for (size_t i = 0; i < count; i++)
+		{
+			jsonData[i] << *data[i];
+		}
 
 		std::ofstream outputFile(fileName);
 
@@ -20,7 +23,10 @@ namespace functions
 			return;
 		}
 
-		outputFile << jsonData;
+		for (size_t i = 0; i < count; i++)
+		{
+			outputFile << jsonData[i];
+		}
 
 		outputFile.close();
 	}

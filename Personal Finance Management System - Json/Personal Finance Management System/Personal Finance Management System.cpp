@@ -23,21 +23,20 @@ int main()
 			<< "5. Add Transaction" << std::endl
 			<< "6. Generating reports" << std::endl
 			<< "7. Formation of ratings by maximum amounts" << std::endl
-			<< "8. Formation of ratings by maximum category" << std::endl;
+			<< "8. Formation of ratings by maximum category" << std::endl
+			<< "9. Save in File" << std::endl;
 		std::cin >> choice;
-		functions::myCheck(choice, std::regex("[1-8]{1}"));
+		functions::myCheck(choice, std::regex("[1-9]{1}"));
 
 		switch (std::stoi(choice))
 		{
 			case 1:
 				wallets[walletsCount] = functions::addWallet();
-				functions::saveInFile(*wallets[walletsCount], "wallets");
 				walletsCount++;
 				system("cls");
 				break;
 			case 2:
 				wallets[std::stoi(currentWallet) - 1]->addCard();
-				functions::saveInFile(*wallets[std::stoi(currentWallet) - 1]->cards[*wallets[std::stoi(currentWallet) - 1]->cardsCount - 1], "cards");
 				system("cls");
 				break;
 			case 3:
@@ -67,7 +66,6 @@ int main()
 					wallets[std::stoi(currentWallet) - 1]->Transactions = newCards;
 				}
 				wallets[std::stoi(currentWallet) - 1]->Transactions[*wallets[std::stoi(currentWallet) - 1]->tranasctionCount] = functions::addTransaction();
-				functions::saveInFile(*wallets[std::stoi(currentWallet) - 1]->Transactions[*wallets[std::stoi(currentWallet) - 1]->tranasctionCount], "transaction");
 				(*wallets[std::stoi(currentWallet) - 1]->tranasctionCount)++;
 				system("cls");
 				break;
@@ -80,6 +78,22 @@ int main()
 				break;
 			case 8:
 				functions::top3category(wallets[std::stoi(currentWallet) - 1]);
+				break;
+			case 9:
+				for (size_t i = 0; i < walletsCount; i++)
+				{
+					functions::saveInFile(wallets, "wallets", walletsCount);
+				}
+				for (size_t i = 0; i < *wallets[std::stoi(currentWallet) - 1]->cardsCount; i++)
+				{
+					functions::saveInFile(wallets[std::stoi(currentWallet) - 1]->cards, "cards", *wallets[std::stoi(currentWallet) - 1]->cardsCount);
+
+				}
+				for (size_t i = 0; i < *wallets[std::stoi(currentWallet) - 1]->tranasctionCount; i++)
+				{
+					functions::saveInFile(wallets[std::stoi(currentWallet) - 1]->Transactions, "transaction", *wallets[std::stoi(currentWallet) - 1]->tranasctionCount);
+
+				}
 				break;
 		}
 	}
