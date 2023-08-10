@@ -29,6 +29,7 @@ namespace functions
 		}
 
 		outputFile.close();
+		delete[] jsonData;
 	}
 
 	template <typename T>
