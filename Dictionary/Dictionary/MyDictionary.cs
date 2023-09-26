@@ -16,58 +16,58 @@ class MyDictionary
         else throw new ArgumentException("The array must contain exactly two elements.", nameof(dictionaryType));
     }
 
-    public void AppendWord(string Word, string Translate)
+    public void AddWord(string word, string translate)
     {
         try
         {
-            CheckWord(Word, DictionaryType[0]);
-            CheckWord(Translate, DictionaryType[1]);
+            CheckWord(word, DictionaryType[0]);
+            CheckWord(translate, DictionaryType[1]);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            throw;
         }
         
-        if (!Dictionary.ContainsKey(Word))
+        if (!Dictionary.ContainsKey(word))
         {
-            Dictionary[Word] = new List<string>();
+            Dictionary[word] = new List<string>();
         }
-        Dictionary[Word].Add(Translate);
+        Dictionary[word].Add(translate);
     }
 
-    public void ReplaceWord(string Word, string NewWord, string? Translation = null)
+    public void ReplaceWord(string word, string newWord, string? translation = null)
     {
         try
         {
-            if(Translation != null)
+            if(translation != null)
             {
                 try 
                 {
-                    CheckWord(Translation, DictionaryType[1]);
-                    CheckWord(NewWord, DictionaryType[1]);
+                    CheckWord(translation, DictionaryType[1]);
+                    CheckWord(newWord, DictionaryType[1]);
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    throw;
                 }
 
-                Dictionary[Word][Dictionary[Word].IndexOf(Translation)] = NewWord;
+                Dictionary[word][Dictionary[word].IndexOf(translation)] = newWord;
             }
             else 
             {
                 try
                 {
-                    CheckWord(Word, DictionaryType[0]);
-                    CheckWord(NewWord, DictionaryType[0]);
+                    CheckWord(word, DictionaryType[0]);
+                    CheckWord(newWord, DictionaryType[0]);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    throw;
                 }
 
-                List<string> temp = Dictionary[Word];
-                Dictionary.Remove(Word);
-                Dictionary[NewWord] = temp;
+                List<string> temp = Dictionary[word];
+                Dictionary.Remove(word);
+                Dictionary[newWord] = temp;
             }
         }
         catch(Exception e)
@@ -76,35 +76,35 @@ class MyDictionary
         }
     }
 
-    public void RemoveWord(string Word, string? Translation = null)
+    public void RemoveWord(string word, string? translation = null)
     {
         try
         {
-            if (Translation != null)
+            if (translation != null)
             {
                 try
                 {
-                    CheckWord(Translation, DictionaryType[1]);
+                    CheckWord(translation, DictionaryType[1]);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    throw;
                 }
 
-                Dictionary[Word].Remove(Translation);
+                Dictionary[word].Remove(translation);
             }
             else
             {
                 try
                 {
-                    CheckWord(Word, DictionaryType[0]);
+                    CheckWord(word, DictionaryType[0]);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    throw;
                 }
 
-                Dictionary.Remove(Word);
+                Dictionary.Remove(word);
             }
         }
         catch (Exception e)
@@ -113,13 +113,13 @@ class MyDictionary
         }
     }
 
-    public void SearchWord(string Word)
+    public void SearchWord(string word)
     {
         try
         {
-            for (int i = 0; i < Dictionary[Word].Count; i++)
+            for (int i = 0; i < Dictionary[word].Count; i++)
             {
-                Console.WriteLine($"Translation {i + 1}: {Dictionary[Word][i]}");
+                Console.WriteLine($"Translation {i + 1}: {Dictionary[word][i]}");
             }
         }
         catch (Exception e)
@@ -143,11 +143,16 @@ class MyDictionary
         }
     }
 
-    private void CheckWord(string Word, string Language)
+    private void CheckWord(string word, string language)
     {
-        if (!СheckRegex.Сheck(Word, Language))
+        if (!СheckRegex.Сheck(word, language))
         {
             throw new ArgumentException("Invalid data!");
         }
+    }
+
+    public override string ToString()
+    {
+        return $"{DictionaryType[0]} - {DictionaryType[1]}";
     }
 }

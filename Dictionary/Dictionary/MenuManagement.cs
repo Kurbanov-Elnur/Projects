@@ -15,19 +15,16 @@ class MenuManagement
             Console.Write(DictionariesManagement);
             Console.WriteLine("Enter 0 for create new dictionary.");
 
-            while (choice < 0 || choice > DictionariesManagement.Dictionaries.Count)
-            {
-                Int32.TryParse(Console.ReadLine(), out choice);
-            }
+            CheckChoice(0, DictionariesManagement.Dictionaries.Count, ref choice);
 
             if(choice == 0)
             {
                 CreateDictionary();
-                CurrentDictionary = 0;
+                CurrentDictionary = (ushort)(DictionariesManagement.Dictionaries.Count - 1);
                 return; 
             }
 
-            CurrentDictionary = (ushort)(choice -= 1);
+            CurrentDictionary = (ushort)(choice - 1);
         }
         else
         {
@@ -39,6 +36,7 @@ class MenuManagement
     public void CreateDictionary()
     {
         string[] dictionaryType = new string[2];
+        int choice = 0;
 
         List<string> languages = new List<string>()
                 {
@@ -56,12 +54,7 @@ class MenuManagement
         for (int i = 0; i < languages.Count; i++)
             Console.WriteLine($"{i + 1}. {languages[i]}");
 
-        int choice = 0;
-        while (choice < 1 || choice > languages.Count)
-        {
-            Console.Write("Enter your choice: ");
-            Int32.TryParse(Console.ReadLine(), out choice);
-        }
+        CheckChoice(1, languages.Count, ref choice);
 
         dictionaryType[0] = languages[choice - 1];
 
@@ -72,18 +65,21 @@ class MenuManagement
         for (int i = 0; i < languages.Count; i++)
             Console.WriteLine($"{i + 1}. {languages[i]}");
 
-        while (choice < 1 || choice > languages.Count)
-        {
-            Console.Write("Enter your choice: ");
-            Int32.TryParse(Console.ReadLine(), out choice);
-        }
+        CheckChoice(1, languages.Count, ref choice);
 
         dictionaryType[1] = languages[choice - 1];
 
-        DictionariesManagement.AddNewDictionary(dictionaryType);
+        try
+        {
+            DictionariesManagement.AddNewDictionary(dictionaryType);
+        }
+        catch(Exception e) 
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
-    public void InsertWord()
+    public void AddWord()
     {
         string Word, Translation;
 
@@ -96,7 +92,7 @@ class MenuManagement
         DictionariesManagement.AddWord(CurrentDictionary, Word, Translation);
     }
 
-    public void ReplaceWith()
+    public void ReplaceWord()
     {
         string Word, NewWord;
         string? Translation;
@@ -105,12 +101,10 @@ class MenuManagement
 
         Console.WriteLine("What do you want to replace?\n" +
             "1. Word\n" +
-            "2. Translation\n");
+            "2. Translation");
 
-        while (choice < 1 || choice > 2)
-        {
-            Int32.TryParse(Console.ReadLine(), out choice);
-        }
+        CheckChoice(1, 2, ref choice);
+
 
         DisplayDictionaryData();
 
@@ -122,7 +116,7 @@ class MenuManagement
             Console.WriteLine("Enter new word: ");
             NewWord = Console.ReadLine();
 
-            DictionariesManagement.Swap(CurrentDictionary, Word, NewWord);
+            DictionariesManagement.ReplaceWord(CurrentDictionary, Word, NewWord);
         }
         else
         {
@@ -135,7 +129,7 @@ class MenuManagement
             Console.WriteLine("Enter new word: ");
             NewWord = Console.ReadLine();
 
-            DictionariesManagement.Swap(CurrentDictionary, Word, NewWord, Translation);
+            DictionariesManagement.ReplaceWord(CurrentDictionary, Word, NewWord, Translation);
         }
     }
 
@@ -148,12 +142,9 @@ class MenuManagement
 
         Console.WriteLine("What do you want to remove?\n" +
             "1. Word\n" +
-            "2. Translation\n");
+            "2. Translation");
 
-        while (choice < 1 || choice > 2)
-        {
-            Int32.TryParse(Console.ReadLine(), out choice);
-        }
+        CheckChoice(1, 2, ref choice);
 
         DisplayDictionaryData();
 
@@ -178,14 +169,19 @@ class MenuManagement
         }
     }
 
-    public void SeekWord()
+    public void SearchWord()
     {
         string Word;
 
         Console.WriteLine("Enter word for search: ");
         Word = Console.ReadLine();
 
-        DictionariesManagement.FindWord(CurrentDictionary, Word);
+        DictionariesManagement.SearchWord(CurrentDictionary, Word);
+    }
+
+    public void DisplayCurrentDictioany()
+    {
+        Console.WriteLine($"Current dictionary: {DictionariesManagement.Dictionaries[CurrentDictionary]}\n");
     }
 
     public void DisplayDictionaryData()
@@ -193,8 +189,24 @@ class MenuManagement
         DictionariesManagement.DisplayData(CurrentDictionary);
     }
 
-    public void InCSV()
+    public void ExportInCSV()
     {
-        DictionariesManagement.DownloadInCSV();
+        DictionariesManagement.ExportInCSV();
+    }
+
+    public void CheckChoice(int start, int end, ref int choice)
+    {
+        Int32.TryParse(Console.ReadLine(), out choice);
+        while (choice < start || choice > end)
+        {
+            Console.Write("Wrong choice!\n" +
+                "Please re-enter: ");
+            Int32.TryParse(Console.ReadLine(), out choice);
+        }
+    }
+
+    public void ImportInProgram()
+    {
+        DictionariesManagement.ImportInProgram();
     }
 }

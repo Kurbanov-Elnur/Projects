@@ -32,53 +32,75 @@ class DictionariesManagement
         DictionaryTypes.Add(dictionaryType);
     }
 
-    public void AddWord(ushort CurrentDictionary, string Word, string Translation)
+    public void AddWord(ushort currentDictionary, string word, string translation)
     {
         try
         {
-            Dictionaries[CurrentDictionary].AppendWord(Word, Translation);
+            Dictionaries[currentDictionary].AddWord(word, translation);
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             Console.WriteLine(e.Message);
         }
     }
 
-    public void Swap(ushort CurrentDictionary, string Word, string NewWord, string? Translation = null)
+    public void ReplaceWord(ushort currentDictionary, string word, string newWord, string? translation = null)
     {
-        if(Translation != null)
+        try
         {
-            Dictionaries[CurrentDictionary].ReplaceWord(Word, NewWord, Translation);
+            if(translation != null)
+            {
+                Dictionaries[currentDictionary].ReplaceWord(word, newWord, translation);
+            }
+            else
+                Dictionaries[currentDictionary].ReplaceWord(word, newWord);
         }
-        else
-            Dictionaries[CurrentDictionary].ReplaceWord(Word, NewWord);
-    }
-
-    public void RemoveWord(ushort CurrentDictionary, string Word, string? Translation = null)
-    {
-        if (Translation != null)
+        catch(Exception e)
         {
-            Dictionaries[CurrentDictionary].RemoveWord(Word, Translation);
+            Console.WriteLine(e.Message);
         }
-        else
-            Dictionaries[CurrentDictionary].RemoveWord(Word);
     }
 
-    public void FindWord(ushort CurrentDictionary, string Word)
+    public void RemoveWord(ushort currentDictionary, string word, string? translation = null)
     {
-        Dictionaries[CurrentDictionary].SearchWord(Word);
+        try
+        {
+            if (translation != null)
+            {
+                Dictionaries[currentDictionary].RemoveWord(word, translation);
+            }
+            else
+                Dictionaries[currentDictionary].RemoveWord(word);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
-    public void DisplayData(ushort CurrentDictionary)
+    public void SearchWord(ushort currentDictionary, string word)
     {
-        Dictionaries[CurrentDictionary].DisplayData();
+        Dictionaries[currentDictionary].SearchWord(word);
     }
 
-    public void DownloadInCSV()
+    public void DisplayData(ushort currentDictionary)
     {
+        Dictionaries[currentDictionary].DisplayData();
+    }
+
+    public void ExportInCSV()
+    {
+        using (var writer = new StreamWriter("DictionaryTypes.csv"))
+        {
+            foreach (var item in DictionaryTypes)
+            {
+                writer.WriteLine($"{item[0]}, {item[1]}");
+            }
+        }
+
         foreach (var item in Dictionaries)
         {
-            string FileName = item.DictionaryType[0] + "-" + item.DictionaryType[0] + ".csv";
+            string FileName = item.DictionaryType[0] + "-" + item.DictionaryType[1] + ".csv";
 
             using (var writer = new StreamWriter(FileName, false, Encoding.UTF8))
             {
@@ -87,6 +109,40 @@ class DictionariesManagement
                     string key = pair.Key;
                     string values = string.Join(",", pair.Value);
                     writer.WriteLine($"{key},{values}");
+                }
+            }
+        }
+    }
+
+    public void ImportInProgram()
+    {
+        using(var reader = new StreamReader("DictionaryTypes.csv"))
+        {
+            string line;
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] Types = line.Split(", ");
+
+                DictionaryTypes.Add(Types);
+            }
+        }
+
+        for (int i = 0; i < DictionaryTypes.Count; i++)
+        {
+            string FileName = DictionaryTypes[i][0] + "-" + DictionaryTypes[i][1] + ".csv";
+            Dictionaries.Add(new MyDictionary(DictionaryTypes[i]));
+
+            using (var reader = new StreamReader(FileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    string key = parts[0];
+                    List<string> values = parts.Skip(1).ToList();
+
+                    Dictionaries[i].Dictionary[key] = values;
                 }
             }
         }
