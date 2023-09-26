@@ -24,11 +24,14 @@ while(true)
 		    "2. Replace Word or Translation.\n" + 
 		    "3. Remove Word or Translation.\n" +
 		    "4. Search Word.\n" +
-            "5. Display dictionay data\n" +
-            "6. Go back.\n" +
-		    "7. Exit and Save");
+            "5. Display dictionary data\n" +
+            "6. Add favorite word.\n" +
+            "7. Remove favorite word.\n" +
+            "8. Display favorite words.\n" +
+            "9. Go back.\n" +
+		    "10. Exit and Save.");
 
-        Menu.CheckChoice(1, 7, ref choice);
+        Menu.CheckChoice(1, 10, ref choice);
 
         switch (choice)
         {
@@ -59,8 +62,23 @@ while(true)
                 break;
             case 6:
                 Console.Clear();
+
+                Menu.AddFavoriteWord();
                 break;
             case 7:
+                Console.Clear();
+
+                Menu.RemoveFavoriteWord();
+                break;
+            case 8:
+                Console.Clear();
+
+                Menu.DisplayFavoriteWords();
+                break;
+            case 9:
+                Console.Clear();
+                break;
+            case 10:
                 Menu.ExportInCSV();
                 Environment.Exit(0);
                 break;

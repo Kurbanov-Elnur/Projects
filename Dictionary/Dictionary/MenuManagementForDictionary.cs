@@ -1,8 +1,10 @@
-﻿namespace Management;
+﻿using MyDictionaries;
 
-class MenuManagement
+namespace Management;
+
+partial class MenuManagement
 {
-    private DictionariesManagement DictionariesManagement = new();
+    public DictionariesManagement DictionariesManagement = new();
     public ushort CurrentDictionary { get; private set; }
 
     public void SelectCurrentDictionary()
@@ -189,11 +191,6 @@ class MenuManagement
         DictionariesManagement.DisplayData(CurrentDictionary);
     }
 
-    public void ExportInCSV()
-    {
-        DictionariesManagement.ExportInCSV();
-    }
-
     public void CheckChoice(int start, int end, ref int choice)
     {
         Int32.TryParse(Console.ReadLine(), out choice);
@@ -203,10 +200,5 @@ class MenuManagement
                 "Please re-enter: ");
             Int32.TryParse(Console.ReadLine(), out choice);
         }
-    }
-
-    public void ImportInProgram()
-    {
-        DictionariesManagement.ImportInProgram();
-    }
+    } 
 }

@@ -13,7 +13,7 @@ namespace MyRegex
             new Regex(@"[A-Za-zÀ-ÿ]{2,}$"), // For French
             new Regex(@"[A-Za-zÅåÄäÖö]{2,}$"), // For Swedish
             new Regex(@"[\p{IsCJKUnifiedIdeographs}]{2,}$"), // For Chine
-            //new Regex(@"^[\p{IsHangul}]{2,}$") // For Korea
+            new Regex(@"^[가-힣]{2,}$") // For Korea
         };
 
         public static List<string> languages = new List<string>() // Default languages, you can also add a language here

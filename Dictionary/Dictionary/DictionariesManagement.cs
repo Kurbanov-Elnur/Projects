@@ -85,7 +85,14 @@ class DictionariesManagement
 
     public void DisplayData(ushort currentDictionary)
     {
-        Dictionaries[currentDictionary].DisplayData();
+        try
+        {
+            Dictionaries[currentDictionary].DisplayData();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     public void ExportInCSV()

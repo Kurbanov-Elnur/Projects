@@ -130,17 +130,22 @@ class MyDictionary
 
     public void DisplayData()
     {
-        foreach (var key in Dictionary.Keys)
+        if (Dictionary.Count != 0)
         {
-            Console.Write($"{key} - ");
-            for (int i = 0; i < Dictionary[key].Count; i++)
+            foreach (var key in Dictionary.Keys)
             {
-                Console.Write($"{Dictionary[key][i]}");
-                if(i + 1 != Dictionary[key].Count)
-                    Console.Write(", ");
+                Console.Write($"{key} - ");
+                for (int i = 0; i < Dictionary[key].Count; i++)
+                {
+                    Console.Write($"{Dictionary[key][i]}");
+                    if (i + 1 != Dictionary[key].Count)
+                        Console.Write(", ");
+                }
+                Console.WriteLine("\n");
             }
-            Console.WriteLine();
         }
+        else
+            throw new Exception("The dictionary is empty!");
     }
 
     private void CheckWord(string word, string language)
