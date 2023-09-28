@@ -29,7 +29,8 @@ while(true)
             "7. Remove favorite word.\n" +
             "8. Display favorite words.\n" +
             "9. Go back.\n" +
-		    "10. Exit and Save.");
+		    "10. Exit and Save.\n" +
+            "(If you do not save and close the program, the changes will not be saved)");
 
         Menu.CheckChoice(1, 10, ref choice);
 
