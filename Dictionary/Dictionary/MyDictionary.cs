@@ -10,8 +10,8 @@ class MyDictionary
     {
         if (dictionaryType.Length == 2)
         {
-            this.DictionaryType = dictionaryType;
-            this.Dictionary = new();
+            DictionaryType = dictionaryType;
+            Dictionary = new();
         }
         else throw new ArgumentException("The array must contain exactly two elements.", nameof(dictionaryType));
     }
@@ -91,7 +91,10 @@ class MyDictionary
                     throw;
                 }
 
-                Dictionary[word].Remove(translation);
+                if (Dictionary[word].Count > 1)
+                    Dictionary[word].Remove(translation);
+                else
+                    throw new Exception("This is the last translation, it cannot be deleted!");
             }
             else
             {
@@ -109,7 +112,7 @@ class MyDictionary
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            throw;
         }
     }
 
@@ -124,7 +127,7 @@ class MyDictionary
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            throw;
         }
     }
 
@@ -141,8 +144,9 @@ class MyDictionary
                     if (i + 1 != Dictionary[key].Count)
                         Console.Write(", ");
                 }
-                Console.WriteLine("\n");
+                Console.WriteLine();
             }
+            Console.WriteLine();
         }
         else
             throw new Exception("The dictionary is empty!");

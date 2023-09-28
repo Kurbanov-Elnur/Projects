@@ -80,7 +80,14 @@ class DictionariesManagement
 
     public void SearchWord(ushort currentDictionary, string word)
     {
-        Dictionaries[currentDictionary].SearchWord(word);
+        try
+        {
+            Dictionaries[currentDictionary].SearchWord(word);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     public void DisplayData(ushort currentDictionary)
@@ -97,61 +104,75 @@ class DictionariesManagement
 
     public void ExportInCSV()
     {
-        using (var writer = new StreamWriter("DictionaryTypes.csv"))
+        try
         {
-            foreach (var item in DictionaryTypes)
+            using (var writer = new StreamWriter("DictionaryTypes.csv"))
             {
-                writer.WriteLine($"{item[0]}, {item[1]}");
-            }
-        }
-
-        foreach (var item in Dictionaries)
-        {
-            string FileName = item.DictionaryType[0] + "-" + item.DictionaryType[1] + ".csv";
-
-            using (var writer = new StreamWriter(FileName, false, Encoding.UTF8))
-            {
-                foreach (var pair in item.Dictionary)
+                foreach (var item in DictionaryTypes)
                 {
-                    string key = pair.Key;
-                    string values = string.Join(",", pair.Value);
-                    writer.WriteLine($"{key},{values}");
+                    writer.WriteLine($"{item[0]}, {item[1]}");
                 }
             }
+
+            foreach (var item in Dictionaries)
+            {
+                string FileName = item.DictionaryType[0] + "-" + item.DictionaryType[1] + ".csv";
+
+                using (var writer = new StreamWriter(FileName, false, Encoding.UTF8))
+                {
+                    foreach (var pair in item.Dictionary)
+                    {
+                        string key = pair.Key;
+                        string values = string.Join(",", pair.Value);
+                        writer.WriteLine($"{key},{values}");
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
         }
     }
 
     public void ImportInProgram()
     {
-        using(var reader = new StreamReader("DictionaryTypes.csv"))
+        try
         {
-            string line;
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                string[] Types = line.Split(", ");
-
-                DictionaryTypes.Add(Types);
-            }
-        }
-
-        for (int i = 0; i < DictionaryTypes.Count; i++)
-        {
-            string FileName = DictionaryTypes[i][0] + "-" + DictionaryTypes[i][1] + ".csv";
-            Dictionaries.Add(new MyDictionary(DictionaryTypes[i]));
-
-            using (var reader = new StreamReader(FileName))
+            using (var reader = new StreamReader("DictionaryTypes.csv"))
             {
                 string line;
+
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string[] parts = line.Split(',');
-                    string key = parts[0];
-                    List<string> values = parts.Skip(1).ToList();
+                    string[] Types = line.Split(", ");
 
-                    Dictionaries[i].Dictionary[key] = values;
+                    DictionaryTypes.Add(Types);
                 }
             }
+
+            for (int i = 0; i < DictionaryTypes.Count; i++)
+            {
+                string FileName = DictionaryTypes[i][0] + "-" + DictionaryTypes[i][1] + ".csv";
+                Dictionaries.Add(new MyDictionary(DictionaryTypes[i]));
+
+                using (var reader = new StreamReader(FileName))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(',');
+                        string key = parts[0];
+                        List<string> values = parts.Skip(1).ToList();
+
+                        Dictionaries[i].Dictionary[key] = values;
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
         }
     }
 

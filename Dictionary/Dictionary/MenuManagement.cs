@@ -1,10 +1,12 @@
 ﻿using MyDictionaries;
+using System.Text;
 
 namespace Management;
 
 partial class MenuManagement
 {
     public DictionariesManagement DictionariesManagement = new();
+    public Favorites Favorites = new();
     public ushort CurrentDictionary { get; private set; }
 
     public void SelectCurrentDictionary()
@@ -94,6 +96,25 @@ partial class MenuManagement
         DictionariesManagement.AddWord(CurrentDictionary, Word, Translation);
     }
 
+    public void AddFavoriteWord()
+    {
+        string word;
+
+        DictionariesManagement.DisplayData(CurrentDictionary);
+
+        Console.WriteLine("Enter favorite word: ");
+        word = Console.ReadLine();
+
+        try
+        {
+            Favorites.AddWord(word, DictionariesManagement.Dictionaries[CurrentDictionary].Dictionary[word]);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("There is no such word in the dictionary!");
+        }
+    }
+
     public void ReplaceWord()
     {
         string Word, NewWord;
@@ -171,6 +192,25 @@ partial class MenuManagement
         }
     }
 
+    public void RemoveFavoriteWord()
+    {
+        string word;
+
+        Favorites.DisplayData();
+
+        Console.WriteLine("Enter favorite word for remove: ");
+        word = Console.ReadLine();
+
+        try
+        {
+            Favorites.RemoveWord(word);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
     public void SearchWord()
     {
         string Word;
@@ -191,6 +231,11 @@ partial class MenuManagement
         DictionariesManagement.DisplayData(CurrentDictionary);
     }
 
+    public void DisplayFavoriteWords()
+    {
+        Favorites.DisplayData();
+    }
+
     public void CheckChoice(int start, int end, ref int choice)
     {
         Int32.TryParse(Console.ReadLine(), out choice);
@@ -200,5 +245,52 @@ partial class MenuManagement
                 "Please re-enter: ");
             Int32.TryParse(Console.ReadLine(), out choice);
         }
-    } 
+    }
+
+    public void ExportInCSV()
+    {
+        try
+        {
+            foreach (var pair in Favorites.FavoritesWords)
+            {
+                using (var writer = new StreamWriter("FavoriteWords.csv", false, Encoding.UTF8))
+                {
+                    string key = pair.Key;
+                    string values = string.Join(",", pair.Value);
+                    writer.WriteLine($"{key},{values}");
+                }
+            }
+
+            DictionariesManagement.ExportInCSV();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public void ImportInProgram()
+    {
+        try
+        {
+            using (var reader = new StreamReader("FavoriteWords.csv"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    string key = parts[0];
+                    List<string> values = parts.Skip(1).ToList();
+
+                    Favorites.AddWord(key, values);
+                }
+            }
+
+            DictionariesManagement.ImportInProgram();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }
