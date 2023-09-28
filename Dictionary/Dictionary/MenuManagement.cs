@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Management;
 
-partial class MenuManagement
+class MenuManagement
 {
     public DictionariesManagement DictionariesManagement = new();
     public Favorites Favorites = new();
