@@ -1,5 +1,8 @@
-﻿Quiz a = new("Ads");
+﻿MenuManagement Menu = new();
 
-a.CreateQuestions();
+Menu.Authorization();
 
-a.TakeTheQuiz("Elnur");
+Menu.StartQuiz();
+
+Menu.DisplayAccountResult();
+

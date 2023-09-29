@@ -34,15 +34,20 @@ class Account
 
     public void DisplayMyResult()
     {
-        foreach (var kvp in MyResults)
+        if (MyResults.Count >= 1)
         {
-            Console.WriteLine($"{kvp.Key}: {kvp.Value}%");
+            foreach (var kvp in MyResults)
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}%");
+            }
         }
+        else
+            Console.WriteLine("You haven't passed any quiz yet");
     }
 
     public void EditPassword(string currentPassword)
     {
-        if(currentPassword == Password)
+        if (currentPassword == Password)
         {
             Console.Write("Enter new password(You can use letters, numbers and symbols \"_-.!\"): ");
             string newPassword = Console.ReadLine();
@@ -51,6 +56,8 @@ class Account
             else
                 throw new ArgumentException("Wrong password!");
         }
+        else
+            throw new ArgumentException("Wrong current password!");
     }
 
     public void EditBirthDay(string password)
@@ -64,6 +71,8 @@ class Account
             else
                 throw new ArgumentException("Wrong password!");
         }
+        else
+            throw new ArgumentException("Wrong current password!");
     }
 
     public int CalculateAge(DateTime birthDay)

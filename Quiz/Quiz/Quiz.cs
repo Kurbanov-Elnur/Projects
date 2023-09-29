@@ -1,12 +1,11 @@
-﻿
-using CheckRegex;
+﻿using CheckRegex;
+
 
 class Quiz
 {
     public string Category { get; set; }
     public List<MyQuestion> Questions { get; set; }
-
-    public Dictionary<string, double> Results { get; set; }
+    public Dictionary<string, double> Results { get; private set; }
 
     public Quiz(string category)
     {
@@ -97,7 +96,17 @@ class Quiz
         }
     }
 
-    public void CheckChoice(int start, int end, ref int choice)
+    public void SortResult()
+    {
+        var sortedByValue = Results.OrderByDescending(pair => pair.Value);
+
+        foreach (var kvp in sortedByValue)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        }
+    }
+
+    public static void CheckChoice(int start, int end, ref int choice)
     {
         Int32.TryParse(Console.ReadLine(), out choice);
         while (choice < start || choice > end)
@@ -108,6 +117,3 @@ class Quiz
         }
     }
 }
-
-
-

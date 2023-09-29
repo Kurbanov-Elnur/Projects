@@ -5,7 +5,7 @@ static class MyRegex
 {
     public static readonly Regex LoginRegex = new Regex(@"^[a-zA-Z0-9_.-]{2,10}$");
     public static readonly Regex PasswordRegex = new Regex(@"^[A-Za-z0-9_.!-]{8,15}$");
-    public static readonly Regex LineRegex = new Regex(@"^[A-Za-z0-9_.!\-? ]+$");
+    public static readonly Regex LineRegex = new Regex(@"^[A-Za-z0-9_.!\-?]+$");
 
     public static bool СheckLogin(string login)
     {
