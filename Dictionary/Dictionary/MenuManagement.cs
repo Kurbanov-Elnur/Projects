@@ -54,7 +54,7 @@ class MenuManagement
                     new string("Korea"),
                 };
 
-        Console.WriteLine("Choose the language of the words: (If you want to exit, enter 0)");
+        Console.WriteLine("Choose the language of the words (If you want to exit, enter 0): ");
 
         for (int i = 0; i < languages.Count; i++)
             Console.WriteLine($"{i + 1}. {languages[i]}");
@@ -91,7 +91,7 @@ class MenuManagement
     {
         string Word, Translation;
 
-        Console.WriteLine("Enter word: (If you want to exit, enter 0)");
+        Console.WriteLine("Enter word (If you want to exit, enter 0): ");
         Word = Console.ReadLine();
 
         if (Word == "0")
