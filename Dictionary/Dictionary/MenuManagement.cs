@@ -105,17 +105,17 @@ class MenuManagement
 
     public void AddFavoriteWord()
     {
-        string word;
+        string Word;
 
         Console.WriteLine("Enter favorite word (If you want to exit, enter 0): ");
-        word = Console.ReadLine();
+        Word = Console.ReadLine();
 
-        if (word == "0")
+        if (Word == "0")
             return;
 
         try
         {
-            Favorites.AddWord(word, DictionariesManagement.Dictionaries[CurrentDictionary].Dictionary[word]);
+            Favorites.AddWord(Word, DictionariesManagement.Dictionaries[CurrentDictionary].Dictionary[Word]);
         }
         catch (Exception e)
         {
@@ -209,19 +209,19 @@ class MenuManagement
 
     public void RemoveFavoriteWord()
     {
-        string word;
+        string Word;
 
         Favorites.DisplayData();
 
         Console.WriteLine("Enter favorite word for remove(If you want to exit, enter 0): ");
-        word = Console.ReadLine();
+        Word = Console.ReadLine();
 
-        if (word == "0")
+        if (Word == "0")
             return;
 
         try
         {
-            Favorites.RemoveWord(word);
+            Favorites.RemoveWord(Word);
         }
         catch (Exception e)
         {
