@@ -19,7 +19,7 @@ class Account
         else
             throw new ArgumentException("Wrong password!");
 
-        if (CalculateAge(birthDay) > 12 || CalculateAge(birthDay) < 80)
+        if (CalculateAge(birthDay) > 12 && CalculateAge(birthDay) < 80)
             BirthDay = birthDay;
         else
             throw new ArgumentException("Your age is not suitable(");

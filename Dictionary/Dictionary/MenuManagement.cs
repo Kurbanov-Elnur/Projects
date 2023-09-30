@@ -54,11 +54,15 @@ class MenuManagement
                     new string("Korea"),
                 };
 
-        Console.WriteLine("Choose the language of the words: ");
+        Console.WriteLine("Choose the language of the words: (If you want to exit, enter 0)");
+
         for (int i = 0; i < languages.Count; i++)
             Console.WriteLine($"{i + 1}. {languages[i]}");
 
-        CheckChoice(1, languages.Count, ref choice);
+        CheckChoice(0, languages.Count, ref choice);
+
+        if (choice == 0)
+            return;
 
         dictionaryType[0] = languages[choice - 1];
 
@@ -87,8 +91,11 @@ class MenuManagement
     {
         string Word, Translation;
 
-        Console.WriteLine("Enter word: ");
+        Console.WriteLine("Enter word: (If you want to exit, enter 0)");
         Word = Console.ReadLine();
+
+        if (Word == "0")
+            return;
 
         Console.WriteLine("Enter Translate: ");
         Translation = Console.ReadLine();
@@ -100,10 +107,11 @@ class MenuManagement
     {
         string word;
 
-        DictionariesManagement.DisplayData(CurrentDictionary);
-
-        Console.WriteLine("Enter favorite word: ");
+        Console.WriteLine("Enter favorite word (If you want to exit, enter 0): ");
         word = Console.ReadLine();
+
+        if (word == "0")
+            return;
 
         try
         {
@@ -124,10 +132,13 @@ class MenuManagement
 
         Console.WriteLine("What do you want to replace?\n" +
             "1. Word\n" +
-            "2. Translation");
+            "2. Translation\n" +
+            "If you want to exit, enter 0");
 
-        CheckChoice(1, 2, ref choice);
+        CheckChoice(0, 2, ref choice);
 
+        if (choice == 0)
+            return;
 
         DisplayDictionaryData();
 
@@ -165,9 +176,13 @@ class MenuManagement
 
         Console.WriteLine("What do you want to remove?\n" +
             "1. Word\n" +
-            "2. Translation");
+            "2. Translation\n" +
+            "If you want to exit, enter 0");
 
-        CheckChoice(1, 2, ref choice);
+        CheckChoice(0, 2, ref choice);
+
+        if (choice == 0)
+            return;
 
         DisplayDictionaryData();
 
@@ -198,8 +213,11 @@ class MenuManagement
 
         Favorites.DisplayData();
 
-        Console.WriteLine("Enter favorite word for remove: ");
+        Console.WriteLine("Enter favorite word for remove(If you want to exit, enter 0): ");
         word = Console.ReadLine();
+
+        if (word == "0")
+            return;
 
         try
         {
@@ -215,8 +233,11 @@ class MenuManagement
     {
         string Word;
 
-        Console.WriteLine("Enter word for search: ");
+        Console.WriteLine("Enter word for search(If you want to exit, enter 0): ");
         Word = Console.ReadLine();
+
+        if(Word == "0")
+            return;
 
         DictionariesManagement.SearchWord(CurrentDictionary, Word);
     }
@@ -292,5 +313,17 @@ class MenuManagement
         {
             Console.WriteLine(e.Message);
         }
+    }
+
+    public bool CheckDictionaryForEmpty()
+    {
+        if (DictionariesManagement.Dictionaries[CurrentDictionary].Dictionary.Count == 0)
+        {
+            Console.WriteLine("Favorites is empty!");
+            return true;
+        }
+        else
+            return false;
+
     }
 }

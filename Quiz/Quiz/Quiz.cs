@@ -1,11 +1,10 @@
 ﻿using CheckRegex;
 
-
 class Quiz
 {
     public string Category { get; set; }
-    public List<MyQuestion> Questions { get; set; }
-    public Dictionary<string, double> Results { get; private set; }
+    public List<MyQuestion> Questions { get; set; } = new();
+    public Dictionary<string, double> Results { get; private set; } = new();
 
     public Quiz(string category)
     {
@@ -33,7 +32,7 @@ class Quiz
 
             int answerCount = 0;
             Console.WriteLine("Enter answers count(max 5): ");
-            CheckChoice(1, 20, ref answerCount);
+            CheckChoice(1, 5, ref answerCount);
 
             for (int j = 0; j < answerCount; j++)
             {

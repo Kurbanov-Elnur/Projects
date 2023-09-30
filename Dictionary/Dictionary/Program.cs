@@ -15,9 +15,9 @@ while(true)
     Menu.SelectCurrentDictionary();
     Console.Clear();
 
-    while (choice != 6)
+    while (choice != 9)
     {
-        choice = -1;
+        choice = 0;
         Menu.DisplayCurrentDictioany();
 
         Console.WriteLine("1. Add Word or Translation.\n" + 
@@ -38,26 +38,46 @@ while(true)
         {
             case 1:
                 Console.Clear();
-
+               
                 Menu.AddWord();
                 break;
             case 2:
                 Console.Clear();
+                if (Menu.CheckDictionaryForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.ReplaceWord();
                 break;
             case 3:
                 Console.Clear();
+                if (Menu.CheckDictionaryForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.DeleteWord();
                 break;
             case 4:
                 Console.Clear();
+                if (Menu.CheckDictionaryForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.SearchWord();
                 break;
             case 5:
                 Console.Clear();
+                if (Menu.CheckDictionaryForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.DisplayDictionaryData();
                 break;
@@ -68,11 +88,21 @@ while(true)
                 break;
             case 7:
                 Console.Clear();
+                if(Menu.Favorites.CheckFavoriteForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.RemoveFavoriteWord();
                 break;
             case 8:
                 Console.Clear();
+                if (Menu.Favorites.CheckFavoriteForEmpty())
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 Menu.DisplayFavoriteWords();
                 break;

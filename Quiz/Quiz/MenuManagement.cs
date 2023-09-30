@@ -1,9 +1,11 @@
-﻿
+﻿using System.Text.Json;
+
 
 class MenuManagement
 {
-    List<Account> Accounts { get; set; } = new();
-    List<Quiz> Quizzes { get; set; } = new();
+    public List<Account> Accounts { get; set; } = new();
+    public List<Quiz> Quizzes { get; set; } = new();
+    public List<string> Categories { get; set; } = new();
     public int CurrentAccount { get; private set; }
 
     public void Authorization()
@@ -29,6 +31,7 @@ class MenuManagement
 
             if (choice == 1)
             {
+                confirm = true;
                 DateTime birthDay;
 
                 for (int i = 0; i < Accounts.Count; i++)
@@ -36,19 +39,18 @@ class MenuManagement
                     if (Accounts[i].Login == login)
                     {
                         Console.WriteLine("This login is busy!");
-                        confirm = true;
+                        confirm = false;
                         break;
                     }
                 }
 
-                if (!confirm)
+                if (confirm)
                 {
                     Console.WriteLine("Enter your birth day (yyyy-MM-dd):");
                     string userInput = Console.ReadLine();
 
                     if (DateTime.TryParse(userInput, out DateTime userBirthday))
                     {
-                        confirm = true;
                         try
                         {
                             Accounts.Add(new Account(login, password, userBirthday));
@@ -99,19 +101,20 @@ class MenuManagement
         category = Console.ReadLine();
 
         Quizzes.Add(new Quiz(category));
+        Categories.Add(category);
 
-        Quizzes[Quizzes.Count].CreateQuestions();
+        Quizzes[Quizzes.Count - 1].CreateQuestions();
     }
 
     public void StartQuiz()
     {
         int choice = 0;
 
-        Console.WriteLine("Choose the quiz you want to take: ");
         if (DisplayQuizzes())
         {
+            Console.WriteLine("Choose the quiz you want to take: ");
             Quiz.CheckChoice(1, Quizzes.Count, ref choice);
-            Accounts[CurrentAccount].AddResult(Quizzes[choice].Category, Quizzes[choice].TakeTheQuiz(Accounts[CurrentAccount].Login));
+            Accounts[CurrentAccount].AddResult(Quizzes[choice - 1].Category, Quizzes[choice - 1].TakeTheQuiz(Accounts[CurrentAccount].Login));
         }
         else
             return;
@@ -131,7 +134,7 @@ class MenuManagement
         if (DisplayQuizzes())
         {
             Quiz.CheckChoice(1, Quizzes.Count, ref choice);
-            Quizzes[choice].SortResult();
+            Quizzes[choice - 1].SortResult();
         }
         else
             return;
@@ -188,6 +191,68 @@ class MenuManagement
         {
             Console.WriteLine("No quizzes, please add a quiz first");
             return false;
+        }
+    }
+
+    public void Export()
+    {
+        using FileStream Category = new("Categories.json", FileMode.OpenOrCreate);
+        using StreamWriter StreamCategory = new(Category);
+
+        string jsonCategory = JsonSerializer.Serialize(Categories);
+
+        StreamCategory.Write(jsonCategory);
+
+        using FileStream Account = new("Accounts.json", FileMode.OpenOrCreate);
+        using StreamWriter StreamAccounts = new(Account);
+
+        string jsonAccounts = JsonSerializer.Serialize(Accounts);
+
+        StreamAccounts.Write(jsonAccounts);
+
+        foreach (var item in Quizzes)
+        {
+            using FileStream Quiz = new($"{item.Category}.json", FileMode.OpenOrCreate);
+            using StreamWriter StreamQuizzes = new(Quiz);
+
+            string jsonQuizzes = JsonSerializer.Serialize(item);
+
+            StreamQuizzes.Write(jsonQuizzes);
+        }
+    }
+
+    public void Import()
+    {
+        using FileStream Category = new("Categories.json", FileMode.OpenOrCreate);
+        using StreamReader StreamCategory = new(Category);
+
+        string jsonCategory = StreamCategory.ReadToEnd();
+
+        Categories = JsonSerializer.Deserialize<List<string>>(jsonCategory);
+
+        using FileStream Account = new("Accounts.json", FileMode.OpenOrCreate);
+        using StreamReader StreamAccounts = new(Account);
+
+        string jsonAccounts = StreamAccounts.ReadToEnd();
+
+        Accounts = JsonSerializer.Deserialize<List<Account>>(jsonAccounts);
+
+        try
+        {
+            foreach (var item in Categories)
+            {
+                using FileStream Quiz = new($"{item}.json", FileMode.OpenOrCreate);
+                using StreamReader StreamQuizzes = new(Quiz);
+
+                string jsonQuizzes = StreamQuizzes.ReadToEnd();
+
+                Quiz? quiz = JsonSerializer.Deserialize<Quiz>(jsonQuizzes);
+                Quizzes.Add(quiz);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 }

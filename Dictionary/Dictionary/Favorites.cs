@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Management;
+using System.Collections.Generic;
 
 namespace MyDictionaries;    
 
@@ -44,4 +45,16 @@ class Favorites
             Console.WriteLine("\n");
         }
     }
+
+    public bool CheckFavoriteForEmpty()
+    {
+        if (FavoritesWords.Count == 0)
+        {
+            Console.WriteLine("Favorites is empty!");
+            return true;
+        }
+        else
+            return false;
+    }
+
 }
