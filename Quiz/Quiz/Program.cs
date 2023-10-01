@@ -22,7 +22,8 @@ while (true)
             "3. Display my results.\n" +
             "4. Display Top in Quizzes.\n" +
             "5. Edit settings.\n" +
-            "6. Exit and safe.");
+            "6. Exit and safe.\n" +
+            "(If you do not save and close the program, the changes will not be saved)");
 
         Quiz.CheckChoice(1, 6, ref choice);
 

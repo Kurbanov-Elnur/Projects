@@ -319,7 +319,7 @@ class MenuManagement
     {
         if (DictionariesManagement.Dictionaries[CurrentDictionary].Dictionary.Count == 0)
         {
-            Console.WriteLine("Favorites is empty!");
+            Console.WriteLine("Dictionary is empty!");
             return true;
         }
         else

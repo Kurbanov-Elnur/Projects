@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 
-
 class MenuManagement
 {
     public List<Account> Accounts { get; set; } = new();
@@ -97,8 +96,11 @@ class MenuManagement
     {
         string category;
 
-        Console.WriteLine("Enter quiz category: ");
+        Console.WriteLine("Enter quiz category(If you want to exit, enter 0): ");
         category = Console.ReadLine();
+
+        if (category == "0")
+            return;
 
         Quizzes.Add(new Quiz(category));
         Categories.Add(category);
@@ -112,8 +114,12 @@ class MenuManagement
 
         if (DisplayQuizzes())
         {
-            Console.WriteLine("Choose the quiz you want to take: ");
-            Quiz.CheckChoice(1, Quizzes.Count, ref choice);
+            Console.WriteLine("Choose the quiz you want to take(If you want to exit, enter 0): ");
+            Quiz.CheckChoice(0, Quizzes.Count, ref choice);
+
+            if (choice == 0)
+                return;
+
             Accounts[CurrentAccount].AddResult(Quizzes[choice - 1].Category, Quizzes[choice - 1].TakeTheQuiz(Accounts[CurrentAccount].Login));
         }
         else
@@ -145,9 +151,13 @@ class MenuManagement
         int choice = 0;
 
         Console.WriteLine("1. Edit Password\n" +
-            "2. Edit BirthDay");
+            "2. Edit BirthDay\n" +
+            "(If you want to exit, enter 0)");
 
-        Quiz.CheckChoice(1, 2, ref choice);
+        Quiz.CheckChoice(0, 2, ref choice);
+
+        if (choice == 0)
+            return;
 
         Console.WriteLine("Enter current password: ");
         string currentPassword = Console.ReadLine();
@@ -196,14 +206,14 @@ class MenuManagement
 
     public void Export()
     {
-        using FileStream Category = new("Categories.json", FileMode.OpenOrCreate);
+        using FileStream Category = new("Categories.json", FileMode.Create, FileAccess.Write);
         using StreamWriter StreamCategory = new(Category);
 
         string jsonCategory = JsonSerializer.Serialize(Categories);
 
         StreamCategory.Write(jsonCategory);
 
-        using FileStream Account = new("Accounts.json", FileMode.OpenOrCreate);
+        using FileStream Account = new("Accounts.json", FileMode.Create, FileAccess.Write);
         using StreamWriter StreamAccounts = new(Account);
 
         string jsonAccounts = JsonSerializer.Serialize(Accounts);
@@ -212,7 +222,7 @@ class MenuManagement
 
         foreach (var item in Quizzes)
         {
-            using FileStream Quiz = new($"{item.Category}.json", FileMode.OpenOrCreate);
+            using FileStream Quiz = new($"{item.Category}.json", FileMode.Create, FileAccess.Write);
             using StreamWriter StreamQuizzes = new(Quiz);
 
             string jsonQuizzes = JsonSerializer.Serialize(item);
@@ -223,14 +233,14 @@ class MenuManagement
 
     public void Import()
     {
-        using FileStream Category = new("Categories.json", FileMode.OpenOrCreate);
+        using FileStream Category = new("Categories.json", FileMode.Open);
         using StreamReader StreamCategory = new(Category);
 
         string jsonCategory = StreamCategory.ReadToEnd();
 
         Categories = JsonSerializer.Deserialize<List<string>>(jsonCategory);
 
-        using FileStream Account = new("Accounts.json", FileMode.OpenOrCreate);
+        using FileStream Account = new("Accounts.json", FileMode.Open);
         using StreamReader StreamAccounts = new(Account);
 
         string jsonAccounts = StreamAccounts.ReadToEnd();
@@ -241,7 +251,7 @@ class MenuManagement
         {
             foreach (var item in Categories)
             {
-                using FileStream Quiz = new($"{item}.json", FileMode.OpenOrCreate);
+                using FileStream Quiz = new($"{item}.json", FileMode.Open);
                 using StreamReader StreamQuizzes = new(Quiz);
 
                 string jsonQuizzes = StreamQuizzes.ReadToEnd();
