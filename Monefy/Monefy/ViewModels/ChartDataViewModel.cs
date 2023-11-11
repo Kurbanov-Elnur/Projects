@@ -43,7 +43,7 @@ namespace Monefy.ViewModels
             _navigationService = navigationService;
         }
 
-        public RelayCommand<Button> Add
+        public ButtonCommand<Button> Add
         {
             get => new(button =>
             {
@@ -79,6 +79,7 @@ namespace Monefy.ViewModels
             });
 
         }
+
 
         public int searchIndex(DateTime Date)
         {

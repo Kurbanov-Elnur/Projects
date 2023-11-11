@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:local="clr-namespace:Monefy.Views"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
 
@@ -18,7 +16,7 @@
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
         </Style>
     </UserControl.Resources>
- 
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -204,22 +202,6 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"/>
         </Button>
-
-        <!--<StackPanel Grid.RowSpan="9" Grid.ColumnSpan="2">
-            <Grid>
-                
-            </Grid>
-            <ListView BorderBrush="LightGreen" Background="White" FontFamily="Century Gothic">
-                <ListViewItem>
-                    <Button
-                        Content="Day"
-                        Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
-                        Width="180">
-                    </Button>
-                </ListViewItem>
-            </ListView>
-            
-        </StackPanel>-->
 
         <wp:PieChart
             Grid.Row="3"

@@ -16,15 +16,8 @@ namespace Monefy.Models
         { 
             Date = DateTime.Today;
             Chart = new();
-
-            Chart.Series.Add(new PieSeries()
-            {
-                Fill = new SolidColorBrush(Colors.Gray),
-                Values = new ChartValues<double> { 100 },
-                DataLabels = false
-            });
         }
-
+        
         public int searchIndex(Color color)
         {
             for (int i = 0; i < Chart.Series.Count; i++)

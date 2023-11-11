@@ -1,4 +1,5 @@
-﻿using Monefy.ViewModels;
+﻿using Monefy.Services.Classes;
+using Monefy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,18 @@ namespace Monefy.Views
             {
                 DragMove();
             }
+        }
+
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            ButtonOpenMenu.Visibility = Visibility.Visible;
         }
     }
 }

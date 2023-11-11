@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Monefy.Services.Classes
 {
-    class ButtonCommand : ICommand
+    public class ButtonCommand : ICommand
     {
         private readonly Action _funcToExecute;
         private readonly Func<bool> _funcToCheck = () => true;

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
+using Monefy.Services.Classes;
 
 namespace Monefy.ViewModels
 {
@@ -18,7 +19,7 @@ namespace Monefy.ViewModels
                 Set(ref _currentView, value);
             }
         }
-        
+
         public MainViewModel(IMessenger messenger)
         {
             Messenger = messenger;
