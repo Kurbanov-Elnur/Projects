@@ -21,7 +21,7 @@ namespace Monefy.Serrvices.Classes
             });
         }
 
-        public PieChart AddSerie(PieChart chart, Brush color)
+        public void AddSerie(PieChart chart, Brush color)
         {
             foreach (PieSeries item in chart.Series)
             {
@@ -29,7 +29,6 @@ namespace Monefy.Serrvices.Classes
                     if (pieSeries.Fill == color)
                     {
                         pieSeries.Values = new ChartValues<double> { Count + (double)pieSeries.Values[0] };
-                        return chart;
                     }
             }
 
@@ -39,8 +38,6 @@ namespace Monefy.Serrvices.Classes
                 Values = new ChartValues<double> { Count },
                 DataLabels = true,
             });
-
-            return chart;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Monefy.ViewModels
 
         private MyChart chart = new();
         private Button color = new();
-        public bool b = true;
 
         private double Balance = new();
         private StringBuilder Expression = new();

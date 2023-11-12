@@ -93,6 +93,7 @@
             Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Visibility="{Binding Visibility}"
             Style="{DynamicResource MaterialDesignFlatAccentButton}"
             Click="ButtonOpenMenu_Click">
             <md:PackIcon Kind="Menu" Width="25" Height="25"/>

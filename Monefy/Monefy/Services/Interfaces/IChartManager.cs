@@ -7,6 +7,6 @@ namespace Monefy.Services.Interfaces
     interface IChartManager
     {
         public  double Count { get; set; }
-        public PieChart AddSerie(PieChart chart, Brush color);
+        public void AddSerie(PieChart chart, Brush color);
     }
 }
