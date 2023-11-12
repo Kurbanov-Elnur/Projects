@@ -12,13 +12,24 @@ using System.Windows.Media;
 using Monefy.Services.Classes;
 using Monefy.Serrvices.Classes;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Data;
+using LiveCharts.Wpf.Charts.Base;
+using System.Drawing;
+using System.Security.RightsManagement;
 
 namespace Monefy.ViewModels
 {
     internal class OperationViewModel : ViewModelBase
     {
-        private readonly INavigationService NavigationService;
-        private readonly IDataService _data;
+        private readonly INavigationService _navigationService;
+        private readonly IChartManager _chartManager;
+        private readonly IMessenger _messenger;
+        private readonly IDataService _dataService;
+
+        private MyChart chart = new();
+        private Button color = new();
+        public bool b = true;
 
         private double Balance = new();
         private StringBuilder Expression = new();
@@ -34,10 +45,18 @@ namespace Monefy.ViewModels
             }
         }
 
-        public OperationViewModel(INavigationService navigationService, IDataService data)
+        public OperationViewModel(INavigationService navigationService, IChartManager chartManager, IMessenger messenger, IDataService dataService)
         {
-            NavigationService = navigationService;
-            _data = data;
+            _navigationService = navigationService;
+            _chartManager = chartManager;
+            _messenger = messenger;
+            _dataService = dataService;
+
+            _messenger.Register<DatasMessage>(this, message =>
+            {
+                chart = message.Datas[0] as MyChart;
+                color = message.Datas[1] as Button;
+            });
         }
 
         public ButtonCommand<string> Click
@@ -92,9 +111,11 @@ namespace Monefy.ViewModels
             () =>
             {
                 Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
-                _data.SendData(Balance);
-                App.Container.GetInstance<ChartDataViewModel>().Charts[App.Container.GetInstance<ChartDataViewModel>().searchIndex(App.Container.GetInstance<ChartDataViewModel>().CurrentChart.Date)].Chart = App.Container.GetInstance<ChartDataViewModel>().chartManager.AddSerie(App.Container.GetInstance<ChartDataViewModel>().Charts[App.Container.GetInstance<ChartDataViewModel>().searchIndex(App.Container.GetInstance<ChartDataViewModel>().CurrentChart.Date)].Chart, App.Container.GetInstance<ChartDataViewModel>()._button.Foreground);
-                NavigationService.NavigateTo<ChartDataViewModel>();
+                _dataService.SendData(Balance);
+                _chartManager.AddSerie(chart.Chart, color.Foreground);
+                _navigationService.NavigateTo<ChartDataViewModel>();
+                Expression.Clear();
+                ExpressionText = "";
             },
             () =>
             {

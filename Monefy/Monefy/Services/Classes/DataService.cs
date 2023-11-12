@@ -21,5 +21,12 @@ namespace Monefy.Serrvices.Classes
                 Data = data
             });
         }
+        public void SendData(object[] data)
+        {
+            _messenger.Send(new DatasMessage()
+            {
+                Datas = data
+            });
+        }
     }
 }

@@ -7,16 +7,25 @@ namespace Monefy.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
-        private ViewModelBase _currentView;
-
         private readonly IMessenger Messenger;
+        private string visibility = "Visible";
+        private ViewModelBase currentView;
+
+        public string Visibility
+        {
+            get => visibility;
+            set 
+            {
+                Set(ref visibility, value);
+            }
+        }
 
         public ViewModelBase CurrentView
         {
-            get => _currentView;
+            get => currentView;
             set
             {
-                Set(ref _currentView, value);
+                Set(ref currentView, value);
             }
         }
 
@@ -28,6 +37,10 @@ namespace Monefy.ViewModels
             Messenger.Register<NavigationMessage>(this, message =>
             {
                 CurrentView = message.ViewModelType;
+                if (CurrentView == App.Container.GetInstance<OperationViewModel>())
+                    Visibility = "Hidden";
+                else
+                    Visibility = "Visible";
             });
         }
     }
