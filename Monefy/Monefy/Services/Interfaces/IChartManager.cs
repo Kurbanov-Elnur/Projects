@@ -2,11 +2,9 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Monefy.Services.Interfaces
+namespace Monefy.Services.Interfaces;
+
+interface IChartManager
 {
-    interface IChartManager
-    {
-        public  double Count { get; set; }
-        public void AddSerie(PieChart chart, Brush color);
-    }
+    public void AddSerie(PieChart chart, Brush color);
 }

@@ -3,30 +3,29 @@ using Monefy.Messages;
 using Monefy.Models;
 using Monefy.Services.Interfaces;
 
-namespace Monefy.Serrvices.Classes
+namespace Monefy.Serrvices.Classes;
+
+public class DataService : IDataService
 {
-    class DataService : IDataService
+    private readonly IMessenger _messenger;
+
+    public DataService(IMessenger messenger)
     {
-        private readonly IMessenger _messenger;
+        _messenger = messenger;
+    }
 
-        public DataService(IMessenger messenger)
+    public void SendData(object data)
+    {
+        _messenger.Send(new DataMessage()
         {
-            _messenger = messenger;
-        }
-
-        public void SendData(object data)
+            Data = data
+        });
+    }
+    public void SendData(object[] data)
+    {
+        _messenger.Send(new DatasMessage()
         {
-            _messenger.Send(new DataMessage()
-            {
-                Data = data
-            });
-        }
-        public void SendData(object[] data)
-        {
-            _messenger.Send(new DatasMessage()
-            {
-                Datas = data
-            });
-        }
+            Datas = data
+        });
     }
 }

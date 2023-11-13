@@ -1,9 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace Monefy.Messages
+namespace Monefy.Messages;
+
+class NavigationMessage
 {
-    class NavigationMessage
-    {
-        public ViewModelBase ViewModelType { get; set; }
-    }
+    public ViewModelBase ViewModelType { get; set; }
 }

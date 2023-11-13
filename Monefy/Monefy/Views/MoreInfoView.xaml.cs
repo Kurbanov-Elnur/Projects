@@ -1,4 +1,5 @@
-﻿using Monefy.ViewModels;
+﻿using Monefy.Services.Interfaces;
+using Monefy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,21 @@ using System.Windows.Shapes;
 
 namespace Monefy.Views;
 
-public partial class OperationView : UserControl
+/// <summary>
+/// Interaction logic for MoreInfoView.xaml
+/// </summary>
+public partial class MoreInfoView : UserControl
 {
-    public OperationView()
+    private readonly IDataService _dataService;
+
+    public MoreInfoView(IDataService dataService)
     {
         InitializeComponent();
-        DataContext = App.Container.GetInstance<OperationViewModel>();
+        _dataService = dataService;
     }
 
-    public static void Changeicon(Button button)
+    private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
     {
-
+        _dataService.SendData(new object[] { "Visible", "Hidden" });
     }
 }

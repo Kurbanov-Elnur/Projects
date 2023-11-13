@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monefy.Messages
+namespace Monefy.Messages;
+
+class DatasMessage
 {
-    class DatasMessage
-    {
-        public object[] Datas { get; set; }
-    }
+    public object[] Datas { get; set; }
 }

@@ -27,9 +27,11 @@ namespace Monefy
 
             Container.RegisterSingleton<IChartManager, ChartManager>();
 
-            Container.RegisterSingleton<ChartDataViewModel>();
             Container.RegisterSingleton<MainViewModel>();
+            Container.RegisterSingleton<ChartDataViewModel>();
             Container.RegisterSingleton<OperationViewModel>();
+            Container.RegisterSingleton<IntervalsViewModel>();
+            Container.RegisterSingleton<MoreInfoViewModel>();
 
             Container.Verify();
         }

@@ -1,6 +1,8 @@
-﻿using Monefy.ViewModels;
+﻿using Monefy.Services.Interfaces;
+using Monefy.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +18,18 @@ using System.Windows.Shapes;
 
 namespace Monefy.Views;
 
-public partial class OperationView : UserControl
+public partial class IntervalsView : UserControl
 {
-    public OperationView()
+    private readonly IDataService _dataService;
+
+    public IntervalsView(IDataService dataService)
     {
         InitializeComponent();
-        DataContext = App.Container.GetInstance<OperationViewModel>();
+        _dataService = dataService;
     }
 
-    public static void Changeicon(Button button)
+    private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
     {
-
+        _dataService.SendData(new object[] { "Visible", "Hidden" });
     }
 }

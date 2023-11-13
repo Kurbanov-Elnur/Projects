@@ -18,118 +18,128 @@ using LiveCharts.Wpf.Charts.Base;
 using System.Drawing;
 using System.Security.RightsManagement;
 
-namespace Monefy.ViewModels
+namespace Monefy.ViewModels;
+
+internal class OperationViewModel : ViewModelBase
 {
-    internal class OperationViewModel : ViewModelBase
+    private readonly INavigationService _navigationService;
+    private readonly IChartManager _chartManager;
+    private readonly IDataService _dataService;
+
+    private MyChart chart;
+    private Button MyButton;
+
+    public MyChart Chart
     {
-        private readonly INavigationService _navigationService;
-        private readonly IChartManager _chartManager;
-        private readonly IMessenger _messenger;
-        private readonly IDataService _dataService;
-
-        private MyChart chart = new();
-        private Button color = new();
-
-        private double Balance = new();
-        private StringBuilder Expression = new();
-
-        public string _expressionText;
-
-        public string ExpressionText
+        get => chart;
+        set
         {
-            get => _expressionText;
-            set
-            {
-                Set(ref _expressionText, value);
-            }
+            Set(ref chart, value);
         }
+    }
 
-        public OperationViewModel(INavigationService navigationService, IChartManager chartManager, IMessenger messenger, IDataService dataService)
+    private double Balance = new();
+    private StringBuilder Expression = new();
+
+    public string _expressionText;
+
+    public string ExpressionText
+    {
+        get => _expressionText;
+        set
         {
-            _navigationService = navigationService;
-            _chartManager = chartManager;
-            _messenger = messenger;
-            _dataService = dataService;
-
-            _messenger.Register<DatasMessage>(this, message =>
-            {
-                chart = message.Datas[0] as MyChart;
-                color = message.Datas[1] as Button;
-            });
+            Set(ref _expressionText, value);
         }
+    }
 
-        public ButtonCommand<string> Click
+    public OperationViewModel(INavigationService navigationService, IChartManager chartManager, IMessenger messenger, IDataService dataService)
+    {
+        _navigationService = navigationService;
+        _chartManager = chartManager;
+        _dataService = dataService;
+
+        messenger.Register<DatasMessage>(this, message =>
         {
-            get => new((operation) =>
-            {
-                if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
-                    ExpressionText += operation;
-                else
-                {
-                    Check();
-                    ExpressionText = "";
-                }
-                Expression.Append(operation);
-            });
-        }
+            chart = message.Datas[0] as MyChart;
+            MyButton = message.Datas[1] as Button;
+        });
+    }
 
-        public ButtonCommand Delete
+    public ButtonCommand<string> Click
+    {
+        get => new((operation) =>
         {
-            get => new(() =>
+            if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+                ExpressionText += operation;
+            else
             {
-                if (Expression.Length > 0)
-                    Expression.Remove(Expression.Length - 1, 1);
-
-                if (!string.IsNullOrEmpty(ExpressionText))
-                    ExpressionText = ExpressionText.Substring(0, ExpressionText.Length - 1);
-            });
-        }
-
-        public ButtonCommand Equal
-        {
-            get => new(() =>
-            {
-                if (Expression.Length > 0)
-                {
-                    Check();
-
-                    ExpressionText = new System.Data.DataTable().Compute(Expression.ToString(), null).ToString();
-                    Expression.Clear();
-                    Expression.Append(ExpressionText);
-                }
-                else
-                {
-                    MessageBox.Show("Expression empty");
-                }
-            });
-        }
-
-        public ButtonCommand ReturnBalance
-        {
-            get => new(
-            () =>
-            {
-                Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
-                _dataService.SendData(Balance);
-                _chartManager.AddSerie(chart.Chart, color.Foreground);
-                _navigationService.NavigateTo<ChartDataViewModel>();
-                Expression.Clear();
+                Check();
                 ExpressionText = "";
-            },
-            () =>
-            {
-                return !(Expression.Length == 0);
-            });
-        }
-
-        public void Check()
-        {
-            if (Expression[Expression.Length - 1].ToString() == "-" || Expression[Expression.Length - 1].ToString() == "+"
-            || Expression[Expression.Length - 1].ToString() == "*" || Expression[Expression.Length - 1].ToString() == "/")
-            {
-                while(Expression[Expression.Length - 1] < 48 || Expression[Expression.Length - 1] > 57)
-                    Expression.Remove(Expression.Length - 1, 1);
             }
+            Expression.Append(operation);
+        });
+    }
+
+    public ButtonCommand Delete
+    {
+        get => new(() =>
+        {
+            if (Expression.Length > 0)
+                Expression.Remove(Expression.Length - 1, 1);
+
+            if (!string.IsNullOrEmpty(ExpressionText))
+                ExpressionText = ExpressionText.Substring(0, ExpressionText.Length - 1);
+        });
+    }
+
+    public ButtonCommand Equal
+    {
+        get => new(() =>
+        {
+            if (Expression.Length > 0)
+            {
+                Check();
+
+                ExpressionText = new System.Data.DataTable().Compute(Expression.ToString(), null).ToString();
+                Expression.Clear();
+                Expression.Append(ExpressionText);
+            }
+            else
+            {
+                MessageBox.Show("Expression empty");
+            }
+        });
+    }
+
+    public ButtonCommand ReturnBalance
+    {
+        get => new(
+        () =>
+        {
+            Check();
+
+            Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
+
+            _dataService.SendData(Balance);
+            _chartManager.AddSerie(chart.Chart, MyButton.Foreground);
+            _navigationService.NavigateTo<ChartDataViewModel>();
+
+            Expression.Clear();
+            ExpressionText = "";
+        },
+        () =>
+        {
+            return !(Expression.Length == 0);
+        });
+    }
+
+    public void Check()
+    {
+        if (Expression[Expression.Length - 1].ToString() == "-" || Expression[Expression.Length - 1].ToString() == "+"
+        || Expression[Expression.Length - 1].ToString() == "*" || Expression[Expression.Length - 1].ToString() == "/")
+        {
+            while(Expression[Expression.Length - 1] < 48 || Expression[Expression.Length - 1] > 57)
+                Expression.Remove(Expression.Length - 1, 1);
         }
     }
 }

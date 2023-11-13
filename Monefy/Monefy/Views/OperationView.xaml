@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monefy.Views"
-            xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"   
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="400">
 
@@ -38,7 +38,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-
+        <TextBlock
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            FontSize="24"
+            Text="{Binding Chart.Date, StringFormat='dd-MM-yyyy'}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="LawnGreen">
+        </TextBlock>
+        
         <Border 
             Grid.Row="1"
             Grid.ColumnSpan="4"
@@ -230,6 +239,7 @@
         </Button>
 
         <Button
+            x:Name="ReturnBtn"
             Grid.Row="9"
             Grid.Column="0"
             Grid.ColumnSpan="4"

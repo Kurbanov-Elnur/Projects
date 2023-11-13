@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Monefy.Views.ChartData"
+﻿<UserControl x:Class="Monefy.Views.ChartDataView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -36,7 +36,47 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
+        <Button 
+            Grid.Row="1"
+            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
+            Command="{Binding Left}">
 
+            <md:PackIcon 
+                Kind="ArrowLeft"
+                Foreground="LawnGreen"
+                Width="60"
+                Height="60"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+        </Button>
+
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            FontSize="24"
+            Text="{Binding CurrentChart.Date, StringFormat='dd-MM-yyyy'}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="LawnGreen">
+        </TextBlock>
+
+        <Button 
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
+            Command="{Binding Right}">
+
+            <md:PackIcon 
+                Kind="ArrowRight"
+                Foreground="LawnGreen"
+                Width="60"
+                Height="60"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+        </Button>
+        
         <Button
             Grid.Row="2"
             Grid.Column="0"
@@ -163,46 +203,6 @@
             <md:PackIcon Kind="CarRepair" Width="30" Height="30" HorizontalAlignment="Center"/>
         </Button>
 
-        <TextBlock
-            Grid.Column="1"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            FontSize="24"
-            Text="{Binding CurrentChart.Date, StringFormat='dd-MM-yyyy'}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="LawnGreen">
-        </TextBlock>
-
-        <Button 
-            Grid.Row="1"
-            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
-            Command="{Binding Left}">
-            
-            <md:PackIcon 
-                Kind="ArrowLeft"
-                Foreground="LawnGreen"
-                Width="60"
-                Height="60"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button 
-            Grid.Row="1"
-            Grid.Column="3"
-            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
-            Command="{Binding Right}">
-
-            <md:PackIcon 
-                Kind="ArrowRight"
-                Foreground="LawnGreen"
-                Width="60"
-                Height="60"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
-        </Button>
-
         <wp:PieChart
             Grid.Row="3"
             Grid.Column="1"
@@ -211,5 +211,17 @@
             Content="{Binding CurrentChart.Chart}"
             IsEnabled="False">
         </wp:PieChart>
+
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="7"
+            Grid.ColumnSpan="2"
+            FontSize="24"
+            Text="{Binding CurrentChart.Balance}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="LawnGreen">
+        </TextBlock>
+        
     </Grid>
 </UserControl>

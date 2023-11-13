@@ -8,11 +8,19 @@
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type ViewModel:ChartDataViewModel}">
-                <View:ChartData/>
+                <View:ChartDataView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModel:OperationViewModel}">
                 <View:OperationView/>
+            </DataTemplate> 
+            
+            <DataTemplate DataType="{x:Type ViewModel:IntervalsViewModel}">
+                <View:IntervalsView/>
+            </DataTemplate>  
+            
+            <DataTemplate DataType="{x:Type ViewModel:MoreInfoViewModel}">
+                <View:MoreInfoView/>
             </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>

@@ -1,9 +1,8 @@
 ﻿using Monefy.Models;
 
-namespace Monefy.Messages
+namespace Monefy.Messages;
+
+class DataMessage
 {
-    class DataMessage
-    {
-        public object Data { get; set; }
-    }
+    public object Data { get; set; }
 }

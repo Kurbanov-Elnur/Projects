@@ -15,13 +15,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Monefy.Views
+namespace Monefy.Views;
+
+public partial class ChartDataView : UserControl
 {
-    public partial class ChartData : UserControl
+    public ChartDataView()
     {
-        public ChartData()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
