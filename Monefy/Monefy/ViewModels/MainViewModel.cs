@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
+using Monefy.Views;
 
 namespace Monefy.ViewModels;
 
@@ -26,7 +27,7 @@ class MainViewModel : ViewModelBase
 
     public ViewModelBase IntervalsView
     {
-        get => intervalsView = App.Container.GetInstance<IntervalsViewModel>();
+        get => intervalsView;
         set
         {
             Set(ref intervalsView, value);
@@ -35,7 +36,7 @@ class MainViewModel : ViewModelBase
 
     public ViewModelBase MoreInfoView
     {
-        get => moreInfoView = App.Container.GetInstance<MoreInfoViewModel>();
+        get => moreInfoView;
         set
         {
             Set(ref moreInfoView, value);
@@ -47,6 +48,8 @@ class MainViewModel : ViewModelBase
         _messenger = messenger;
         _dataService = dataService;
         CurrentView = App.Container.GetInstance<ChartDataViewModel>();
+        IntervalsView = App.Container.GetInstance<IntervalsViewModel>();
+        MoreInfoView = App.Container.GetInstance<MoreInfoViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>
         {

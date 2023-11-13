@@ -2,17 +2,22 @@
 using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Services.Classes;
+using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Monefy.ViewModels;
 
 class MoreInfoViewModel : ViewModelBase
 {
     private readonly IMessenger _messenger;
+    private readonly IDataService _dataService;
+
     private string openMenuVisibility = "Visible";
     private string closeMenuVisibility = "Hidden";
 
@@ -34,14 +39,14 @@ class MoreInfoViewModel : ViewModelBase
         }
     }
 
-    public MoreInfoViewModel(IMessenger messenger)
+    public MoreInfoViewModel(IMessenger messenger, IDataService dataService)
     {
         _messenger = messenger;
+        _dataService = dataService;
 
-        _messenger.Register<DatasMessage>(this, (message) =>
+        _messenger.Register<DataMessage>(this, (message) =>
         {
-            OpenMenuVisibility = message.Datas[0] as string;
-            CloseMenuVisibility = message.Datas[1] as string;
+            OpenMenuVisibility = message.Data as string;
         });
     }
 
@@ -51,6 +56,8 @@ class MoreInfoViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Hidden";
             CloseMenuVisibility = "Visible";
+
+            _dataService.SendData("Hidden");
         });
     }
 
@@ -60,6 +67,8 @@ class MoreInfoViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Visible";
             CloseMenuVisibility = "Hidden";
+
+            _dataService.SendData("Visible");
         });
     }
 }

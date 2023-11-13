@@ -121,7 +121,7 @@ internal class OperationViewModel : ViewModelBase
             Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
 
             _dataService.SendData(Balance);
-            _chartManager.AddSerie(chart.Chart, MyButton.Foreground);
+            _chartManager.AddSerie(chart, MyButton.Foreground);
             _navigationService.NavigateTo<ChartDataViewModel>();
 
             Expression.Clear();

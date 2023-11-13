@@ -2,6 +2,7 @@
 using LiveCharts;
 using LiveCharts.Wpf;
 using Monefy.Messages;
+using Monefy.Models;
 using Monefy.Services.Interfaces;
 using System.Windows.Media;
 
@@ -21,15 +22,21 @@ class ChartManager : IChartManager
         });
     }
 
-    public void AddSerie(PieChart chart, Brush color)
+    public void AddSerie(MyChart MyChart, Brush color)
     {
+        PieChart chart = MyChart.Chart;
+
         foreach (PieSeries item in chart.Series)
         {
-            if (item is PieSeries pieSeries)
-                if (pieSeries.Fill == color)
-                {
-                    pieSeries.Values = new ChartValues<double> { Count + (double)pieSeries.Values[0] };
-                }
+            if (item.Fill == color)
+            {
+                item.Values = new ChartValues<double> { Count + (double)item.Values[0] };
+                return;
+            }
+            if ((item.Fill as SolidColorBrush).Color == Colors.Gray)
+            {
+                item.Values = new ChartValues<double> { 0 };
+            }
         }
 
         chart.Series.Add(new PieSeries()
@@ -38,5 +45,7 @@ class ChartManager : IChartManager
             Values = new ChartValues<double> { Count },
             DataLabels = true,
         });
+
+        MyChart.Balance += Count;
     }
 }

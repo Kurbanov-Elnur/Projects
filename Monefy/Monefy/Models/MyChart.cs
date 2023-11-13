@@ -10,13 +10,20 @@ namespace Monefy.Models;
 internal class MyChart 
 {
     public PieChart Chart { get; set; }
-    public double Balance { get; set; } = 1000;
+    public double Balance { get; set; }
     public DateTime Date { get; set; }
 
     public MyChart()
     { 
         Date = DateTime.Today;
         Chart = new();
+        Chart.Series.Add(new PieSeries()
+        {
+            Fill = new SolidColorBrush(Colors.Gray),
+            Values = new ChartValues<double> { 100 },
+            DataLabels = false
+        });
+        Chart.InnerRadius = 45;
     }
     
     public int searchIndex(Color color)

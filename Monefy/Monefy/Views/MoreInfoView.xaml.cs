@@ -17,21 +17,17 @@ using System.Windows.Shapes;
 
 namespace Monefy.Views;
 
-/// <summary>
-/// Interaction logic for MoreInfoView.xaml
-/// </summary>
 public partial class MoreInfoView : UserControl
 {
-    private readonly IDataService _dataService;
-
-    public MoreInfoView(IDataService dataService)
+    public MoreInfoView()
     {
         InitializeComponent();
-        _dataService = dataService;
     }
 
-    private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+    public void BorderClose(object sender, MouseButtonEventArgs e)
     {
-        _dataService.SendData(new object[] { "Visible", "Hidden" });
+        App.Container.GetInstance<MoreInfoViewModel>().OpenMenuVisibility = "Visible";
+        App.Container.GetInstance<MoreInfoViewModel>().CloseMenuVisibility = "Hidden";
+        App.Container.GetInstance<IntervalsViewModel>().OpenMenuVisibility = "Visible";
     }
 }

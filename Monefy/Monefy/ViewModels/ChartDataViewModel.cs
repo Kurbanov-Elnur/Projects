@@ -23,7 +23,7 @@ namespace Monefy.ViewModels;
 internal class ChartDataViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
-    private readonly IDataService _datasService;
+    private readonly IDataService _dataService;
 
     public List<MyChart> Charts { get; set; } = new();
 
@@ -41,7 +41,7 @@ internal class ChartDataViewModel : ViewModelBase
     {
         Charts.Add(new MyChart()
         {
-            Date = DateTime.Today.AddDays(-2)
+            Date = DateTime.Today.AddDays(-2),
         });
         Charts.Add(new MyChart()
         {
@@ -51,14 +51,14 @@ internal class ChartDataViewModel : ViewModelBase
 
         CurrentChart = Charts[searchIndex(DateTime.Today)];
         _navigationService = navigationService;
-        _datasService = dataService;
+        _dataService = dataService;
     }
 
     public ButtonCommand<Button> Add
     {
         get => new(button =>
         {
-            _datasService.SendData( new object[] { Charts[searchIndex(CurrentChart.Date)], button });
+            _dataService.SendData( new object[] { Charts[searchIndex(CurrentChart.Date)], button });
             _navigationService.NavigateTo<OperationViewModel>();
         });
     }
@@ -89,7 +89,6 @@ internal class ChartDataViewModel : ViewModelBase
         });
 
     }
-
 
     public int searchIndex(DateTime Date)
     {

@@ -54,10 +54,11 @@
             HorizontalAlignment="Right"
             Width="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <Border
+                Grid.Column="1"
                 Background="LightGreen">
                 <StackPanel>
                     <Button
@@ -65,12 +66,12 @@
                         Visibility="{Binding CloseMenuVisibility}"
                         Height="60"
                         Width="60"
-                        HorizontalAlignment="Right"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Command="{Binding CloseMenu}"
                         Foreground="LightGray"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}">
-                        <md:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                        <md:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
                     </Button>
                     <Button
                         Grid.Row="2"
@@ -82,10 +83,10 @@
             </Border>
             <Border
                 x:Name="Border"
-                MouseDown="ButtonCloseMenu_Click"
-                Grid.Column="1"
+                MouseDown="BorderClose"
+                Grid.Column="0"
                 Background="Black"
-                Opacity="0.6">
+                Opacity="0.4">
             </Border>
         </Grid>
     </Grid>

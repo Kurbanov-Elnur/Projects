@@ -2,19 +2,16 @@
 using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Services.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Monefy.Services.Interfaces;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Monefy.ViewModels;
 
 class IntervalsViewModel : ViewModelBase
 {
     private readonly IMessenger _messenger;
+    private readonly IDataService _dataService;
+
     private string openMenuVisibility = "Visible";
     private string closeMenuVisibility = "Hidden";
 
@@ -36,14 +33,14 @@ class IntervalsViewModel : ViewModelBase
         }
     }
 
-    public IntervalsViewModel(IMessenger messenger)
+    public IntervalsViewModel(IMessenger messenger, IDataService dataService)
     {
         _messenger = messenger;
+        _dataService = dataService;
 
-        _messenger.Register<DatasMessage>(this, (message) =>
+        _messenger.Register<DataMessage>(this, (message) =>
         {
-            OpenMenuVisibility = message.Datas[0] as string;
-            CloseMenuVisibility = message.Datas[1] as string;
+            OpenMenuVisibility = message.Data as string;
         });
     }
 
@@ -53,6 +50,8 @@ class IntervalsViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Hidden";
             CloseMenuVisibility = "Visible";
+
+            _dataService.SendData("Hidden");
         });
     }
 
@@ -62,6 +61,8 @@ class IntervalsViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Visible";
             CloseMenuVisibility = "Hidden";
+
+            _dataService.SendData("Visible");
         });
     }
 }

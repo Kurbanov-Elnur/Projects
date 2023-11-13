@@ -74,18 +74,33 @@
                     </Button>
                     <Button
                         Grid.Row="2"
+                        Height="60"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}"
                         Foreground="White"
                         Content="Day">
+                    </Button>       
+                    <Button
+                        Grid.Row="2"
+                        Height="60"
+                        Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                        Foreground="White"
+                        Content="Month">
+                    </Button>     
+                    <Button
+                        Grid.Row="2"
+                        Height="60"
+                        Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                        Foreground="White"
+                        Content="Year">
                     </Button>
                 </StackPanel>
             </Border>
             <Border
                 x:Name="Border"
-                MouseDown="ButtonCloseMenu_Click"
+                MouseDown="BorderClose"
                 Grid.Column="1"
                 Background="Black"
-                Opacity="0.6">
+                Opacity="0.4">
             </Border>
         </Grid>
     </Grid>

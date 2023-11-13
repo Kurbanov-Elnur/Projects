@@ -20,16 +20,15 @@ namespace Monefy.Views;
 
 public partial class IntervalsView : UserControl
 {
-    private readonly IDataService _dataService;
-
-    public IntervalsView(IDataService dataService)
+    public IntervalsView()
     {
         InitializeComponent();
-        _dataService = dataService;
     }
 
-    private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+    public void BorderClose(object sender, MouseButtonEventArgs e)
     {
-        _dataService.SendData(new object[] { "Visible", "Hidden" });
+        App.Container.GetInstance<IntervalsViewModel>().OpenMenuVisibility = "Visible";
+        App.Container.GetInstance<IntervalsViewModel>().CloseMenuVisibility = "Hidden";
+        App.Container.GetInstance<MoreInfoViewModel>().OpenMenuVisibility = "Visible";
     }
 }
