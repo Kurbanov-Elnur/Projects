@@ -30,7 +30,7 @@ class ChartManager : IChartManager
         {
             if (item.Fill == color)
             {
-                item.Values = new ChartValues<double> { Count + (double)item.Values[0] };
+                item.Values[0] = (double)(Count + (double)item.Values[0]);
                 return;
             }
             if ((item.Fill as SolidColorBrush).Color == Colors.Gray)

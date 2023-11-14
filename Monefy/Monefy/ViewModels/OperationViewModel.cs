@@ -17,6 +17,7 @@ using System.Data;
 using LiveCharts.Wpf.Charts.Base;
 using System.Drawing;
 using System.Security.RightsManagement;
+using MaterialDesignThemes.Wpf;
 
 namespace Monefy.ViewModels;
 
@@ -26,8 +27,13 @@ internal class OperationViewModel : ViewModelBase
     private readonly IChartManager _chartManager;
     private readonly IDataService _dataService;
 
+    private double Balance = new();
+    private StringBuilder Expression = new();
+    private string _expressionText;
+
     private MyChart chart;
     private Button MyButton;
+    private PackIcon icon;
 
     public MyChart Chart
     {
@@ -38,10 +44,14 @@ internal class OperationViewModel : ViewModelBase
         }
     }
 
-    private double Balance = new();
-    private StringBuilder Expression = new();
-
-    public string _expressionText;
+    public  PackIcon Icon
+    {
+        get => icon;
+        set
+        {
+            Set(ref icon, value);
+        }
+    }
 
     public string ExpressionText
     {
@@ -60,8 +70,9 @@ internal class OperationViewModel : ViewModelBase
 
         messenger.Register<DatasMessage>(this, message =>
         {
-            chart = message.Datas[0] as MyChart;
+            Chart = message.Datas[0] as MyChart;
             MyButton = message.Datas[1] as Button;
+            Icon = MyButton.Content as PackIcon;
         });
     }
 
@@ -94,7 +105,8 @@ internal class OperationViewModel : ViewModelBase
 
     public ButtonCommand Equal
     {
-        get => new(() =>
+        get => new(
+        () =>
         {
             if (Expression.Length > 0)
             {
@@ -104,10 +116,10 @@ internal class OperationViewModel : ViewModelBase
                 Expression.Clear();
                 Expression.Append(ExpressionText);
             }
-            else
-            {
-                MessageBox.Show("Expression empty");
-            }
+        },
+        () =>
+        {
+            return !(Expression.Length == 0);
         });
     }
 
@@ -121,7 +133,7 @@ internal class OperationViewModel : ViewModelBase
             Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
 
             _dataService.SendData(Balance);
-            _chartManager.AddSerie(chart, MyButton.Foreground);
+            _chartManager.AddSerie(Chart, MyButton.Foreground);
             _navigationService.NavigateTo<ChartDataViewModel>();
 
             Expression.Clear();

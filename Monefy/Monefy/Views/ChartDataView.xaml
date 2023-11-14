@@ -76,7 +76,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"/>
         </Button>
-        
+
         <Button
             Grid.Row="2"
             Grid.Column="0"

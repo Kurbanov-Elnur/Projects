@@ -5,6 +5,7 @@ using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
+using MaterialDesignThemes.Wpf;
 using Monefy.Messages;
 using Monefy.Models;
 using Monefy.Services.Classes;
@@ -17,6 +18,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shell;
 
 namespace Monefy.ViewModels;
 
@@ -52,13 +54,16 @@ internal class ChartDataViewModel : ViewModelBase
         CurrentChart = Charts[searchIndex(DateTime.Today)];
         _navigationService = navigationService;
         _dataService = dataService;
+
     }
 
     public ButtonCommand<Button> Add
     {
         get => new(button =>
         {
-            _dataService.SendData( new object[] { Charts[searchIndex(CurrentChart.Date)], button });
+            PackIcon icon = button.Content as PackIcon;
+
+            _dataService.SendData( new object[] { Charts[searchIndex(CurrentChart.Date)], button});
             _navigationService.NavigateTo<OperationViewModel>();
         });
     }

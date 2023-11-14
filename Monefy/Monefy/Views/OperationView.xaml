@@ -94,7 +94,6 @@
             CaretBrush="DarkBlue"
             Foreground="LightGreen"
             md:TextFieldAssist.UnderlineBrush="LightGreen"
-            Text="{Binding B, UpdateSourceTrigger=PropertyChanged}"
             FontSize="24"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
@@ -238,6 +237,17 @@
             <md:PackIcon Kind="SlashForward" Height="50" Width="50"/>
         </Button>
 
+        <TextBlock
+            Grid.Row="9"
+            Grid.ColumnSpan="2"
+            Text="Add to"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="24"
+            Margin="100 0 0 0"
+            Foreground="{Binding Icon.Foreground}">
+        </TextBlock>
+        
         <Button
             x:Name="ReturnBtn"
             Grid.Row="9"
@@ -249,6 +259,13 @@
             Width="380"
             Style="{DynamicResource MaterialDesignFlatAccentButton}"
             Command="{Binding ReturnBalance}">
+
+            <md:PackIcon
+                Kind="{Binding Icon.Kind}"
+                Margin="100 0 0 0 "
+                Width="40"
+                Height="40"
+                Foreground="{Binding Icon.Foreground}"/>
         </Button>
     </Grid>
 </UserControl>
