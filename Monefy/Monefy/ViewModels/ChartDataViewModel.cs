@@ -27,7 +27,7 @@ internal class ChartDataViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
 
-    public List<MyChart> Charts { get; set; } = new();
+    public List<MyChart> Charts = new();
 
     public MyChart _currentChart;
     public MyChart CurrentChart
@@ -54,7 +54,6 @@ internal class ChartDataViewModel : ViewModelBase
         CurrentChart = Charts[searchIndex(DateTime.Today)];
         _navigationService = navigationService;
         _dataService = dataService;
-
     }
 
     public ButtonCommand<Button> Add

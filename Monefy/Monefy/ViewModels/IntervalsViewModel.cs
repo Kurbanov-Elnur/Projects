@@ -44,6 +44,27 @@ class IntervalsViewModel : ViewModelBase
         });
     }
 
+    public ButtonCommand DayView
+    {
+        get => new(() =>
+        {
+        });
+    }  
+    
+    public ButtonCommand MonthView
+    {
+        get => new(() =>
+        {
+        });
+    }  
+    
+    public ButtonCommand YearView
+    {
+        get => new(() =>
+        {
+        });
+    }
+
     public ButtonCommand OpenMenu
     {
         get => new(() =>

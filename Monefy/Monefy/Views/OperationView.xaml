@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monefy.Views"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"   
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"  
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="400">
 
@@ -12,7 +12,8 @@
         <Style TargetType="Button" x:Key="MyButtonStyle" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
             <Setter Property="Height" Value="70" />
             <Setter Property="Width" Value="95" />
-            <Setter Property="BorderBrush" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="{Binding Icon.Foreground}"/>
+            <Setter Property="BorderBrush" Value="{Binding Icon.Foreground}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Command" Value="{Binding Click}"/>
         </Style>
@@ -38,6 +39,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Button
+            Width="60"
+            Height="40"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="{Binding Icon.Foreground}"
+            Style="{DynamicResource MaterialDesignFlatAccentButton}"
+            Command="{Binding Back}">
+
+            <md:PackIcon Kind="ArrowLeft" Height="20" Width="20"/>
+        </Button>
+        
         <TextBlock
             Grid.Column="1"
             Grid.ColumnSpan="2"
@@ -45,7 +58,7 @@
             Text="{Binding Chart.Date, StringFormat='dd-MM-yyyy'}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Foreground="LawnGreen">
+            Foreground="{Binding Icon.Foreground}">
         </TextBlock>
         
         <Border 
@@ -64,10 +77,10 @@
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            md:TextFieldAssist.UnderlineBrush="LightGreen"
+            md:TextFieldAssist.UnderlineBrush="{Binding Icon.Foreground}"
             Text="{Binding ExpressionText, UpdateSourceTrigger=PropertyChanged}"
             FontSize="50"
-            Foreground="Black"
+            Foreground="{Binding Icon.Foreground}"
             TextAlignment="Center"
             IsReadOnly="True"
             BorderThickness="0">
@@ -92,8 +105,8 @@
             md:HintAssist.Hint ="Note"
             VerticalAlignment="Center"
             CaretBrush="DarkBlue"
-            Foreground="LightGreen"
-            md:TextFieldAssist.UnderlineBrush="LightGreen"
+            Foreground="{Binding Icon.Foreground}"
+            md:TextFieldAssist.UnderlineBrush="{Binding Icon.Foreground}"
             FontSize="24"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
@@ -247,14 +260,15 @@
             Margin="100 0 0 0"
             Foreground="{Binding Icon.Foreground}">
         </TextBlock>
-        
+
         <Button
             x:Name="ReturnBtn"
             Grid.Row="9"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            BorderBrush="LightGreen"
+            BorderBrush="{Binding Icon.Foreground}"
             BorderThickness="1"
+            Foreground="{Binding Icon.Foreground}"
             Height="60"
             Width="380"
             Style="{DynamicResource MaterialDesignFlatAccentButton}"

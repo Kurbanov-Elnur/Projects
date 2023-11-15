@@ -27,7 +27,7 @@ internal class OperationViewModel : ViewModelBase
     private readonly IChartManager _chartManager;
     private readonly IDataService _dataService;
 
-    private double Balance = new();
+    private double Balance;
     private StringBuilder Expression = new();
     private string _expressionText;
 
@@ -81,9 +81,15 @@ internal class OperationViewModel : ViewModelBase
         get => new((operation) =>
         {
             if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+            {
+                if (Expression.Length == 0 && operation == "0")
+                    return;
                 ExpressionText += operation;
+            }
             else
             {
+                if (Expression.Length == 0)
+                    return;
                 Check();
                 ExpressionText = "";
             }
@@ -131,7 +137,6 @@ internal class OperationViewModel : ViewModelBase
             Check();
 
             Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
-
             _dataService.SendData(Balance);
             _chartManager.AddSerie(Chart, MyButton.Foreground);
             _navigationService.NavigateTo<ChartDataViewModel>();
@@ -141,7 +146,17 @@ internal class OperationViewModel : ViewModelBase
         },
         () =>
         {
-            return !(Expression.Length == 0);
+            return !(Expression.Length == 0 || Expression[0].ToString() == "0");
+        });
+    }
+
+    public ButtonCommand Back
+    {
+        get => new(() =>
+        {
+            _navigationService.NavigateTo<ChartDataViewModel>();
+            Expression.Clear();
+            ExpressionText = "";
         });
     }
 

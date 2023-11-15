@@ -210,6 +210,12 @@
             Grid.ColumnSpan="2"
             Content="{Binding CurrentChart.Chart}"
             IsEnabled="False">
+
+            <wp:PieChart.Resources>
+                <Style TargetType="wp:LineSeries">
+                    <Setter Property="Stroke" Value="Transparent"/>
+                </Style>
+            </wp:PieChart.Resources>
         </wp:PieChart>
 
         <TextBlock
@@ -221,7 +227,6 @@
             Margin="0 20 2 0"
             Text="{Binding CurrentChart.Balance}"
             Foreground="LawnGreen">
-            
         </TextBlock>
 
         <TextBlock

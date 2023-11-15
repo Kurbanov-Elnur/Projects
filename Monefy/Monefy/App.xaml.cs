@@ -26,6 +26,7 @@ public partial class App : Application
         Container.RegisterSingleton<IDataService, DataService>();
 
         Container.RegisterSingleton<IChartManager, ChartManager>();
+        Container.RegisterSingleton<IIntervalsManager, IntervalsManager>();
 
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<ChartDataViewModel>();
