@@ -17,10 +17,18 @@
             
             <DataTemplate DataType="{x:Type ViewModel:IntervalsViewModel}">
                 <View:IntervalsView/>
-            </DataTemplate>  
-            
-            <DataTemplate DataType="{x:Type ViewModel:MoreInfoViewModel}">
-                <View:MoreInfoView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:CategoriesViewModel}">
+                <View:CategoriesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:TransactionsViewModel}">
+                <View:TransactionsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:CardsViewModel}">
+                <View:CardsView/>
             </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>
@@ -28,6 +36,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="c:\projects\monefy\monefy\styles\mybuttonstyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

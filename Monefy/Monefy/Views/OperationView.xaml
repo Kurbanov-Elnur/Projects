@@ -4,21 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monefy.Views"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"  
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="400">
-
-    <UserControl.Resources>
-        <Style TargetType="Button" x:Key="MyButtonStyle" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
-            <Setter Property="Height" Value="70" />
-            <Setter Property="Width" Value="95" />
-            <Setter Property="Foreground" Value="{Binding Icon.Foreground}"/>
-            <Setter Property="BorderBrush" Value="{Binding Icon.Foreground}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Command" Value="{Binding Click}"/>
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -39,247 +27,261 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button
-            Width="60"
-            Height="40"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Foreground="{Binding Icon.Foreground}"
-            Style="{DynamicResource MaterialDesignFlatAccentButton}"
-            Command="{Binding Back}">
-
-            <md:PackIcon Kind="ArrowLeft" Height="20" Width="20"/>
-        </Button>
-        
-        <TextBlock
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            FontSize="24"
-            Text="{Binding Chart.Date, StringFormat='dd-MM-yyyy'}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="{Binding Icon.Foreground}">
-        </TextBlock>
-        
-        <Border 
-            Grid.Row="1"
+        <Border
             Grid.ColumnSpan="4"
-            Background="White"
-            Padding="30"
-            CornerRadius="30">
+            Background="Blue"
+            CornerRadius="0 0 80 80">
 
             <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Color="LightBlue" ShadowDepth="0"/>
+                <DropShadowEffect BlurRadius="10" Color="Blue"/>
             </Border.Effect>
+            
+            <Grid>
+                <Button
+                    Width="60"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Foreground="White"
+                    Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                    Command="{Binding Back}">
+
+                    <md:PackIcon Kind="ArrowLeft" Height="20" Width="20"/>
+                </Button>
+        
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    FontSize="24"
+                    Text="Transfer"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White">
+                </TextBlock>
+            </Grid>
         </Border>
 
         <TextBox 
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            md:TextFieldAssist.UnderlineBrush="{Binding Icon.Foreground}"
             Text="{Binding ExpressionText, UpdateSourceTrigger=PropertyChanged}"
             FontSize="50"
-            Foreground="{Binding Icon.Foreground}"
+            Foreground="Blue"
             TextAlignment="Center"
             IsReadOnly="True"
             BorderThickness="0">
+
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Blue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
         </TextBox>
 
         <Button
-            Grid.Row="1"
-            Grid.Column="3"
-            Width="40"
-            Height="40"
-            HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Command="{Binding Delete}"
-            Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="35,22,35,23">
+            Grid.Row="2"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Command="{Binding Delete}">
 
             <md:PackIcon Kind="Backspace" Width="20" Height="20"/>
         </Button>
 
-        <TextBox
-            Grid.Row="2"
+        <StackPanel
+            Grid.Row="4"
+            Orientation="Horizontal"
             Grid.ColumnSpan="4"
-            md:HintAssist.Hint ="Note"
-            VerticalAlignment="Center"
-            CaretBrush="DarkBlue"
-            Foreground="{Binding Icon.Foreground}"
-            md:TextFieldAssist.UnderlineBrush="{Binding Icon.Foreground}"
-            FontSize="24"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            HorizontalAlignment="Center">
+            
+            <Button
+                Grid.Row="4"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="1">
 
-        <Button
-            Grid.Row="4"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="1">
+                <md:PackIcon Kind="NumericOne" Width="30" Height="30"/>
+            </Button>
 
-            <md:PackIcon Kind="NumericOne" Height="60" Width="60"/>
-        </Button>
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="2">
 
-        <Button
+                <md:PackIcon Kind="NumericTwo" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="2"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="3">
+
+                <md:PackIcon Kind="NumericThree" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="3"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="+">
+
+                <md:PackIcon Kind="Plus" Width="23" Height="23"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel
             Grid.Row="5"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="4">
-
-            <md:PackIcon Kind="NumericFour" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="7">
-
-            <md:PackIcon Kind="NumericSeven" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="7"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter=".">
-
-            <md:PackIcon Margin="0,15,0,0" Kind="Dot" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="4"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="2">
-
-            <md:PackIcon Kind="NumericTwo" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="5"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="5">
-
-            <md:PackIcon Kind="NumericFive" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="8">
-
-            <md:PackIcon Kind="NumericEight" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="7"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="0">
-
-            <md:PackIcon Kind="NumericZero" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="4"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="3">
-
-            <md:PackIcon Kind="NumericThree" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="5"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="6">
-
-            <md:PackIcon Kind="NumericSix" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            CommandParameter="9">
-
-            <md:PackIcon Kind="NumericNine" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="7"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            Command="{Binding Equal}">
-
-            <md:PackIcon Kind="Equal" Height="60" Width="60"/>
-        </Button>
-
-        <Button
-            Grid.Row="4"
-            Grid.Column="3"
-            CommandParameter="+"
-            Style="{StaticResource MyButtonStyle}">
-
-            <md:PackIcon Kind="Plus" Height="50" Width="50"/>
-        </Button>
-
-        <Button
-            Grid.Row="5"
-            Grid.Column="3"
-            CommandParameter="-"
-            Style="{StaticResource MyButtonStyle}">
-
-            <md:PackIcon Kind="Minus" Height="50" Width="50"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="3"
-            CommandParameter="*"
-            Style="{StaticResource MyButtonStyle}">
-
-            <md:PackIcon Kind="Multiplication" Height="50" Width="50"/>
-        </Button>
-
-        <Button
-            Grid.Row="7"
-            Grid.Column="3"
-            CommandParameter="/"
-            Style="{StaticResource MyButtonStyle}">
-
-            <md:PackIcon Kind="SlashForward" Height="50" Width="50"/>
-        </Button>
-
-        <TextBlock
-            Grid.Row="9"
-            Grid.ColumnSpan="2"
-            Text="Add to"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24"
-            Margin="100 0 0 0"
-            Foreground="{Binding Icon.Foreground}">
-        </TextBlock>
-
-        <Button
-            x:Name="ReturnBtn"
-            Grid.Row="9"
-            Grid.Column="0"
+            Orientation="Horizontal"
             Grid.ColumnSpan="4"
-            BorderBrush="{Binding Icon.Foreground}"
-            BorderThickness="1"
-            Foreground="{Binding Icon.Foreground}"
-            Height="60"
-            Width="380"
-            Style="{DynamicResource MaterialDesignFlatAccentButton}"
-            Command="{Binding ReturnBalance}">
+            HorizontalAlignment="Center">
 
-            <md:PackIcon
-                Kind="{Binding Icon.Kind}"
-                Margin="100 0 0 0 "
-                Width="40"
-                Height="40"
-                Foreground="{Binding Icon.Foreground}"/>
-        </Button>
+            <Button
+                Grid.Row="5"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="4">
+
+                <md:PackIcon Kind="NumericFour" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="5">
+
+                <md:PackIcon Kind="NumericFive" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="5"
+                Grid.Column="2"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="6">
+
+                <md:PackIcon Kind="NumericSix" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="5"
+                Grid.Column="3"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="-">
+
+                <md:PackIcon Kind="Minus" Width="23" Height="23"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="6"
+            Orientation="Horizontal"
+            Grid.ColumnSpan="4"
+            HorizontalAlignment="Center">
+
+            <Button
+                Grid.Row="6"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="7">
+
+                <md:PackIcon Kind="NumericSeven" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="8">
+
+                <md:PackIcon Kind="NumericEight" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="2"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="9">
+
+                <md:PackIcon Kind="NumericNine" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="3"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="*">
+
+                <md:PackIcon Kind="Multiply" Width="23" Height="23"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="7"
+            Orientation="Horizontal"
+            Grid.ColumnSpan="4"
+            HorizontalAlignment="Center">
+            
+            <Button
+                Grid.Row="7"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter=".">
+
+                <md:PackIcon Kind="Dot" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="7"
+                Grid.Column="1"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="0">
+
+                <md:PackIcon Kind="NumericZero" Width="30" Height="30"/>
+            </Button>
+
+            <Button
+                Grid.Row="7"
+                Grid.Column="2"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Equal}">
+
+                <md:PackIcon Kind="Equal" Width="23" Height="23"/>
+            </Button>
+
+            <Button
+                Grid.Row="7"
+                Grid.Column="3"
+                Style="{StaticResource MyButtonStyle}"
+                Command="{Binding Click}"
+                CommandParameter="/">
+
+                <md:PackIcon Kind="SlashForward" Width="23" Height="23"/>
+            </Button>
+        </StackPanel>
+
+        <ContentControl
+            Grid.Row="1"
+            Grid.ColumnSpan="4"
+            Grid.RowSpan="8"
+            Content="{Binding ChoiceCategories}">
+        </ContentControl>
     </Grid>
 </UserControl>

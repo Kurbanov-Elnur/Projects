@@ -29,6 +29,6 @@ public partial class IntervalsView : UserControl
     {
         App.Container.GetInstance<IntervalsViewModel>().OpenMenuVisibility = "Visible";
         App.Container.GetInstance<IntervalsViewModel>().CloseMenuVisibility = "Hidden";
-        App.Container.GetInstance<MoreInfoViewModel>().OpenMenuVisibility = "Visible";
+        App.Container.GetInstance<MainViewModel>().Visibility = "Visible";
     }
 }

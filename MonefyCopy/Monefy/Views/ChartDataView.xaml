@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="Monefy.Views.ChartDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="MyButtonStyle" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Height" Value="70" />
+            <Setter Property="Command" Value="{Binding Add}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+ 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Button 
+            Grid.Row="1"
+            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
+            Command="{Binding Left}">
+
+            <md:PackIcon 
+                Kind="ArrowLeft"
+                Foreground="LawnGreen"
+                Width="60"
+                Height="60"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+        </Button>
+
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            FontSize="24"
+            Text="{Binding CurrentChart.Date, StringFormat='dd-MM-yyyy'}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="LawnGreen">
+        </TextBlock>
+
+        <Button 
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
+            Command="{Binding Right}">
+
+            <md:PackIcon 
+                Kind="ArrowRight"
+                Foreground="LawnGreen"
+                Width="60"
+                Height="60"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Orange">
+            
+            <md:PackIcon Kind="Dog" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="LawnGreen">
+
+            <md:PackIcon Kind="Phone" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Purple">
+
+            <md:PackIcon Kind="LocalCafe" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Yellow">
+
+            <md:PackIcon Kind="Car" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Pink">
+
+            <md:PackIcon Kind="ClothesHanger" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="DarkBlue">
+
+            <md:PackIcon Kind="Food" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Red">
+
+            <md:PackIcon Kind="Beverages" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Violet">
+
+            <md:PackIcon Kind="Transportation" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="DarkTurquoise">
+
+            <md:PackIcon Kind="Home" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Green">
+
+            <md:PackIcon Kind="OralHygiene" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="3"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="SandyBrown">
+
+            <md:PackIcon Kind="YoutubeSports" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="2"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="DeepSkyBlue">
+
+            <md:PackIcon Kind="Gift" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="1"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="MediumSpringGreen">
+
+            <md:PackIcon Kind="HealthPotion" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="0"
+            Style="{StaticResource MyButtonStyle}"
+            Foreground="Tan">
+
+            <md:PackIcon Kind="CarRepair" Width="30" Height="30" HorizontalAlignment="Center"/>
+        </Button>
+
+        <wp:PieChart
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="2"
+            Content="{Binding CurrentChart.Chart}"
+            IsEnabled="False">
+
+            <wp:PieChart.Resources>
+                <Style TargetType="wp:LineSeries">
+                    <Setter Property="Stroke" Value="Transparent"/>
+                </Style>
+            </wp:PieChart.Resources>
+        </wp:PieChart>
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            FontSize="20"
+            Margin="0 20 2 0"
+            Text="{Binding CurrentChart.Balance}"
+            Foreground="LawnGreen">
+        </TextBlock>
+
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="7"
+            Grid.ColumnSpan="2"
+            FontSize="24"
+            Text="{Binding CurrentChart.Balance}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="LawnGreen">
+        </TextBlock>
+        
+    </Grid>
+</UserControl>

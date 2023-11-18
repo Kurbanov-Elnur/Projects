@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="Monefy.Views.TransactionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Monefy.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="400" Background="White">
+
+    <Grid Background="#BFEFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            CornerRadius="0 0 80 80">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Gray"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button
+                    Width="60"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Foreground="White"
+                    Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                    Command="{Binding Back}">
+
+                    <md:PackIcon Kind="ArrowLeft" Height="20" Width="20"/>
+                </Button>
+
+                <TextBlock
+                    Text="Transactions"
+                    FontSize="24"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Text="$5000"
+                    FontSize="24"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            CornerRadius="80 80 0 0"
+            Width="400"
+            Height="430"
+            VerticalAlignment="Bottom">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="Blue" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="Gray" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            CornerRadius="20"
+                            Background="Black"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Width="250"
+                            Height="40">
+
+                            <TextBox
+                                Foreground="White"
+                                md:HintAssist.Hint="Search"
+                                FontSize="20"
+                                Margin="9 0 0 0">
+                                
+                            </TextBox>
+                        </Border>
+                        
+                        <Button
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource MyButtonStyle}"
+                            Width="40"
+                            Height="40">
+
+                            <md:PackIcon Kind="Search"/>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <ScrollViewer
+                    Grid.Row="1"
+                    HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding Transactions}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border
+                                        Background="#33FFFFFF"
+                                        CornerRadius="15"
+                                        Margin="0 0 0 5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*"/>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="0.4*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label
+                                                HorizontalAlignment="Right">
+                                                
+                                                <md:PackIcon
+                                                Kind="{Binding Icon.Name}"
+                                                Width="40"
+                                                Height="40"
+                                                Foreground="{Binding Icon.Color}"/>
+                                            </Label>
+
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Left"
+                                                Text="{Binding Category}"
+                                                FontSize="15"
+                                                Margin="0 0 0 0"
+                                                Foreground="White">
+
+                                            </TextBlock>
+
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Left"
+                                                Text="{Binding Description}"
+                                                FontSize="15"
+                                                Foreground="White"
+                                                Margin="0 0 0 0">
+
+                                            </TextBlock>
+
+                                            <Label
+                                                Foreground="White"
+                                                Grid.Column="2"
+                                                Content="{Binding Amount}"
+                                                FontSize="30"
+                                                HorizontalAlignment="Right">
+                                                
+                                            </Label>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

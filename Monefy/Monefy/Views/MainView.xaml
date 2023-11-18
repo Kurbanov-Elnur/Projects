@@ -6,61 +6,45 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Monefy.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="700" Width="400" WindowStyle="None">
+        Title="MainView"
+        Height="700"
+        Width="400"
+        WindowStyle="None"
+        Background="White"
+        AllowsTransparency="True">
 
-    <Grid Background="Azure">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.07*"/>
+            <RowDefinition Height="0.06*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border
-            x:Name="Main"
-            Grid.ColumnSpan="4"
-            Background="LightGreen"
+            Background="Blue"
             MouseLeftButtonDown="DragWindow">
         </Border>
+
+        <Button
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Foreground="White"
+            Click="Close"
+            Style="{DynamicResource MaterialDesignIconButton}">
+
+            <md:PackIcon Kind="Logout"/>
+        </Button>
 
         <TextBlock
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             FontSize="20"
-            FontStyle="Italic"
+            FontStyle="Oblique"
             Foreground="AliceBlue"
-            Margin="3">
+            Margin="10 0 0 0">
             Monefy
         </TextBlock>
-
-        <StackPanel
-            Margin="2" 
-            Orientation="Horizontal"
-            HorizontalAlignment="Right"
-            Width="150">
-
-            <Button 
-                Click="Minimize_Click"
-                Name="Minimize"
-                Style="{DynamicResource MaterialDesignFlatButton}">
-                <md:PackIcon Kind="Minimize"/>
-            </Button>
-
-            <Button 
-                Click="Maximize_Click"
-                Name="Maximize"
-                Style="{DynamicResource MaterialDesignFlatButton}">
-                <md:PackIcon Kind="Maximize"/>
-            </Button>
-
-            <Button 
-                Click="Close_Click"
-                Name="Close"
-                Style="{DynamicResource MaterialDesignFlatButton}">
-                <md:PackIcon Kind="Close"/>
-            </Button>
-        </StackPanel>
-
+        
         <ContentControl Grid.Row="1"  Content="{Binding CurrentView}"/>
         <ContentControl Grid.Row="1"  Content="{Binding IntervalsView}"/>
-        <ContentControl Grid.Row="1"  Content="{Binding MoreInfoView}"/>
     </Grid>
 </Window>

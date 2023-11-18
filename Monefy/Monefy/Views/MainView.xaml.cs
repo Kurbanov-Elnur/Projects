@@ -1,4 +1,6 @@
-﻿using Monefy.Services.Classes;
+﻿using Monefy.Models;
+using Monefy.Services.Classes;
+using Monefy.Services.Interfaces;
 using Monefy.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,32 +20,17 @@ namespace Monefy.Views;
 
 public partial class MainView : Window
 {
+    private readonly SerializeService _serializeService;
     public MainView()
     {
         InitializeComponent();
-        DataContext = App.Container.GetInstance<MainViewModel>();
+        _serializeService = new();
     }
 
-    private void Minimize_Click(object sender, RoutedEventArgs e)
+    private void Close(object sender, RoutedEventArgs e)
     {
-        this.WindowState = WindowState.Minimized;
-    }
-
-    private void Close_Click(object sender, RoutedEventArgs e)
-    {
+        _serializeService.Serialize("Data.json", App.Container.GetInstance<ChartDataViewModel>().Transactions);
         App.Current.Shutdown();
-    }
-
-    private void Maximize_Click(object sender, RoutedEventArgs e)
-    {
-        if (this.WindowState == WindowState.Normal)
-        {
-            this.WindowState = WindowState.Maximized;
-        }
-        else
-        {
-            this.WindowState = WindowState.Normal;
-        }
     }
 
     private void DragWindow(object sender, MouseButtonEventArgs e)

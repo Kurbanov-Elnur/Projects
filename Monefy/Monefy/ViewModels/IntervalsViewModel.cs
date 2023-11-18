@@ -40,7 +40,8 @@ class IntervalsViewModel : ViewModelBase
 
         _messenger.Register<DataMessage>(this, (message) =>
         {
-            OpenMenuVisibility = message.Data as string;
+            if(message.Data as string == "Hidden" || message.Data as string == "Visible")
+                OpenMenuVisibility = message.Data as string;
         });
     }
 
@@ -71,8 +72,7 @@ class IntervalsViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Hidden";
             CloseMenuVisibility = "Visible";
-
-            _dataService.SendData("Hidden");
+            App.Container.GetInstance<MainViewModel>().Visibility = "Hidden";
         });
     }
 
@@ -82,8 +82,6 @@ class IntervalsViewModel : ViewModelBase
         {
             OpenMenuVisibility = "Visible";
             CloseMenuVisibility = "Hidden";
-
-            _dataService.SendData("Visible");
         });
     }
 }

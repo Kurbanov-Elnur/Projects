@@ -24,34 +24,12 @@ namespace Monefy.ViewModels;
 internal class OperationViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
-    private readonly IChartManager _chartManager;
     private readonly IDataService _dataService;
 
-    private double Balance;
+    private double Balance = 0; 
     private StringBuilder Expression = new();
-    private string _expressionText;
-
-    private MyChart chart;
-    private Button MyButton;
-    private PackIcon icon;
-
-    public MyChart Chart
-    {
-        get => chart;
-        set
-        {
-            Set(ref chart, value);
-        }
-    }
-
-    public  PackIcon Icon
-    {
-        get => icon;
-        set
-        {
-            Set(ref icon, value);
-        }
-    }
+    private string _expressionText = "";
+    public ViewModelBase ChoiceCategories { get; set; } = App.Container.GetInstance<CategoriesViewModel>();
 
     public string ExpressionText
     {
@@ -62,18 +40,10 @@ internal class OperationViewModel : ViewModelBase
         }
     }
 
-    public OperationViewModel(INavigationService navigationService, IChartManager chartManager, IMessenger messenger, IDataService dataService)
+    public OperationViewModel(INavigationService navigationService, IDataService dataService)
     {
         _navigationService = navigationService;
-        _chartManager = chartManager;
         _dataService = dataService;
-
-        messenger.Register<DatasMessage>(this, message =>
-        {
-            Chart = message.Datas[0] as MyChart;
-            MyButton = message.Datas[1] as Button;
-            Icon = MyButton.Content as PackIcon;
-        });
     }
 
     public ButtonCommand<string> Click
@@ -83,6 +53,8 @@ internal class OperationViewModel : ViewModelBase
             if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
             {
                 if (Expression.Length == 0 && operation == "0")
+                    return;
+                if (ExpressionText.Contains(operation) && operation == ".")
                     return;
                 ExpressionText += operation;
             }
@@ -129,25 +101,20 @@ internal class OperationViewModel : ViewModelBase
         });
     }
 
-    public ButtonCommand ReturnBalance
+    public bool SendData()
     {
-        get => new(
-        () =>
-        {
-            Check();
+        Check();
 
+        if(Expression.Length > 0) 
             Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
-            _dataService.SendData(Balance);
-            _chartManager.AddSerie(Chart, MyButton.Foreground);
-            _navigationService.NavigateTo<ChartDataViewModel>();
 
-            Expression.Clear();
-            ExpressionText = "";
-        },
-        () =>
+        if (Balance == 0 || Balance < 0)
+            return false;
+        else
         {
-            return !(Expression.Length == 0 || Expression[0].ToString() == "0");
-        });
+            _dataService.SendData(Balance);
+            return true;
+        }
     }
 
     public ButtonCommand Back
@@ -162,11 +129,14 @@ internal class OperationViewModel : ViewModelBase
 
     public void Check()
     {
-        if (Expression[Expression.Length - 1].ToString() == "-" || Expression[Expression.Length - 1].ToString() == "+"
-        || Expression[Expression.Length - 1].ToString() == "*" || Expression[Expression.Length - 1].ToString() == "/")
+        if (Expression.Length > 0)
         {
-            while(Expression[Expression.Length - 1] < 48 || Expression[Expression.Length - 1] > 57)
-                Expression.Remove(Expression.Length - 1, 1);
+            if (Expression[Expression.Length - 1].ToString() == "-" || Expression[Expression.Length - 1].ToString() == "+"
+            || Expression[Expression.Length - 1].ToString() == "*" || Expression[Expression.Length - 1].ToString() == "/")
+            {
+                while (Expression[Expression.Length - 1] < 48 || Expression[Expression.Length - 1] > 57)
+                    Expression.Remove(Expression.Length - 1, 1);
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Monefy.Services.Interfaces;
 using Monefy.Services.Classes;
 using Monefy.Serrvices.Classes;
+using System.Threading;
 
 namespace Monefy;
 
@@ -27,15 +28,16 @@ public partial class App : Application
 
         Container.RegisterSingleton<IChartManager, ChartManager>();
         Container.RegisterSingleton<IIntervalsManager, IntervalsManager>();
+        Container.RegisterSingleton<ISerializeService, SerializeService>();
+        Container.RegisterSingleton<IDeserializeService, DeserializeService>();
 
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<ChartDataViewModel>();
         Container.RegisterSingleton<OperationViewModel>();
         Container.RegisterSingleton<IntervalsViewModel>();
-        Container.RegisterSingleton<MoreInfoViewModel>();
-
-        Container.RegisterSingleton<MoreInfoView>();
-        Container.RegisterSingleton<IntervalsView>();
+        Container.RegisterSingleton<CategoriesViewModel>();
+        Container.RegisterSingleton<TransactionsViewModel>();
+        Container.RegisterSingleton<CardsViewModel>();
 
         Container.Verify();
     }
@@ -49,5 +51,6 @@ public partial class App : Application
         window.DataContext = Container.GetInstance<MainViewModel>();
 
         window.ShowDialog();
+
     }
 }

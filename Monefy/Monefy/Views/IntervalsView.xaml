@@ -27,9 +27,6 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
-            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
-        </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseDown" SourceName="Border">
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}" />
         </EventTrigger>
@@ -43,8 +40,9 @@
             Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Foreground="White"
             Visibility="{Binding OpenMenuVisibility}"
-            Style="{DynamicResource MaterialDesignFlatAccentButton}"
+            Style="{DynamicResource MaterialDesignIconButton}"
             Command="{Binding OpenMenu}">
             <md:PackIcon Kind="Menu" Width="25" Height="25"/>
         </Button>
@@ -58,44 +56,32 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border
-                Background="LightGreen">
+                Background="AliceBlue">
                 <StackPanel>
-                    <Button
-                        x:Name="ButtonCloseMenu"
-                        Visibility="{Binding CloseMenuVisibility}"
-                        Height="60"
-                        Width="60"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Command="{Binding CloseMenu}"
-                        Foreground="LightGray"
-                        Style="{DynamicResource MaterialDesignFlatAccentButton}">
-                        <md:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
-                    </Button>
                     <Button
                         Height="60"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}"
-                        Foreground="White"
+                        Foreground="Black"
                         Content="Day"
                         Command="{Binding Day}">
                     </Button> 
                     <Button
                         Height="60"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}"
-                        Foreground="White"
+                        Foreground="Black"
                         Content="Weak"
                         Command="{Binding Weak}">
                     </Button>       
                     <Button
                         Height="60"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}"
-                        Foreground="White"
+                        Foreground="Black"
                         Content="Month">
                     </Button>     
                     <Button
                         Height="60"
                         Style="{DynamicResource MaterialDesignFlatAccentButton}"
-                        Foreground="White"
+                        Foreground="Black"
                         Content="Year">
                     </Button>
                 </StackPanel>
@@ -104,7 +90,7 @@
                 x:Name="Border"
                 MouseDown="BorderClose"
                 Grid.Column="1"
-                Background="Black"
+                Background="LightBlue"
                 Opacity="0.4">
             </Border>
         </Grid>

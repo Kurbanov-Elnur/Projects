@@ -1,4 +1,5 @@
 ﻿using LiveCharts.Wpf;
+using Monefy.Services.Interfaces;
 using Monefy.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,15 @@ public partial class ChartDataView : UserControl
     public ChartDataView()
     {
         InitializeComponent();
+    }
+
+    private void MoreInfo(object sender, MouseButtonEventArgs e)
+    {
+        App.Container.GetInstance<INavigationService>().NavigateTo<TransactionsViewModel>();
+    }
+
+    private void CardInfo(object sender, MouseButtonEventArgs e)
+    {
+        App.Container.GetInstance<INavigationService>().NavigateTo<CardsViewModel>();
     }
 }

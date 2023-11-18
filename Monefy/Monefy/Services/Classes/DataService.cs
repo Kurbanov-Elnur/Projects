@@ -21,6 +21,7 @@ public class DataService : IDataService
             Data = data
         });
     }
+
     public void SendData(object[] data)
     {
         _messenger.Send(new DatasMessage()

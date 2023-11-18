@@ -21,11 +21,5 @@ public partial class OperationView : UserControl
     public OperationView()
     {
         InitializeComponent();
-        DataContext = App.Container.GetInstance<OperationViewModel>();
-    }
-
-    public static void Changeicon(Button button)
-    {
-
     }
 }

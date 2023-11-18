@@ -5,14 +5,16 @@ using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
-using MaterialDesignThemes.Wpf;
 using Monefy.Messages;
 using Monefy.Models;
+using Monefy.Serrvices.Classes;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -24,83 +26,68 @@ namespace Monefy.ViewModels;
 
 internal class ChartDataViewModel : ViewModelBase
 {
+    private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
 
-    public List<MyChart> Charts = new();
+    public ObservableCollection<Transaction> Transactions = new();
 
-    public MyChart _currentChart;
-    public MyChart CurrentChart
+    public Card currentCard;
+
+    public Card CurrentCard
     {
-        get => _currentChart;
+        get => currentCard;
         set
         {
-            Set(ref _currentChart, value);
+            Set(ref currentCard, value);
         }
     }
 
-    public ChartDataViewModel(INavigationService navigationService, IDataService dataService)
-    {
-        Charts.Add(new MyChart()
-        {
-            Date = DateTime.Today.AddDays(-2),
-        });
-        Charts.Add(new MyChart()
-        {
-            Date = DateTime.Today.AddDays(-1)
-        });
-        Charts.Add(new MyChart());
+    public SeriesCollection data = new();
 
-        CurrentChart = Charts[searchIndex(DateTime.Today)];
+    public SeriesCollection Data
+    {
+        get => data;
+        set
+        {
+            Set(ref data, value);
+        }
+    }
+
+    public DateTime currentDate = DateTime.Today;
+
+    public DateTime CurrentDate
+    {
+        get => currentDate;
+        set
+        {
+            Set(ref currentDate, value);
+        }
+    }
+
+    public ChartDataViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger, IDeserializeService deserializeService, IChartManager chartManager)
+    {
+        _messenger = messenger;
         _navigationService = navigationService;
         _dataService = dataService;
+
+        Transactions = deserializeService.Deserialize<Transaction>("Data.json");
+        chartManager.UpdateData(Transactions, Data, DateTime.Today);
+
+        _messenger.Register<DataMessage>(this, message =>
+        {
+            if (message.Data as Card != null)
+                CurrentCard = message.Data as Card;
+        });
     }
 
-    public ButtonCommand<Button> Add
+    public ButtonCommand Add
     {
-        get => new(button =>
+        get => new(() =>
         {
-            PackIcon icon = button.Content as PackIcon;
-
-            _dataService.SendData( new object[] { Charts[searchIndex(CurrentChart.Date)], button});
+            _dataService.SendData(Transactions);
+            _dataService.SendData(new object[] { CurrentDate, Data });
             _navigationService.NavigateTo<OperationViewModel>();
         });
-    }
-
-    public ButtonCommand Left
-    {
-        get => new(
-        () =>
-        {
-            CurrentChart = Charts[searchIndex(CurrentChart.Date) - 1];
-        },
-        () =>
-        {
-            return !(searchIndex(CurrentChart.Date) == 0);
-        });
-    }            
-
-    public ButtonCommand Right
-    {
-        get => new(
-        () =>
-        {
-            CurrentChart = Charts[searchIndex(CurrentChart.Date) + 1];
-        },
-        () =>
-        {
-            return !(searchIndex(CurrentChart.Date)  == Charts.Count - 1);
-        });
-
-    }
-
-    public int searchIndex(DateTime Date)
-    {
-        for (int i = 0; i < Charts.Count; i++)
-        {
-            if (Charts[i].Date == Date)
-                return i;
-        }
-        return -1;
     }
 }

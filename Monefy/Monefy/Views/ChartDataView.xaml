@@ -6,239 +6,123 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="400">
-
-    <UserControl.Resources>
-        <Style TargetType="Button" x:Key="MyButtonStyle" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
-            <Setter Property="Width" Value="70" />
-            <Setter Property="Height" Value="70" />
-            <Setter Property="Command" Value="{Binding Add}" />
-            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
-        </Style>
-    </UserControl.Resources>
+             d:DesignHeight="700" d:DesignWidth="400" Background="White">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
- 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <Button 
+
+        <Border
+            Grid.Row="0"
+            Background="Blue"
+            CornerRadius="0 0 80 80"
+            Margin="0 0 0  200">
+
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Blue"/>
+            </Border.Effect>
+        </Border>
+
+        <Border
+            CornerRadius="80"
+            Background="White"
+            VerticalAlignment="Bottom"
+            Width="350"
+            Height="400"
+            MouseDown="MoreInfo">
+
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="Gray" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Text="{Binding CurrentCard.Balance}"
+                    Foreground="LightSkyBlue"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                </TextBlock>
+                
+                <Button
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0 0 60 0"
+                    Style="{DynamicResource MaterialDesignIconButton}"
+                    Command="{Binding Add}">
+
+                    <md:PackIcon Kind="Plus" Foreground="LightSkyBlue"/>
+                </Button>
+
+                <wp:CartesianChart
+                    Grid.Row="1"
+                    Series="{Binding Data}"
+                    Width="300"
+                    Height="250"
+                    IsEnabled="False"
+                    LegendLocation="Bottom">
+                    <wp:CartesianChart.AxisX>
+                        <wp:Axis ShowLabels="False" />
+                    </wp:CartesianChart.AxisX>
+                    <wp:CartesianChart.AxisY>
+                        <wp:Axis ShowLabels="False" />
+                    </wp:CartesianChart.AxisY>
+                </wp:CartesianChart>
+            </Grid>
+        </Border>
+
+        <Border
+            MouseDown="CardInfo"
+            Width="300"
+            Height="100"
             Grid.Row="1"
-            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
-            Command="{Binding Left}">
+            CornerRadius="30">
 
-            <md:PackIcon 
-                Kind="ArrowLeft"
-                Foreground="LawnGreen"
-                Width="60"
-                Height="60"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
-        </Button>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Blue"/>
+            </Border.Effect>
 
-        <TextBlock
-            Grid.Column="1"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            FontSize="24"
-            Text="{Binding CurrentChart.Date, StringFormat='dd-MM-yyyy'}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="LawnGreen">
-        </TextBlock>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Violet" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
 
-        <Button 
-            Grid.Row="1"
-            Grid.Column="3"
-            Style="{DynamicResource MaterialDesignFlatSecondaryLightButton}"
-            Command="{Binding Right}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
 
-            <md:PackIcon 
-                Kind="ArrowRight"
-                Foreground="LawnGreen"
-                Width="60"
-                Height="60"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
-        </Button>
+                <TextBlock
+                    FontSize="30"
+                    Text="Your cards"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="AliceBlue">
+                    
+                </TextBlock>
+                
+                <Button
+                    Margin="0 5 0 0"
+                    Grid.Column="1"
+                    Style="{StaticResource MyButtonStyle}"
+                    Background="Transparent"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
 
-        <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Orange">
-            
-            <md:PackIcon Kind="Dog" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="3"
-            Grid.Column="0"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="LawnGreen">
-
-            <md:PackIcon Kind="Phone" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="4"
-            Grid.Column="0"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Purple">
-
-            <md:PackIcon Kind="LocalCafe" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="5"
-            Grid.Column="0"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Yellow">
-
-            <md:PackIcon Kind="Car" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Pink">
-
-            <md:PackIcon Kind="ClothesHanger" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="2"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="DarkBlue">
-
-            <md:PackIcon Kind="Food" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="2"
-            Grid.Column="3"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Red">
-
-            <md:PackIcon Kind="Beverages" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="3"
-            Grid.Column="3"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Violet">
-
-            <md:PackIcon Kind="Transportation" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="4"
-            Grid.Column="3"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="DarkTurquoise">
-
-            <md:PackIcon Kind="Home" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="5"
-            Grid.Column="3"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Green">
-
-            <md:PackIcon Kind="OralHygiene" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="3"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="SandyBrown">
-
-            <md:PackIcon Kind="YoutubeSports" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="2"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="DeepSkyBlue">
-
-            <md:PackIcon Kind="Gift" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="1"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="MediumSpringGreen">
-
-            <md:PackIcon Kind="HealthPotion" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <Button
-            Grid.Row="6"
-            Grid.Column="0"
-            Style="{StaticResource MyButtonStyle}"
-            Foreground="Tan">
-
-            <md:PackIcon Kind="CarRepair" Width="30" Height="30" HorizontalAlignment="Center"/>
-        </Button>
-
-        <wp:PieChart
-            Grid.Row="3"
-            Grid.Column="1"
-            Grid.RowSpan="3"
-            Grid.ColumnSpan="2"
-            Content="{Binding CurrentChart.Chart}"
-            IsEnabled="False">
-
-            <wp:PieChart.Resources>
-                <Style TargetType="wp:LineSeries">
-                    <Setter Property="Stroke" Value="Transparent"/>
-                </Style>
-            </wp:PieChart.Resources>
-        </wp:PieChart>
-
-        <TextBlock
-            Grid.Row="4"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            FontSize="20"
-            Margin="0 20 2 0"
-            Text="{Binding CurrentChart.Balance}"
-            Foreground="LawnGreen">
-        </TextBlock>
-
-        <TextBlock
-            Grid.Column="1"
-            Grid.Row="7"
-            Grid.ColumnSpan="2"
-            FontSize="24"
-            Text="{Binding CurrentChart.Balance}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="LawnGreen">
-        </TextBlock>
-        
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="30" Height="30" Foreground="Violet"/>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
