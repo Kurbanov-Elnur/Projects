@@ -29,6 +29,7 @@ internal class OperationViewModel : ViewModelBase
     private double Balance = 0; 
     private StringBuilder Expression = new();
     private string _expressionText = "";
+
     public ViewModelBase ChoiceCategories { get; set; } = App.Container.GetInstance<CategoriesViewModel>();
 
     public string ExpressionText

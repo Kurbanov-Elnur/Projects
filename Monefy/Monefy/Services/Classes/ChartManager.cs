@@ -56,7 +56,6 @@ class ChartManager : IChartManager
         });
 
         _dataService.SendData(transactions);
-        UpdateData(transactions, Data, CurrentDate);
     }
     
     public void UpdateData(ObservableCollection<Transaction> transactions, SeriesCollection Data, DateTime Date)

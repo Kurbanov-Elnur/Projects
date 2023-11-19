@@ -25,17 +25,31 @@ namespace Monefy.ViewModels
             Cards.Add(new Card()
             {
                 Name = "MyCard",
-                Number = 12345678,
+                Number = "2345678",
                 Balance = 1000000,
             });
             Cards.Add(new Card()
             {
                 Name = "MyCard",
-                Number = 12345678,
+                Number = "12345678",
+                Balance = 1000000,
+            });
+            Cards.Add(new Card()
+            {
+                Name = "MyCard",
+                Number = "12345678",
                 Balance = 1000000,
             });
 
             _dataService.SendData(Cards[0]);
+        }
+
+        public ButtonCommand AddCard
+        {
+            get => new(() =>
+            {
+                _navigationService.NavigateTo<AddCardViewModel>();
+            });
         }
 
         public ButtonCommand Back

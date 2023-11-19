@@ -29,13 +29,19 @@
 
         <Border
             Grid.ColumnSpan="4"
-            Background="Blue"
             CornerRadius="0 0 80 80">
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="Blue"/>
             </Border.Effect>
-            
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
             <Grid>
                 <Button
                     Width="60"
@@ -61,28 +67,15 @@
             </Grid>
         </Border>
 
-        <TextBox 
+        <TextBlock
             Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Text="{Binding ExpressionText, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ExpressionText}"
             FontSize="50"
             Foreground="Blue"
-            TextAlignment="Center"
-            IsReadOnly="True"
-            BorderThickness="0">
-
-            <TextBox.Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="Blue"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
+            TextAlignment="Center">
+        </TextBlock>
 
         <Button
             VerticalAlignment="Center"

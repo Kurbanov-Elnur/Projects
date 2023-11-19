@@ -16,7 +16,6 @@
         </Grid.RowDefinitions>
 
         <Border
-            Grid.Row="0"
             CornerRadius="0 0 80 80">
 
             <Border.Background>

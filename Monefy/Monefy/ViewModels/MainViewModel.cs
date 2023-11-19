@@ -47,6 +47,7 @@ class MainViewModel : ViewModelBase
     {
         _messenger = messenger;
         _dataService = dataService;
+        App.Container.GetInstance<TransactionsViewModel>();
         CurrentView = App.Container.GetInstance<ChartDataViewModel>();
         IntervalsView = App.Container.GetInstance<IntervalsViewModel>();
 

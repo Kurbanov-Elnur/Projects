@@ -8,21 +8,43 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400" Background="White">
 
-    <Grid>
+    <Grid Background="SkyBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Ellipse
+            Width="200"
+            Height="200"
+            Grid.Row="1"
+            Fill="LightBlue"
+            Margin="280 0 0 -200">
+
+        </Ellipse>
+
+        <Ellipse
+            Width="200"
+            Height="200"
+            Grid.RowSpan="2"
+            Fill="LightBlue"
+            Margin="-85 446 285 54">
+        </Ellipse>
+
         <Border
-            Grid.Row="0"
-            Background="Blue"
             CornerRadius="0 0 80 80"
             Margin="0 0 0  200">
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="Blue"/>
             </Border.Effect>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
         </Border>
 
         <Border
@@ -44,14 +66,13 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock
-                    Grid.Row="0"
                     Text="{Binding CurrentCard.Balance}"
                     Foreground="LightSkyBlue"
                     FontSize="30"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                 </TextBlock>
-                
+
                 <Button
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
@@ -109,18 +130,19 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Foreground="AliceBlue">
-                    
+
                 </TextBlock>
-                
+
                 <Button
                     Margin="0 5 0 0"
                     Grid.Column="1"
                     Style="{StaticResource MyButtonStyle}"
                     Background="Transparent"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    IsEnabled="False">
 
-                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="30" Height="30" Foreground="Violet"/>
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="30" Height="30" Foreground="White"/>
                 </Button>
             </Grid>
         </Border>

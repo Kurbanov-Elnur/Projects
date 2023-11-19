@@ -21,5 +21,24 @@ namespace Monefy.Views
         {
             InitializeComponent();
         }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (sender is ScrollViewer scrollViewer)
+            {
+                double deltaY = -e.Delta;
+
+                if (e.Delta > 0)
+                {
+                    scrollViewer.LineRight();
+                }
+                else if (e.Delta < 0)
+                {
+                    scrollViewer.LineLeft();
+                }
+
+                e.Handled = true;
+            }
+        }
     }
 }

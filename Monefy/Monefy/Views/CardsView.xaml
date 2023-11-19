@@ -9,14 +9,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
 
-    <Grid Background="#BFEFFF">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border
-            Grid.Row="0"
             CornerRadius="0 0 80 80">
 
             <Border.Background>
@@ -33,6 +32,7 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Margin="0 -40 0 0"
                 Text="Cards"
                 FontSize="30"
                 Foreground="White">
@@ -53,12 +53,20 @@
         </Button>
 
         <ScrollViewer
+            Margin="0 -110 0 0"
+            PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
+            HorizontalScrollBarVisibility="Hidden"
             Grid.Row="1"
             VerticalScrollBarVisibility="Hidden">
             <ItemsControl ItemsSource="{Binding Cards}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <StackPanel Margin="5">
                             <Border
                                 Width="200"
                                 Height="250"
@@ -163,5 +171,14 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+        <Button
+            Style="{StaticResource MyButtonStyle}"
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            Command="{Binding AddCard}">
+
+            <md:PackIcon Kind="Plus" Width="30" Height="30"/>
+        </Button>
     </Grid>
 </UserControl>

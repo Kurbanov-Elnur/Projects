@@ -74,11 +74,18 @@ internal class ChartDataViewModel : ViewModelBase
         Transactions = deserializeService.Deserialize<Transaction>("Data.json");
         chartManager.UpdateData(Transactions, Data, DateTime.Today);
 
+        _dataService.SendData(Transactions);
+
         _messenger.Register<DataMessage>(this, message =>
         {
             if (message.Data as Card != null)
                 CurrentCard = message.Data as Card;
         });
+
+        Transactions.CollectionChanged += (sender, e) =>
+        {
+            chartManager.UpdateData(Transactions, Data, DateTime.Today);
+        };
     }
 
     public ButtonCommand Add

@@ -10,7 +10,7 @@ namespace Monefy.Models;
 
 public class Transaction
 {
-    public double Amount { get; set; }
+    public double Amount { get; set; } 
     public string Description { get; set; }
     public MyIcon Icon { get; set; }
     public DateTime Date { get; set; }

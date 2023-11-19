@@ -20,14 +20,20 @@
         </Grid.RowDefinitions>
 
         <Border
-            Background="Blue"
             MouseLeftButtonDown="DragWindow">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
         </Border>
 
         <Button
             VerticalAlignment="Center"
             HorizontalAlignment="Right"
-            Foreground="White"
+            Foreground="Blue"
             Click="Close"
             Style="{DynamicResource MaterialDesignIconButton}">
 
@@ -39,7 +45,7 @@
             VerticalAlignment="Center"
             FontSize="20"
             FontStyle="Oblique"
-            Foreground="AliceBlue"
+            Foreground="White"
             Margin="10 0 0 0">
             Monefy
         </TextBlock>
