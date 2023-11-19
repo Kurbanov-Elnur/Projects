@@ -28,19 +28,13 @@
         </Grid.ColumnDefinitions>
 
         <Border
+            Background="#3d56fa"
             Grid.ColumnSpan="4"
             CornerRadius="0 0 80 80">
 
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" Color="Blue"/>
+                <DropShadowEffect BlurRadius="5" Color="Gray"/>
             </Border.Effect>
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
 
             <Grid>
                 <Button

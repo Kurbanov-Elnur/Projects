@@ -8,43 +8,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400" Background="White">
 
-    <Grid Background="SkyBlue">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Ellipse
-            Width="200"
-            Height="200"
-            Grid.Row="1"
-            Fill="LightBlue"
-            Margin="280 0 0 -200">
-
-        </Ellipse>
-
-        <Ellipse
-            Width="200"
-            Height="200"
-            Grid.RowSpan="2"
-            Fill="LightBlue"
-            Margin="-85 446 285 54">
-        </Ellipse>
-
         <Border
+            Background="#3d56fa"
             CornerRadius="0 0 80 80"
             Margin="0 0 0  200">
 
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" Color="Blue"/>
+                <DropShadowEffect BlurRadius="5" Color="Gray"/>
             </Border.Effect>
 
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
+            <!--<TextBlock
+                Text="{Binding CurrentDate, StringFormat='dd-MM-yyyy'}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Foreground="White"
+                FontSize="25"
+                Margin="0 40 0 0">
+
+            </TextBlock>-->
         </Border>
 
         <Border

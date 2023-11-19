@@ -50,6 +50,7 @@ class ChartManager : IChartManager
     {
         transactions.Add(new Transaction()
         {
+            Date = CurrentDate,
             Category = button.Name,
             Amount = Count,
             Icon = new MyIcon((button.Content as PackIcon).Kind.ToString(), button.Foreground.ToString())

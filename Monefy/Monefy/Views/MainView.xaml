@@ -20,20 +20,14 @@
         </Grid.RowDefinitions>
 
         <Border
+            Background="#3d56fa"
             MouseLeftButtonDown="DragWindow">
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
         </Border>
 
         <Button
             VerticalAlignment="Center"
             HorizontalAlignment="Right"
-            Foreground="Blue"
+            Foreground="White"
             Click="Close"
             Style="{DynamicResource MaterialDesignIconButton}">
 

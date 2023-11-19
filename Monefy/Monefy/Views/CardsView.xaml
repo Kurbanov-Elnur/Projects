@@ -16,14 +16,8 @@
         </Grid.RowDefinitions>
 
         <Border
+            Background="#3d56fa"
             CornerRadius="0 0 80 80">
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="Gray"/>
@@ -41,6 +35,17 @@
         </Border>
 
         <Button
+            Style="{StaticResource MyButtonStyle}"
+            VerticalAlignment="Center"
+            Command="{Binding AddCard}"
+            Margin="150 0 0 36"
+            Foreground="White"
+            Background="Transparent">
+
+            <md:PackIcon Kind="Plus" Width="30" Height="30"/>
+        </Button>
+
+        <Button
             Width="60"
             Height="40"
             HorizontalAlignment="Left"
@@ -54,116 +59,150 @@
 
         <ScrollViewer
             Margin="0 -110 0 0"
-            PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
             HorizontalScrollBarVisibility="Hidden"
             Grid.Row="1"
             VerticalScrollBarVisibility="Hidden">
             <ItemsControl ItemsSource="{Binding Cards}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="5">
                             <Border
-                                Width="200"
-                                Height="250"
-                                CornerRadius="30">
+                                Width="340"
+                                Height="200"
+                                CornerRadius="40">
 
                                 <Border.Background>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="LightBlue" Offset="0"/>
-                                        <GradientStop Color="Violet" Offset="1"/>
+                                        <GradientStop Color="#d489ff" Offset="-0.2"/>
+                                        <GradientStop Color="#7985ff" Offset="0.5"/>
+                                        <GradientStop Color="#6ad8fd" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="10" Color="Gray"/>
+                                </Border.Effect>
+
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
+                                        <RowDefinition/>
+                                        <RowDefinition Height="1.8*"/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <Border
-                                        VerticalAlignment="Top"
-                                        Background="White"
-                                        Opacity="0.2"
-                                        HorizontalAlignment="Center"
-                                        CornerRadius="20"
-                                        Width="180"
-                                        Height="30">
-                                        <StackPanel
-                                            Orientation="Horizontal"
-                                            HorizontalAlignment="Center">
-                                            <TextBlock
-                                                Text="$"
-                                                FontSize="25"
-                                                Foreground="Green"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="5 0 5 0">
-                                        
-                                            </TextBlock>
-                                    
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                FontSize="25"
-                                                Foreground="Black"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Text="{Binding Balance}">
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border
-                                        VerticalAlignment="Center"
-                                        Grid.Row="1"
-                                        Background="White"
-                                        Opacity="0.2"
-                                        HorizontalAlignment="Left"
-                                        CornerRadius="20"
-                                        Width="130"
-                                        Height="30">
-                                        <StackPanel
-                                            HorizontalAlignment="Center">
-                                            
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                FontSize="25"
-                                                Foreground="Black"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Text="{Binding Name}">
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border
-                                        VerticalAlignment="Bottom"
-                                        Grid.Row="2"
-                                        Background="White"
-                                        Opacity="0.2"
-                                        HorizontalAlignment="Right"
-                                        CornerRadius="20"
+                                    <TextBlock
+                                        Text="Name"
+                                        Background="Transparent"
                                         Width="130"
                                         Height="30"
-                                        Margin="0 0 5 5">
-                                        <StackPanel
-                                            HorizontalAlignment="Center">
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        Foreground="White"
+                                        Margin="28 0 0 0">
 
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                FontSize="25"
-                                                Foreground="Black"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Text="{Binding Number}">
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
+                                    </TextBlock>
+
+                                    <TextBlock
+                                        Text="Surname"
+                                        Background="Transparent"
+                                        Width="150"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        Foreground="White"
+                                        Margin="180 0 0 0">
+
+                                    </TextBlock>
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Text="Number"
+                                        Background="Transparent"
+                                        Width="280"
+                                        Height="30"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        Foreground="White">
+
+                                    </TextBlock>
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Width="50"
+                                        Height="20"
+                                        Text="WALID"
+                                        Background="Transparent"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="13"
+                                        Foreground="White"
+                                        Margin="10 10 0 0">
+                                    </TextBlock>
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Width="50"
+                                        Height="20"
+                                        Text="THRU"
+                                        Background="Transparent"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Bottom"
+                                        FontSize="13"
+                                        Foreground="White"
+                                        Margin="10 0 0 10">
+                                    </TextBlock>
+
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Width="70"
+                                        Height="40"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        Margin="60 0 0 0">
+
+                                        <TextBlock
+                                            Text="0"
+                                            Background="Transparent"
+                                            FontSize="20"
+                                            Width="20"
+                                            Foreground="White"
+                                            Margin="0 5 0 0">
+
+                                        </TextBlock>
+
+                                        <Label
+                                            Content="/"
+                                            FontSize="20"
+                                            Width="20">
+                                        </Label>
+
+                                        <TextBlock
+                                            Text="0"
+                                            Background="Transparent"
+                                            FontSize="20"
+                                            Width="30"
+                                            Foreground="White"
+                                            Margin="5 5 0 0">
+
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <TextBlock
+                                        Margin="0 0 20 0"
+                                        HorizontalAlignment="Right"
+                                        Grid.Row="3"
+                                        Text="CVV"
+                                        Background="Transparent"
+                                        FontSize="20"
+                                        Width="50"
+                                        Height="30"
+                                        Foreground="White">
+
+                                    </TextBlock>
                                 </Grid>
                             </Border>
                         </StackPanel>
@@ -171,14 +210,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-
-        <Button
-            Style="{StaticResource MyButtonStyle}"
-            Grid.Row="1"
-            VerticalAlignment="Center"
-            Command="{Binding AddCard}">
-
-            <md:PackIcon Kind="Plus" Width="30" Height="30"/>
-        </Button>
     </Grid>
 </UserControl>

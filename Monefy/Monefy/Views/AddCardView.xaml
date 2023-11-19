@@ -8,31 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
 
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#1a6aeb" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Background="White">
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.7*"/>
             <RowDefinition/>
+            <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
-
-
         <Border
+            Background="#3d56fa"
             Grid.Row="0"
             CornerRadius="0 0 80 80">
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="Gray"/>
@@ -61,16 +48,17 @@
         </Button>
 
         <Border
+            VerticalAlignment="Center"
             Grid.Row="1"
             Width="340"
             Height="200"
-            CornerRadius="40"
-            Margin="0 0 0 90">
+            CornerRadius="40">
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="LimeGreen" Offset="0"/>
-                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#d489ff" Offset="-0.2"/>
+                    <GradientStop Color="#7985ff" Offset="0.5"/>
+                    <GradientStop Color="#6ad8fd" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -81,22 +69,40 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="1.8*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
+                
                 <TextBox
-                    md:HintAssist.Hint="Card name"
+                    md:HintAssist.Hint="Owner name"
                     Background="Transparent"
                     BorderThickness="0"
-                    Width="200"
+                    Width="130"
                     Height="30"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontSize="20"
                     Foreground="White"
-                    TextAlignment="Center">
+                    Margin="28 0 0 0"
+                    PreviewTextInput="CheckNameSurname"
+                    Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+
+                </TextBox>
+
+                <TextBox
+                    md:HintAssist.Hint="Owner surname"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Width="150"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Margin="180 0 0 0"
+                    PreviewTextInput="CheckNameSurname"
+                    Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+
                 </TextBox>
 
                 <TextBox
@@ -106,32 +112,50 @@
                     BorderThickness="0"
                     Width="280"
                     Height="30"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    Foreground="White">
+                    Foreground="White"
+                    PreviewTextInput="CheckNumber"
+                    Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+                    
                 </TextBox>
 
                 <TextBlock
                     Grid.Row="2"
-                    Width="130"
-                    Height="40"
-                    Text="Date Of Expiry"
+                    Width="50"
+                    Height="20"
+                    Text="WALID"
                     Background="Transparent"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White">
+                    VerticalAlignment="Top"
+                    FontSize="13"
+                    Foreground="White"
+                    Margin="10 10 0 0">
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Row="2"
+                    Width="50"
+                    Height="20"
+                    Text="THRU"
+                    Background="Transparent"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="13"
+                    Foreground="White"
+                    Margin="10 0 0 10">
                 </TextBlock>
 
                 <StackPanel
-                    Margin="0 0 0 5"
                     Grid.Row="2"
-                    Width="60"
+                    Width="70"
                     Height="40"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    Margin="60 0 0 0">
+
                     <TextBox
                         md:HintAssist.Hint="0"
                         Background="Transparent"
@@ -139,7 +163,11 @@
                         FontSize="20"
                         Width="20"
                         Foreground="White"
-                        TextAlignment="Center">
+                        Margin="0 5 0 0"
+                        PreviewTextInput="CheckMonth"
+                        TextChanged="CheckMonth"
+                        Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+                        
                     </TextBox>
 
                     <Label
@@ -147,15 +175,19 @@
                         FontSize="20"
                         Width="20">
                     </Label>
-                
+
                     <TextBox
                         md:HintAssist.Hint="0"
                         Background="Transparent"
                         BorderThickness="0"
                         FontSize="20"
-                        Width="20"
+                        Width="30"
                         Foreground="White"
-                        TextAlignment="Center">
+                        Margin="5 5 0 0"
+                        PreviewTextInput="CheckYear"
+                        TextChanged="CheckYear"
+                        Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+                        
                     </TextBox>
                 </StackPanel>
 
@@ -170,9 +202,20 @@
                     Width="50"
                     Height="30"
                     Foreground="White"
-                    TextAlignment="Center">
+                    PreviewTextInput="CheckCVV"
+                    Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+                    
                 </TextBox>
             </Grid>
         </Border>
+
+        <Button
+            Grid.Row="2"
+            Content="Add new card"
+            Width="200"
+            FontSize="20"
+            Style="{StaticResource MyButtonStyle}">
+            
+        </Button>
     </Grid>
 </UserControl>

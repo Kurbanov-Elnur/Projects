@@ -9,21 +9,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400" Background="White">
 
-    <Grid Background="#BFEFFF">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border
+            Background="#3d56fa"
             CornerRadius="0 0 80 80">
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="Gray"/>
@@ -67,18 +61,12 @@
         </Border>
 
         <Border
+            Background="#3d56fa"
             Grid.Row="1"
             CornerRadius="80 80 0 0"
             Width="400"
             Height="430"
             VerticalAlignment="Bottom">
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Color="Gray" />
@@ -103,7 +91,8 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Width="250"
-                            Height="40">
+                            Height="40"
+                            Opacity="0.85">
 
                             <TextBox
                                 Foreground="White"

@@ -72,7 +72,7 @@ internal class ChartDataViewModel : ViewModelBase
         _dataService = dataService;
 
         Transactions = deserializeService.Deserialize<Transaction>("Data.json");
-        chartManager.UpdateData(Transactions, Data, DateTime.Today);
+        chartManager.UpdateData(Transactions, Data, CurrentDate);
 
         _dataService.SendData(Transactions);
 
@@ -84,7 +84,7 @@ internal class ChartDataViewModel : ViewModelBase
 
         Transactions.CollectionChanged += (sender, e) =>
         {
-            chartManager.UpdateData(Transactions, Data, DateTime.Today);
+            chartManager.UpdateData(Transactions, Data, CurrentDate);
         };
     }
 
