@@ -3,11 +3,13 @@ using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
+using Prism.Commands;
+using Prism.Mvvm;
 using System.Windows;
 
 namespace Monefy.ViewModels;
 
-class IntervalsViewModel : ViewModelBase
+class IntervalsViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly IDataService _dataService;
@@ -20,7 +22,7 @@ class IntervalsViewModel : ViewModelBase
         get => openMenuVisibility;
         set
         {
-            Set(ref openMenuVisibility, value);
+            SetProperty(ref openMenuVisibility, value);
         }
     }
 
@@ -29,7 +31,7 @@ class IntervalsViewModel : ViewModelBase
         get => closeMenuVisibility;
         set
         {
-            Set(ref closeMenuVisibility, value);
+            SetProperty(ref closeMenuVisibility, value);
         }
     }
 
@@ -43,45 +45,24 @@ class IntervalsViewModel : ViewModelBase
             if(message.Data as string == "Hidden" || message.Data as string == "Visible")
                 OpenMenuVisibility = message.Data as string;
         });
-    }
 
-    public ButtonCommand DayView
-    {
-        get => new(() =>
-        {
-        });
-    }  
-    
-    public ButtonCommand MonthView
-    {
-        get => new(() =>
-        {
-        });
-    }  
-    
-    public ButtonCommand YearView
-    {
-        get => new(() =>
-        {
-        });
-    }
-
-    public ButtonCommand OpenMenu
-    {
-        get => new(() =>
+        OpenMenu = new(() =>
         {
             OpenMenuVisibility = "Hidden";
             CloseMenuVisibility = "Visible";
             App.Container.GetInstance<MainViewModel>().Visibility = "Hidden";
         });
-    }
 
-    public ButtonCommand CloseMenu
-    {
-        get => new(() =>
+        CloseMenu = new(() =>
         {
             OpenMenuVisibility = "Visible";
             CloseMenuVisibility = "Hidden";
         });
     }
+
+    public DelegateCommand DayView { get; private set; }
+    public DelegateCommand MonthView { get; private set; }
+    public DelegateCommand YearView { get; private set; }
+    public DelegateCommand OpenMenu { get; private set; }
+    public DelegateCommand CloseMenu { get; private set; }
 }

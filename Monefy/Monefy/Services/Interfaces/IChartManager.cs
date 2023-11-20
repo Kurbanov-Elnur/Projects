@@ -11,6 +11,6 @@ namespace Monefy.Services.Interfaces;
 
 interface IChartManager
 {
-    public void AddTransaction(ObservableCollection<Transaction> transactions, Button button);
-    public void UpdateData(ObservableCollection<Transaction> transactions, SeriesCollection Data, DateTime Date);
+    public SeriesCollection Data { get; set; }
+    public void UpdateData(ObservableCollection<Transaction> transactions, DateTime Date);
 }

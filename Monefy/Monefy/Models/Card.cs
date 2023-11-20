@@ -11,8 +11,8 @@ class Card
     public string Name { get; set; }
     public string Surname { get; set; }
     public string Number { get; set; }
-    public short MonthOfExpiry { get; set; }
-    public short YearOfExpiry { get; set; }
-    public short CVV { get; set; }
-    public double Balance { get; set; }
+    public string MonthOfExpiry { get; set; }
+    public string YearOfExpiry { get; set; }
+    public string CVV { get; set; }
+    public double Balance { get; set; } = 0;
 }

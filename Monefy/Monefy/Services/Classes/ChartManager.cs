@@ -19,47 +19,19 @@ namespace Monefy.Serrvices.Classes;
 
 class ChartManager : IChartManager
 {
-    private readonly INavigationService navigation;
-    private readonly IDataService _dataService;
+    public SeriesCollection Data { get; set; }
 
-    public double Count;
-    public DateTime CurrentDate;
-    SeriesCollection Data;
-
-    public ChartManager(IMessenger messenger, INavigationService navigate, IDataService dataService)
+    public ChartManager(IMessenger messenger)
     {
-        navigation = navigate;
-        _dataService = dataService;
 
         messenger.Register<DataMessage>(this, (message) =>
         {
-            double.TryParse(message.Data.ToString(), out Count);
+            if (message.Data as SeriesCollection != null)
+                Data = message.Data as SeriesCollection;
         });
-
-        messenger.Register<DatasMessage>(this, (message) =>
-        {
-            if (DateTime.TryParse(message.Datas[0].ToString(), out CurrentDate) && message.Datas[1] as SeriesCollection != null)
-            {
-                DateTime.TryParse(message.Datas[0].ToString(), out CurrentDate);
-                Data = message.Datas[1] as SeriesCollection;
-            }
-        });
-    }
-
-    public void AddTransaction(ObservableCollection<Transaction> transactions, Button button)
-    {
-        transactions.Add(new Transaction()
-        {
-            Date = CurrentDate,
-            Category = button.Name,
-            Amount = Count,
-            Icon = new MyIcon((button.Content as PackIcon).Kind.ToString(), button.Foreground.ToString())
-        });
-
-        _dataService.SendData(transactions);
     }
     
-    public void UpdateData(ObservableCollection<Transaction> transactions, SeriesCollection Data, DateTime Date)
+    public void UpdateData(ObservableCollection<Transaction> transactions, DateTime Date)
     {
         Data.Clear();
 

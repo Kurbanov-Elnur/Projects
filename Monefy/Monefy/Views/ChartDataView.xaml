@@ -23,7 +23,7 @@
                 <DropShadowEffect BlurRadius="5" Color="Gray"/>
             </Border.Effect>
 
-            <!--<TextBlock
+            <TextBlock
                 Text="{Binding CurrentDate, StringFormat='dd-MM-yyyy'}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
@@ -31,7 +31,7 @@
                 FontSize="25"
                 Margin="0 40 0 0">
 
-            </TextBlock>-->
+            </TextBlock>
         </Border>
 
         <Border

@@ -18,26 +18,28 @@ using LiveCharts.Wpf.Charts.Base;
 using System.Drawing;
 using System.Security.RightsManagement;
 using MaterialDesignThemes.Wpf;
+using Prism.Commands;
+using Prism.Mvvm;
 
 namespace Monefy.ViewModels;
 
-internal class OperationViewModel : ViewModelBase
+internal class OperationViewModel : BindableBase
 {
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
 
-    private double Balance = 0; 
+    private double Amount = 0; 
     private StringBuilder Expression = new();
-    private string _expressionText = "";
+    public string _expressionText = "";
 
-    public ViewModelBase ChoiceCategories { get; set; } = App.Container.GetInstance<CategoriesViewModel>();
+    public BindableBase ChoiceCategories { get; set; } = App.Container.GetInstance<CategoriesViewModel>();
 
     public string ExpressionText
     {
         get => _expressionText;
         set
         {
-            Set(ref _expressionText, value);
+            SetProperty(ref _expressionText, value);
         }
     }
 
@@ -45,11 +47,8 @@ internal class OperationViewModel : ViewModelBase
     {
         _navigationService = navigationService;
         _dataService = dataService;
-    }
 
-    public ButtonCommand<string> Click
-    {
-        get => new((operation) =>
+        Click = new((operation) =>
         {
             if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
             {
@@ -68,11 +67,8 @@ internal class OperationViewModel : ViewModelBase
             }
             Expression.Append(operation);
         });
-    }
 
-    public ButtonCommand Delete
-    {
-        get => new(() =>
+        Delete = new(() =>
         {
             if (Expression.Length > 0)
                 Expression.Remove(Expression.Length - 1, 1);
@@ -80,11 +76,8 @@ internal class OperationViewModel : ViewModelBase
             if (!string.IsNullOrEmpty(ExpressionText))
                 ExpressionText = ExpressionText.Substring(0, ExpressionText.Length - 1);
         });
-    }
 
-    public ButtonCommand Equal
-    {
-        get => new(
+        Equal = new(
         () =>
         {
             if (Expression.Length > 0)
@@ -100,32 +93,34 @@ internal class OperationViewModel : ViewModelBase
         {
             return !(Expression.Length == 0);
         });
+
+        Back = new(() =>
+        {
+            _navigationService.NavigateTo<ChartDataViewModel>();
+            Expression.Clear();
+            ExpressionText = "";
+        });
     }
+
+    public DelegateCommand<string> Click { get; private set; }
+    public DelegateCommand Delete { get; private set; }
+    public DelegateCommand Equal { get; private set; }
+    public DelegateCommand Back { get; private set; }
 
     public bool SendData()
     {
         Check();
 
         if(Expression.Length > 0) 
-            Balance = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
+            Amount = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
 
-        if (Balance == 0 || Balance < 0)
+        if (Amount == 0 || Amount < 0)
             return false;
         else
         {
-            _dataService.SendData(Balance);
+            _dataService.SendData(Amount);
             return true;
         }
-    }
-
-    public ButtonCommand Back
-    {
-        get => new(() =>
-        {
-            _navigationService.NavigateTo<ChartDataViewModel>();
-            Expression.Clear();
-            ExpressionText = "";
-        });
     }
 
     public void Check()

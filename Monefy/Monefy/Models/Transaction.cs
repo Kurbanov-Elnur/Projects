@@ -15,8 +15,4 @@ public class Transaction
     public MyIcon Icon { get; set; }
     public DateTime Date { get; set; }
     public string Category { get; set; }
-    public Transaction()
-    {
-        Date = DateTime.Today;
-    }
 }

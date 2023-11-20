@@ -91,7 +91,7 @@
                                     </Grid.RowDefinitions>
 
                                     <TextBlock
-                                        Text="Name"
+                                        Text="{Binding Name}"
                                         Background="Transparent"
                                         Width="130"
                                         Height="30"
@@ -104,7 +104,7 @@
                                     </TextBlock>
 
                                     <TextBlock
-                                        Text="Surname"
+                                        Text="{Binding Surname}"
                                         Background="Transparent"
                                         Width="150"
                                         Height="30"
@@ -118,7 +118,7 @@
 
                                     <TextBlock
                                         Grid.Row="1"
-                                        Text="Number"
+                                        Text="{Binding Number}"
                                         Background="Transparent"
                                         Width="280"
                                         Height="30"
@@ -165,7 +165,7 @@
                                         Margin="60 0 0 0">
 
                                         <TextBlock
-                                            Text="0"
+                                            Text="{Binding MonthOfExpiry}"
                                             Background="Transparent"
                                             FontSize="20"
                                             Width="20"
@@ -181,7 +181,7 @@
                                         </Label>
 
                                         <TextBlock
-                                            Text="0"
+                                            Text="{Binding YearOfExpiry}"
                                             Background="Transparent"
                                             FontSize="20"
                                             Width="30"
@@ -195,7 +195,7 @@
                                         Margin="0 0 20 0"
                                         HorizontalAlignment="Right"
                                         Grid.Row="3"
-                                        Text="CVV"
+                                        Text="{Binding CVV}"
                                         Background="Transparent"
                                         FontSize="20"
                                         Width="50"

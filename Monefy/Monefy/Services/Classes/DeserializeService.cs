@@ -22,8 +22,7 @@ class DeserializeService : IDeserializeService
         var deserializedObject = JsonConvert.DeserializeObject<ObservableCollection<T>>(json, new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All
-        }
-        );
+        });
 
         return deserializedObject;
     }

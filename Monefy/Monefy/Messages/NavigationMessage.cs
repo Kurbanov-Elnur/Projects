@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
+using Prism.Mvvm;
 
 namespace Monefy.Messages;
 
 class NavigationMessage
 {
-    public ViewModelBase ViewModelType { get; set; }
+    public BindableBase ViewModelType { get; set; }
 }

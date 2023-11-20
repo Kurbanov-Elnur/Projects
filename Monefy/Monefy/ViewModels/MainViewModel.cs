@@ -4,42 +4,43 @@ using Monefy.Messages;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
 using Monefy.Views;
+using Prism.Mvvm;
 using System.Threading;
 
 namespace Monefy.ViewModels;
 
-class MainViewModel : ViewModelBase
+class MainViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly IDataService _dataService;
     private string visibility = "Visible";
-    private ViewModelBase intervalsView;
-    private ViewModelBase currentView;
+    private BindableBase intervalsView;
+    private BindableBase currentView;
 
     public string Visibility
     {
         get => visibility;
         set
         {
-            Set(ref visibility, value);
+            SetProperty(ref visibility, value);
         }
     }
 
-    public ViewModelBase CurrentView
+    public BindableBase CurrentView
     {
         get => currentView;
         set
         {
-            Set(ref currentView, value);
+            SetProperty(ref currentView, value);
         }
     }
 
-    public ViewModelBase IntervalsView
+    public BindableBase IntervalsView
     {
         get => intervalsView;
         set
         {
-            Set(ref intervalsView, value);
+            SetProperty(ref intervalsView, value);
         }
     }
 

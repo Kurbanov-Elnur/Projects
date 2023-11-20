@@ -4,6 +4,8 @@ using Monefy.Messages;
 using Monefy.Models;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
+using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace Monefy.ViewModels;
 
-class TransactionsViewModel : ViewModelBase
+class TransactionsViewModel : BindableBase
 {
     private readonly INavigationService _navigationService;
-    private readonly IMessenger _messenger;
+    private readonly IDataService _dataService;
 
     private ObservableCollection<Transaction> transactions;
 
@@ -25,27 +27,27 @@ class TransactionsViewModel : ViewModelBase
         get => transactions;
         set
         {
-            Set(ref transactions, value);
+            SetProperty(ref transactions, value);
         }
     }
 
-    public TransactionsViewModel(INavigationService navigationService, IMessenger messenger)
+    public TransactionsViewModel(INavigationService navigationService, IDataService dataService, IDeserializeService deserializeService)
     {
         _navigationService = navigationService;
-        _messenger = messenger;
+        _dataService = dataService;
 
-        _messenger.Register<DataMessage>(this, message =>
-        {
-            if (message.Data as ObservableCollection<Transaction> != null)
-                Transactions = message.Data as ObservableCollection<Transaction>;
-        });
-    }
+        Transactions = deserializeService.Deserialize<Transaction>("Data.json");
 
-    public ButtonCommand Back
-    {
-        get => new(() =>
+        if (Transactions == null)
+            Transactions = new();
+
+        _dataService.SendData(Transactions);
+
+        Back = new(() =>
         {
             _navigationService.NavigateTo<ChartDataViewModel>();
         });
     }
+
+    public DelegateCommand Back { get; private set; }
 }

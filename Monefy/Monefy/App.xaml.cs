@@ -26,6 +26,7 @@ public partial class App : Application
         Container.RegisterSingleton<INavigationService, NavigationService>();
         Container.RegisterSingleton<IDataService, DataService>();
 
+        Container.RegisterSingleton<ITransactionsManager, TransactionsManager>();
         Container.RegisterSingleton<IChartManager, ChartManager>();
         Container.RegisterSingleton<IIntervalsManager, IntervalsManager>();
         Container.RegisterSingleton<ISerializeService, SerializeService>();
@@ -33,11 +34,11 @@ public partial class App : Application
         Container.RegisterSingleton<IDeserializeService, DeserializeService>();
 
         Container.RegisterSingleton<MainViewModel>();
+        Container.RegisterSingleton<TransactionsViewModel>();
+        Container.RegisterSingleton<CategoriesViewModel>();
         Container.RegisterSingleton<ChartDataViewModel>();
         Container.RegisterSingleton<OperationViewModel>();
         Container.RegisterSingleton<IntervalsViewModel>();
-        Container.RegisterSingleton<CategoriesViewModel>();
-        Container.RegisterSingleton<TransactionsViewModel>();
         Container.RegisterSingleton<CardsViewModel>();
         Container.RegisterSingleton<AddCardViewModel>();
 

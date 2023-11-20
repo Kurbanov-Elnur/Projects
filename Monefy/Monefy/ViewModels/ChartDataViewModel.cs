@@ -10,6 +10,8 @@ using Monefy.Models;
 using Monefy.Serrvices.Classes;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
+using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,13 +26,13 @@ using System.Windows.Shell;
 
 namespace Monefy.ViewModels;
 
-internal class ChartDataViewModel : ViewModelBase
+internal class ChartDataViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
 
-    public ObservableCollection<Transaction> Transactions = new();
+    public ObservableCollection<Transaction> Transactions { get; set; }
 
     public Card currentCard;
 
@@ -39,7 +41,7 @@ internal class ChartDataViewModel : ViewModelBase
         get => currentCard;
         set
         {
-            Set(ref currentCard, value);
+            SetProperty(ref currentCard, value);
         }
     }
 
@@ -50,7 +52,7 @@ internal class ChartDataViewModel : ViewModelBase
         get => data;
         set
         {
-            Set(ref data, value);
+            SetProperty(ref data, value);
         }
     }
 
@@ -61,40 +63,42 @@ internal class ChartDataViewModel : ViewModelBase
         get => currentDate;
         set
         {
-            Set(ref currentDate, value);
+            SetProperty(ref currentDate, value);
         }
     }
 
-    public ChartDataViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger, IDeserializeService deserializeService, IChartManager chartManager)
+    public ChartDataViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger, IChartManager chartManager)
     {
         _messenger = messenger;
         _navigationService = navigationService;
         _dataService = dataService;
 
-        Transactions = deserializeService.Deserialize<Transaction>("Data.json");
-        chartManager.UpdateData(Transactions, Data, CurrentDate);
-
-        _dataService.SendData(Transactions);
-
         _messenger.Register<DataMessage>(this, message =>
         {
             if (message.Data as Card != null)
                 CurrentCard = message.Data as Card;
+            if (message.Data as ObservableCollection<Transaction> != null)
+                Transactions = message.Data as ObservableCollection<Transaction>;
         });
+
+        Transactions = App.Container.GetInstance<TransactionsViewModel>().Transactions;
+
+        _dataService.SendData(Data);
+        _dataService.SendData(CurrentDate);
+
+        chartManager.UpdateData(Transactions, CurrentDate);
 
         Transactions.CollectionChanged += (sender, e) =>
         {
-            chartManager.UpdateData(Transactions, Data, CurrentDate);
+            chartManager.UpdateData(Transactions, CurrentDate);
         };
-    }
 
-    public ButtonCommand Add
-    {
-        get => new(() =>
+        Add = new(() =>
         {
-            _dataService.SendData(Transactions);
-            _dataService.SendData(new object[] { CurrentDate, Data });
+            _dataService.SendData(CurrentDate);
             _navigationService.NavigateTo<OperationViewModel>();
         });
     }
+
+    public DelegateCommand Add { get; private set; }
 }

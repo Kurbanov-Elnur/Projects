@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using Monefy.Messages;
 using Monefy.Services.Interfaces;
+using Prism.Mvvm;
 
 namespace Monefy.Services.Classes;
 
@@ -12,7 +13,7 @@ class NavigationService : INavigationService
     {
         _messenger = messenger;
     }
-    public void NavigateTo<T>() where T : ViewModelBase
+    public void NavigateTo<T>() where T : BindableBase
     {
         _messenger.Send(new NavigationMessage()
         {
