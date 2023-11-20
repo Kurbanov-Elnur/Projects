@@ -119,6 +119,8 @@ internal class OperationViewModel : BindableBase
         else
         {
             _dataService.SendData(Amount);
+            Expression.Clear();
+            _expressionText = "";
             return true;
         }
     }

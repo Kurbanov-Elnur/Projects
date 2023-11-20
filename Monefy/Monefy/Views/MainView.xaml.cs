@@ -30,6 +30,7 @@ public partial class MainView : Window
     private void Close(object sender, RoutedEventArgs e)
     {
         _serializeService.Serialize("Data.json", App.Container.GetInstance<ChartDataViewModel>().Transactions);
+        _serializeService.Serialize("Cards.json", App.Container.GetInstance<CardsViewModel>().Cards);
         App.Current.Shutdown();
     }
 

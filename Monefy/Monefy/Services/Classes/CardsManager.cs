@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Models;
+using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Monefy.Services.Classes;
 
-class CardsManager
+class CardsManager : ICardsManager
 {
     private readonly IMessenger _messenger;
 
@@ -27,4 +28,8 @@ class CardsManager
         });
     }
 
+    public void AddNewCard(Card newCard)
+    {
+        Cards.Add(newCard);
+    }
 }

@@ -27,6 +27,7 @@ public partial class App : Application
         Container.RegisterSingleton<IDataService, DataService>();
 
         Container.RegisterSingleton<ITransactionsManager, TransactionsManager>();
+        Container.RegisterSingleton<ICardsManager, CardsManager>();
         Container.RegisterSingleton<IChartManager, ChartManager>();
         Container.RegisterSingleton<IIntervalsManager, IntervalsManager>();
         Container.RegisterSingleton<ISerializeService, SerializeService>();

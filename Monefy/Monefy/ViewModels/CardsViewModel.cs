@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Monefy.ViewModels;
 
@@ -18,45 +19,17 @@ class CardsViewModel : BindableBase
     private readonly IDataService _dataService;
     private readonly INavigationService _navigationService;
 
-    public ObservableCollection<Card> Cards { get; set; } = new();
+    public ObservableCollection<Card> Cards { get; set; } 
 
-    public CardsViewModel(INavigationService navigationService, IDataService dataService)
+    public CardsViewModel(INavigationService navigationService, IDataService dataService, IDeserializeService deserializeService)
     {
         _dataService = dataService;
         _navigationService = navigationService;
 
-        Cards.Add(new Card()
-        {
-            Name = "Elnur",
-            Surname = "Mamedov",
-            Number = "1234 1233 1231 2312",
-            CVV = "123",
-            MonthOfExpiry = "01",
-            YearOfExpiry = "26",
-            Balance = 120
-        });
+        Cards = deserializeService.Deserialize<Card>("Cards.json");
 
-        Cards.Add(new Card()
-        {
-            Name = "Javad",
-            Surname = "Rahimli",
-            Number = "1234 1233 1231 2312",
-            CVV = "123",
-            MonthOfExpiry = "01",
-            YearOfExpiry = "26",
-            Balance = 120
-        });
-
-        Cards.Add(new Card()
-        {
-            Name = "Kenan",
-            Surname = "Mammedli",
-            Number = "1234 1233 1231 2312",
-            CVV = "123",
-            MonthOfExpiry = "01",
-            YearOfExpiry = "26",
-            Balance = 120
-        });
+        if (Cards == null)
+            Cards = new();
 
         Back = new(() =>
         {

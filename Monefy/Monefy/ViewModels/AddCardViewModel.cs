@@ -16,6 +16,7 @@ namespace Monefy.ViewModels;
 internal class AddCardViewModel : BindableBase
 {
     private readonly INavigationService _navigationService;
+    private readonly ICardsManager _cardsManager;
 
     public Card newCard;
 
@@ -28,22 +29,37 @@ internal class AddCardViewModel : BindableBase
         }
     }
 
-    public AddCardViewModel(INavigationService navigationService)
+    public AddCardViewModel(INavigationService navigationService, ICardsManager cardsManager)
     {
         _navigationService = navigationService;
+        _cardsManager = cardsManager;
+
         newCard = new Card();
 
         AddNewCard = new(() =>
         {
+            _cardsManager.AddNewCard(new Card(NewCard));
+            Clear();
             _navigationService.NavigateTo<CardsViewModel>();
         });
 
         Back = new(() =>
         {
+            Clear();
             _navigationService.NavigateTo<CardsViewModel>();
         });
     }
 
     public DelegateCommand AddNewCard { get; private set; }
     public DelegateCommand Back { get; private set; }
+
+    public void Clear()
+    {
+        newCard.Name = "";
+        newCard.Surname = "";
+        newCard.CVV = "";
+        newCard.YearOfExpiry = "";
+        newCard.MonthOfExpiry = "";
+        newCard.Number = "";
+    }
 }
