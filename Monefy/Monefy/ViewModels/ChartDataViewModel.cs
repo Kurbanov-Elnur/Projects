@@ -31,6 +31,7 @@ internal class ChartDataViewModel : BindableBase
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
+    private readonly IChartManager _chartManager;
 
     public ObservableCollection<Transaction> Transactions { get; set; }
 
@@ -63,6 +64,7 @@ internal class ChartDataViewModel : BindableBase
         get => currentDate;
         set
         {
+            _chartManager.UpdateData(Transactions, CurrentDate);
             SetProperty(ref currentDate, value);
         }
     }
@@ -72,6 +74,7 @@ internal class ChartDataViewModel : BindableBase
         _messenger = messenger;
         _navigationService = navigationService;
         _dataService = dataService;
+        _chartManager = chartManager;
 
         _messenger.Register<DataMessage>(this, message =>
         {
@@ -86,11 +89,11 @@ internal class ChartDataViewModel : BindableBase
         _dataService.SendData(Data);
         _dataService.SendData(CurrentDate);
 
-        chartManager.UpdateData(Transactions, CurrentDate);
+        _chartManager.UpdateData(Transactions, CurrentDate);
 
         Transactions.CollectionChanged += (sender, e) =>
         {
-            chartManager.UpdateData(Transactions, CurrentDate);
+            _chartManager.UpdateData(Transactions, CurrentDate);
         };
 
         Add = new(() =>
@@ -101,4 +104,5 @@ internal class ChartDataViewModel : BindableBase
     }
 
     public DelegateCommand Add { get; private set; }
+
 }

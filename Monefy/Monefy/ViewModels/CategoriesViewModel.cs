@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using MaterialDesignThemes.Wpf;
 using Monefy.Messages;
 using Monefy.Models;
 using Monefy.Serrvices.Classes;
@@ -28,14 +27,14 @@ class CategoriesViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
-    private readonly ITransactionsManager _transactionsManager;
+    private readonly IDataService _dataService;
 
     private string openMenuVisibility = "Visible";
     private string closeMenuVisibility = "Hidden";
 
     private double Amount;
-    private DateTime CurrentDate { get; set; } 
-    
+    private DateTime CurrentDate { get; set; }
+
     public string OpenMenuVisibility
     {
         get => openMenuVisibility;
@@ -54,17 +53,18 @@ class CategoriesViewModel : BindableBase
         }
     }
 
-    public CategoriesViewModel(IMessenger messenger, INavigationService navigationService, ITransactionsManager transactionsManager)
+    public CategoriesViewModel(IMessenger messenger, INavigationService navigationService, IDataService dataService)
     {
         _messenger = messenger;
         _navigationService = navigationService;
-        _transactionsManager = transactionsManager;
+        _dataService = dataService;
 
         _messenger.Register<DataMessage>(this, message =>
         {
             double.TryParse(message.Data.ToString(), out Amount);
             if (DateTime.TryParse(message.Data.ToString(), out DateTime result))
                 CurrentDate = result;
+
         });
 
         Select = new((button) =>
@@ -76,10 +76,11 @@ class CategoriesViewModel : BindableBase
                     Date = CurrentDate,
                     Category = button.Name,
                     Amount = Amount,
-                    Icon = new MyIcon((button.Content as PackIcon).Kind.ToString(), button.Foreground.ToString())
+                    Icon = new MyIcon((button.Content as MaterialDesignThemes.Wpf.PackIcon).Kind.ToString(), button.Foreground.ToString())
                 };
-
-                _transactionsManager.AddTransaction(NewTransaction);
+                _dataService.SendData(NewTransaction);
+                _navigationService.NavigateTo<PayViewModel>();
+                return;
             }
             _navigationService.NavigateTo<ChartDataViewModel>();
         });

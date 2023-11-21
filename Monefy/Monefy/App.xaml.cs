@@ -37,6 +37,7 @@ public partial class App : Application
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<TransactionsViewModel>();
         Container.RegisterSingleton<CategoriesViewModel>();
+        Container.RegisterSingleton<PayViewModel>();
         Container.RegisterSingleton<ChartDataViewModel>();
         Container.RegisterSingleton<OperationViewModel>();
         Container.RegisterSingleton<IntervalsViewModel>();
