@@ -35,14 +35,14 @@ internal class ChartDataViewModel : BindableBase
 
     public ObservableCollection<Transaction> Transactions { get; set; }
 
-    public Card currentCard;
+    public double currentBalance;
 
-    public Card CurrentCard
+    public double CurrentBalance
     {
-        get => currentCard;
+        get => currentBalance;
         set
         {
-            SetProperty(ref currentCard, value);
+            SetProperty(ref currentBalance, value);
         }
     }
 
@@ -78,10 +78,13 @@ internal class ChartDataViewModel : BindableBase
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            if (message.Data as Card != null)
-                CurrentCard = message.Data as Card;
             if (message.Data as ObservableCollection<Transaction> != null)
                 Transactions = message.Data as ObservableCollection<Transaction>;
+        });
+
+        _messenger.Register<BalanceMessage>(this, message =>
+        {
+            CurrentBalance = message.Balance;
         });
 
         Transactions = App.Container.GetInstance<TransactionsViewModel>().Transactions;
@@ -95,14 +98,17 @@ internal class ChartDataViewModel : BindableBase
         {
             _chartManager.UpdateData(Transactions, CurrentDate);
         };
-
-        Add = new(() =>
+        Add = new(
+        () =>
         {
             _dataService.SendData(CurrentDate);
             _navigationService.NavigateTo<OperationViewModel>();
+        },
+        () =>
+        {
+            return App.Container.GetInstance<CardsViewModel>().Cards.Count != 0;
         });
     }
 
     public DelegateCommand Add { get; private set; }
-
 }

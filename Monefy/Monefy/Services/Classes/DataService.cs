@@ -29,4 +29,12 @@ public class DataService : IDataService
             Datas = data
         });
     }
+
+    public void SendBalance(double balance)
+    {
+        _messenger.Send(new BalanceMessage()
+        {
+            Balance = balance
+        });
+    }
 }

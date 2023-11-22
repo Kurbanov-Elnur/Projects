@@ -43,6 +43,7 @@ public partial class App : Application
         Container.RegisterSingleton<IntervalsViewModel>();
         Container.RegisterSingleton<CardsViewModel>();
         Container.RegisterSingleton<AddCardViewModel>();
+        Container.RegisterSingleton<TransactionMoreInfoViewModel>();
 
         Container.Verify();
     }

@@ -28,7 +28,16 @@ internal class OperationViewModel : BindableBase
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
 
-    private double Amount = 0; 
+    private double Amount = 0;
+    private string description;
+    public string Description
+    {
+        get => description;
+        set
+        {
+            SetProperty(ref description, value);
+        }
+    }
     private StringBuilder Expression = new();
     public string _expressionText = "";
 
@@ -111,14 +120,14 @@ internal class OperationViewModel : BindableBase
     {
         Check();
 
-        if(Expression.Length > 0) 
+        if (Expression.Length > 0)
             Amount = double.Parse(new System.Data.DataTable().Compute(Expression.ToString(), null).ToString());
 
         if (Amount == 0 || Amount < 0)
             return false;
         else
         {
-            _dataService.SendData(Amount);
+            _dataService.SendData(new object[] { Amount, Description });
             Expression.Clear();
             _expressionText = "";
             return true;

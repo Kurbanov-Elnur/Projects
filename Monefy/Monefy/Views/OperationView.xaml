@@ -81,6 +81,29 @@
             <md:PackIcon Kind="Backspace" Width="20" Height="20"/>
         </Button>
 
+        <Border
+            Width="360"
+            Height="60"
+            CornerRadius="20"
+            Grid.Row="3"
+            Grid.ColumnSpan="4"
+            Background="AliceBlue">
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <TextBox
+                    Margin="10 0 10 0"
+                    md:HintAssist.Hint="Description"
+                    Text="{Binding Description}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Foreground="Blue"
+                    TextWrapping="Wrap"
+                    Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+                </TextBox>
+            </ScrollViewer>
+        </Border>
+
         <StackPanel
             Grid.Row="4"
             Orientation="Horizontal"

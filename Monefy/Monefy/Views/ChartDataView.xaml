@@ -53,7 +53,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock
-                    Text="{Binding CurrentCard.Balance}"
+                    Text="{Binding CurrentBalance}"
                     Foreground="LightSkyBlue"
                     FontSize="30"
                     HorizontalAlignment="Center"

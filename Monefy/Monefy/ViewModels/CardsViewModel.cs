@@ -19,14 +19,25 @@ class CardsViewModel : BindableBase
     private readonly IDataService _dataService;
     private readonly INavigationService _navigationService;
 
-    public ObservableCollection<Card> Cards { get; set; } 
+    private ObservableCollection<Card> _cards;
+
+    public ObservableCollection<Card> Cards
+    {
+        get => _cards;
+        set
+        {
+            SetProperty(ref _cards, value);
+        }
+    }
 
     public CardsViewModel(INavigationService navigationService, IDataService dataService, IDeserializeService deserializeService)
     {
         _dataService = dataService;
         _navigationService = navigationService;
 
+
         Cards = deserializeService.Deserialize<Card>("Cards.json");
+        _dataService.SendData(Cards);
 
         if (Cards == null)
             Cards = new();
@@ -41,7 +52,6 @@ class CardsViewModel : BindableBase
             _navigationService.NavigateTo<AddCardViewModel>();
         });
 
-        _dataService.SendData(Cards);
     }
 
     public DelegateCommand AddCard { get; private set; }

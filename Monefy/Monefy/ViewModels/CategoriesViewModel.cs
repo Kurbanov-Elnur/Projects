@@ -33,6 +33,7 @@ class CategoriesViewModel : BindableBase
     private string closeMenuVisibility = "Hidden";
 
     private double Amount;
+    private string Description;
     private DateTime CurrentDate { get; set; }
 
     public string OpenMenuVisibility
@@ -61,10 +62,14 @@ class CategoriesViewModel : BindableBase
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            double.TryParse(message.Data.ToString(), out Amount);
-            if (DateTime.TryParse(message.Data.ToString(), out DateTime result))
+            if (message.Data != null && DateTime.TryParse(message.Data.ToString(), out DateTime result))
                 CurrentDate = result;
+        });
 
+        _messenger.Register<DatasMessage>(this, message =>
+        {
+            double.TryParse(message.Datas[0].ToString(), out Amount);
+            Description = message.Datas[1] as string;
         });
 
         Select = new((button) =>
@@ -76,6 +81,7 @@ class CategoriesViewModel : BindableBase
                     Date = CurrentDate,
                     Category = button.Name,
                     Amount = Amount,
+                    Description = this.Description,
                     Icon = new MyIcon((button.Content as MaterialDesignThemes.Wpf.PackIcon).Kind.ToString(), button.Foreground.ToString())
                 };
                 _dataService.SendData(NewTransaction);

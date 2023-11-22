@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Monefy.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             Name="Transactions"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400" Background="White">
 
@@ -51,7 +52,7 @@
 
                 <TextBlock
                     Grid.Row="1"
-                    Text="$5000"
+                    Text="{Binding TotalExpenses}"
                     FontSize="24"
                     Foreground="White"
                     VerticalAlignment="Center"
@@ -93,11 +94,15 @@
                             Opacity="0.85">
 
                             <TextBox
-                                Foreground="White"
                                 md:HintAssist.Hint="Search"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Width="230"
+                                Height="30"
                                 FontSize="20"
-                                Margin="9 0 0 0">
-                                
+                                Foreground="White"
+                                Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+
                             </TextBox>
                         </Border>
                         
@@ -128,13 +133,12 @@
                                         Margin="0 0 0 5">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.2*"/>
                                                 <ColumnDefinition />
-                                                <ColumnDefinition Width="0.4*"/>
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
 
                                             <Label
-                                                HorizontalAlignment="Right">
+                                                HorizontalAlignment="Left">
                                                 
                                                 <md:PackIcon
                                                 Kind="{Binding Icon.Name}"
@@ -144,24 +148,11 @@
                                             </Label>
 
                                             <TextBlock
-                                                Grid.Column="1"
                                                 VerticalAlignment="Top"
-                                                HorizontalAlignment="Left"
+                                                HorizontalAlignment="Center"
                                                 Text="{Binding Category}"
-                                                FontSize="15"
-                                                Margin="0 0 0 0"
+                                                FontSize="20"
                                                 Foreground="White">
-
-                                            </TextBlock>
-
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                VerticalAlignment="Bottom"
-                                                HorizontalAlignment="Left"
-                                                Text="{Binding Description}"
-                                                FontSize="15"
-                                                Foreground="White"
-                                                Margin="0 0 0 0">
 
                                             </TextBlock>
 
@@ -170,9 +161,23 @@
                                                 Grid.Column="2"
                                                 Content="{Binding Amount}"
                                                 FontSize="30"
-                                                HorizontalAlignment="Right">
+                                                HorizontalAlignment="Center"
+                                                Margin="40 0 0 0">
                                                 
                                             </Label>
+
+                                            <Button
+                                                Width="30"
+                                                Height="30"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Style="{StaticResource MyButtonStyle}"
+                                                Background="Transparent"
+                                                Command="{Binding ElementName=Transactions, Path=DataContext.MoreInfo}"
+                                                CommandParameter="{Binding}">
+                                                
+                                                <md:PackIcon Kind="ArrowRightBoldCircle" Width="30" Height="30" Foreground="AliceBlue"/>
+                                            </Button>
                                         </Grid>
                                     </Border>
                                 </StackPanel>

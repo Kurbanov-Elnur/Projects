@@ -130,6 +130,19 @@
                                     </TextBlock>
 
                                     <TextBlock
+                                        Grid.Row="1"
+                                        Text="{Binding Balance}"
+                                        Background="Transparent"
+                                        Width="70"
+                                        Height="30"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        Foreground="White">
+
+                                    </TextBlock>
+
+                                    <TextBlock
                                         Grid.Row="2"
                                         Width="50"
                                         Height="20"

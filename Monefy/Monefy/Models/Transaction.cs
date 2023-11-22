@@ -15,4 +15,5 @@ public class Transaction
     public MyIcon Icon { get; set; }
     public DateTime Date { get; set; }
     public string Category { get; set; }
+    public string PaymentСard { get; set; }
 }

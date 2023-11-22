@@ -38,6 +38,10 @@
             <DataTemplate DataType="{x:Type ViewModel:PayViewModel}">
                 <View:PayView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ViewModel:TransactionMoreInfoViewModel}">
+                <View:TransctionMoreInfoView/>
+            </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

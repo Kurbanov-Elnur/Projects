@@ -28,4 +28,9 @@ class TransactionsManager : ITransactionsManager
     {
         Transactions.Add(transaction);
     }
+
+    public void RemoveTransaction(Transaction transaction)
+    {
+        Transactions.Remove(transaction);
+    }
 }

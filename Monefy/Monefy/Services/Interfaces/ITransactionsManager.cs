@@ -12,4 +12,5 @@ interface ITransactionsManager
 {
     public ObservableCollection<Transaction> Transactions { get; set; }
     public void AddTransaction(Transaction transaction);
+    public void RemoveTransaction(Transaction transaction);
 }
