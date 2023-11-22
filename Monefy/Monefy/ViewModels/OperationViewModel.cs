@@ -97,10 +97,6 @@ internal class OperationViewModel : BindableBase
                 Expression.Clear();
                 Expression.Append(ExpressionText);
             }
-        },
-        () =>
-        {
-            return !(Expression.Length == 0);
         });
 
         Back = new(() =>
@@ -128,8 +124,9 @@ internal class OperationViewModel : BindableBase
         else
         {
             _dataService.SendData(new object[] { Amount, Description });
+            Amount = 0;
             Expression.Clear();
-            _expressionText = "";
+            ExpressionText = "";
             return true;
         }
     }

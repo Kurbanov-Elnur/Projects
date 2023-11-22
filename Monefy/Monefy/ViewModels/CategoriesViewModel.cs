@@ -93,9 +93,13 @@ class CategoriesViewModel : BindableBase
 
         OpenMenu = new DelegateCommand(() =>
         {
-            OpenMenuVisibility = "Hidden";
-            CloseMenuVisibility = "Visible";
-            App.Container.GetInstance<OperationViewModel>().SendData();
+            if (App.Container.GetInstance<OperationViewModel>().SendData())
+            {
+                OpenMenuVisibility = "Hidden";
+                CloseMenuVisibility = "Visible";
+            }
+            else
+                _navigationService.NavigateTo<ChartDataViewModel>();
         });
 
         CloseMenu = new(() =>

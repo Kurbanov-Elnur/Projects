@@ -64,8 +64,8 @@ internal class ChartDataViewModel : BindableBase
         get => currentDate;
         set
         {
-            _chartManager.UpdateData(Transactions, CurrentDate);
             SetProperty(ref currentDate, value);
+            _chartManager.UpdateData(Transactions, CurrentDate);
         }
     }
 
@@ -98,7 +98,8 @@ internal class ChartDataViewModel : BindableBase
         {
             _chartManager.UpdateData(Transactions, CurrentDate);
         };
-        Add = new(
+
+        AddTransaction = new(
         () =>
         {
             _dataService.SendData(CurrentDate);
@@ -108,7 +109,21 @@ internal class ChartDataViewModel : BindableBase
         {
             return App.Container.GetInstance<CardsViewModel>().Cards.Count != 0;
         });
+
+        PreviousDay = new(
+        () =>
+        {
+            CurrentDate = CurrentDate.AddDays(-1);
+        });
+
+        NextDay = new(
+        () =>
+        {
+            CurrentDate = CurrentDate.AddDays(+1);
+        });
     }
 
-    public DelegateCommand Add { get; private set; }
+    public DelegateCommand AddTransaction { get; private set; }
+    public DelegateCommand PreviousDay { get; private set; }
+    public DelegateCommand NextDay { get; private set; }
 }

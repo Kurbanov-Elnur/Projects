@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Monefy.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wp="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             Name="Cards"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
 
@@ -115,6 +116,16 @@
                                         Margin="180 0 0 0">
 
                                     </TextBlock>
+
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Style="{DynamicResource MaterialDesignIconButton}"
+                                        Command="{Binding ElementName=Cards, Path=DataContext.AddBalance}"
+                                        CommandParameter="{Binding}">
+
+                                        <md:PackIcon Kind="Plus" Foreground="White"/>
+                                    </Button>
 
                                     <TextBlock
                                         Grid.Row="1"

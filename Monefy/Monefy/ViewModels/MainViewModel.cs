@@ -55,6 +55,7 @@ class MainViewModel : BindableBase
         _messenger.Register<NavigationMessage>(this, message =>
         {
             CurrentView = message.ViewModelType;
+
             if (CurrentView != App.Container.GetInstance<ChartDataViewModel>())
                 Visibility = "Hidden";
             else

@@ -52,8 +52,13 @@ class CardsViewModel : BindableBase
             _navigationService.NavigateTo<AddCardViewModel>();
         });
 
+        AddBalance = new((selected) =>
+        {
+            _navigationService.NavigateTo<OperationViewModel>();
+        });
     }
 
     public DelegateCommand AddCard { get; private set; }
+    public DelegateCommand<Card> AddBalance { get; private set; }
     public DelegateCommand Back { get; private set; }
 }
