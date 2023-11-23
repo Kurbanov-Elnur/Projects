@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Monefy.Views"
+             Name="Category"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
 
@@ -63,195 +64,291 @@
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
 
-            <Border
-                Background="White">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+        <TabControl>
+                <TabItem Header="Expenses">
+                    <Border
+                        Background="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                    <Button
-                            x:Name="Pets"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Orange"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Pets"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Orange"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Dog" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Dog" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Connection"
-                            Grid.Column="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="LawnGreen"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Connection"
+                                Grid.Column="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="LawnGreen"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Phone" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Phone" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Restaurant"
-                            Grid.Column="2"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Purple"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Restaurant"
+                                Grid.Column="2"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Purple"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Restaurant" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Restaurant" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Taxi"
-                            Grid.Row="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Yellow"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Taxi"
+                                Grid.Row="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Yellow"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Car" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Car" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Clothes"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Pink"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Clothes"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Pink"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="ClothesHanger" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="ClothesHanger" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Beverages"
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Red"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Beverages"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Red"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Beverages" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Beverages" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Transportation"
-                            Grid.Row="2"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Violet"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Transportation"
+                                Grid.Row="2"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Violet"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Transportation" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Transportation" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Home"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="DarkTurquoise"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Home"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="DarkTurquoise"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Home" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Home" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Hygiene"
-                            Grid.Row="2"
-                            Grid.Column="2"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Green"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Hygiene"
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Green"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="OralHygiene" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="OralHygiene" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Sport"
-                            Grid.Row="3"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="SandyBrown"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Sport"
+                                Grid.Row="3"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="SandyBrown"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="YoutubeSports" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="YoutubeSports" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Gift"
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="DeepSkyBlue"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Gift"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="DeepSkyBlue"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Gift" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Gift" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Health"
-                            Grid.Row="3"
-                            Grid.Column="2"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="MediumSpringGreen"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Health"
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="MediumSpringGreen"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="HealthPotion" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="HealthPotion" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="CarRepair"
-                            Grid.Row="4"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="Tan"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="CarRepair"
+                                Grid.Row="4"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="Tan"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="CarRepair" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="CarRepair" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            x:Name="Market"
-                            Grid.Row="4"
-                            Grid.Column="1"
-                            Style="{StaticResource MyButtonStyle}"
-                            Foreground="HotPink"
-                            Command="{Binding Select}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Button
+                                x:Name="Market"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource MyButtonStyle}"
+                                Foreground="HotPink"
+                                Command="{Binding Select}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
 
-                        <md:PackIcon Kind="Marketplace" Width="30" Height="30" HorizontalAlignment="Center"/>
-                    </Button>
+                                <md:PackIcon Kind="Marketplace" Width="30" Height="30" HorizontalAlignment="Center"/>
+                            </Button>
 
-                    <Button
-                            Grid.Row="4"
-                            Grid.Column="2"
-                            x:Name="ButtonCloseMenu"
-                            Style="{StaticResource MyButtonStyle}"
-                            Command="{Binding CloseMenu}">
+                            <Button
+                                Grid.Row="4"
+                                Grid.Column="2"
+                                x:Name="ButtonCloseMenu"
+                                Style="{StaticResource MyButtonStyle}"
+                                Command="{Binding CloseMenu}">
 
-                        <md:PackIcon Kind="ArrowDown" Width="25" Height="25"/>
-                    </Button>
-                </Grid>
-            </Border>
+                                <md:PackIcon Kind="ArrowDown" Width="25" Height="25"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </TabItem>
+
+                <TabItem
+                    Header="Incomes">
+                    <ScrollViewer
+                        Background="White"
+                        Grid.Row="1"
+                        Margin="0 20 0 0"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Hidden">
+
+                        <ItemsControl  ItemsSource="{Binding Cards}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel 
+                                        Margin="5">
+                                        <Button
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Height="60"
+                                            Command="{Binding ElementName=Category, Path=DataContext.Select}"
+                                            CommandParameter="{Binding}">
+
+                                            <Border
+                                                Height="50"
+                                                Width="350"
+                                                CornerRadius="20">
+
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#d489ff" Offset="-0.2"/>
+                                                        <GradientStop Color="#7985ff" Offset="0.5"/>
+                                                        <GradientStop Color="#6ad8fd" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+
+                                                <Border.Effect>
+                                                    <DropShadowEffect BlurRadius="10" Color="Gray"/>
+                                                </Border.Effect>
+
+                                                <Grid>
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.3*"/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="0.3*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock
+                                                        Text="{Binding Name}"
+                                                        Background="Transparent"
+                                                        Width="60"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="20"
+                                                        Foreground="White">
+
+                                                    </TextBlock>
+
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Text="{Binding Number}"
+                                                        Background="Transparent"
+                                                        Width="200"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="20"
+                                                        Foreground="White">
+
+                                                    </TextBlock>
+
+                                                    <TextBlock
+                                                        Grid.Column="2"
+                                                        Text="{Binding Balance}"
+                                                        Background="Transparent"
+                                                        Width="30"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="20"
+                                                        Foreground="White">
+                                                    </TextBlock>
+                                                </Grid>
+                                            </Border>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </Grid>
 
         <Button

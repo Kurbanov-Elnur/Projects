@@ -117,16 +117,6 @@
 
                                     </TextBlock>
 
-                                    <Button
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Style="{DynamicResource MaterialDesignIconButton}"
-                                        Command="{Binding ElementName=Cards, Path=DataContext.AddBalance}"
-                                        CommandParameter="{Binding}">
-
-                                        <md:PackIcon Kind="Plus" Foreground="White"/>
-                                    </Button>
-
                                     <TextBlock
                                         Grid.Row="1"
                                         Text="{Binding Number}"

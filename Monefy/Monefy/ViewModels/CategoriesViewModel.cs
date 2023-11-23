@@ -28,12 +28,17 @@ class CategoriesViewModel : BindableBase
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
+    private readonly ICardsManager _cardsManager;
 
     private string openMenuVisibility = "Visible";
     private string closeMenuVisibility = "Hidden";
 
     private double Amount;
     private string Description;
+
+    public ObservableCollection<Card> Cards { get; set; }
+
+
     private DateTime CurrentDate { get; set; }
 
     public string OpenMenuVisibility
@@ -54,16 +59,19 @@ class CategoriesViewModel : BindableBase
         }
     }
 
-    public CategoriesViewModel(IMessenger messenger, INavigationService navigationService, IDataService dataService)
+    public CategoriesViewModel(IMessenger messenger, INavigationService navigationService, IDataService dataService, ICardsManager cardsManager)
     {
         _messenger = messenger;
         _navigationService = navigationService;
         _dataService = dataService;
+        _cardsManager = cardsManager;
 
         _messenger.Register<DataMessage>(this, message =>
         {
             if (message.Data != null && DateTime.TryParse(message.Data.ToString(), out DateTime result))
                 CurrentDate = result;
+            if (message.Data as ObservableCollection<Card> != null)
+                Cards = message.Data as ObservableCollection<Card>;
         });
 
         _messenger.Register<DatasMessage>(this, message =>
@@ -74,21 +82,31 @@ class CategoriesViewModel : BindableBase
 
         Select = new((button) =>
         {
-            if (Amount > 0)
+            if(button as Button != null)
             {
-                Transaction NewTransaction = new Transaction()
+                Button Data = button as Button;
+                if (Amount > 0)
                 {
-                    Date = CurrentDate,
-                    Category = button.Name,
-                    Amount = Amount,
-                    Description = this.Description,
-                    Icon = new MyIcon((button.Content as MaterialDesignThemes.Wpf.PackIcon).Kind.ToString(), button.Foreground.ToString())
-                };
-                _dataService.SendData(NewTransaction);
-                _navigationService.NavigateTo<PayViewModel>();
-                return;
+                    Transaction NewTransaction = new Transaction()
+                    {
+                        Date = CurrentDate,
+                        Category = Data.Name,
+                        Amount = Amount,
+                        Description = this.Description,
+                        Icon = new MyIcon((Data.Content as MaterialDesignThemes.Wpf.PackIcon).Kind.ToString(), Data.Foreground.ToString())
+                    };
+                    _dataService.SendData(NewTransaction);
+                    _navigationService.NavigateTo<PayViewModel>();
+                    return;
+                }
+                _navigationService.NavigateTo<ChartDataViewModel>();
             }
-            _navigationService.NavigateTo<ChartDataViewModel>();
+            else
+            {
+                Card card = button as Card;
+                _cardsManager.AddCardBalance(card.Number, Amount);
+                _navigationService.NavigateTo<ChartDataViewModel>();
+            }
         });
 
         OpenMenu = new DelegateCommand(() =>
@@ -109,7 +127,7 @@ class CategoriesViewModel : BindableBase
         });
     }
 
-    public DelegateCommand<Button> Select { get; private set; }
+    public DelegateCommand<object> Select { get; private set; }
     public DelegateCommand OpenMenu { get; private set; }
     public DelegateCommand CloseMenu { get; private set; }
 }
