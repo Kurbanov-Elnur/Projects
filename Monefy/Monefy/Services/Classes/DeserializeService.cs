@@ -14,7 +14,7 @@ class DeserializeService : IDeserializeService
 {
     public ObservableCollection<T> Deserialize<T>(string fileName)
     {
-        using var fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Read);
+        using var fileStream = new FileStream(fileName, FileMode.OpenOrCreate);
         using var streamReader = new StreamReader(fileStream);
 
         string json = streamReader.ReadToEnd();
