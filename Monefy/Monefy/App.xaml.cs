@@ -31,7 +31,6 @@ public partial class App : Application
         Container.RegisterSingleton<IChartManager, ChartManager>();
         Container.RegisterSingleton<IIntervalsManager, IntervalsManager>();
         Container.RegisterSingleton<ISerializeService, SerializeService>();
-        Container.RegisterSingleton<IServerService, ServerService>();
         Container.RegisterSingleton<IDeserializeService, DeserializeService>();
 
         Container.RegisterSingleton<MainViewModel>();
