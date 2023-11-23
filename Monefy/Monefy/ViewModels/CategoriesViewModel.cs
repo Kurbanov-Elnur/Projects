@@ -82,11 +82,12 @@ class CategoriesViewModel : BindableBase
 
         Select = new((button) =>
         {
-            if(button as Button != null)
+            if (Amount > 0)
             {
-                Button Data = button as Button;
-                if (Amount > 0)
+                if(button as Button != null)
                 {
+                    Button Data = button as Button;
+
                     Transaction NewTransaction = new Transaction()
                     {
                         Date = CurrentDate,
@@ -99,14 +100,14 @@ class CategoriesViewModel : BindableBase
                     _navigationService.NavigateTo<PayViewModel>();
                     return;
                 }
-                _navigationService.NavigateTo<ChartDataViewModel>();
+                else
+                {
+                    Card card = button as Card;
+                    _cardsManager.AddCardBalance(card.Number, Amount);
+                    _navigationService.NavigateTo<ChartDataViewModel>();
+                }
             }
-            else
-            {
-                Card card = button as Card;
-                _cardsManager.AddCardBalance(card.Number, Amount);
-                _navigationService.NavigateTo<ChartDataViewModel>();
-            }
+            _navigationService.NavigateTo<ChartDataViewModel>();
         });
 
         OpenMenu = new DelegateCommand(() =>
