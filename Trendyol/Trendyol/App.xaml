@@ -1,0 +1,32 @@
+﻿<Application x:Class="Trendyol.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Trendyol"
+             xmlns:View="clr-namespace:Trendyol.Views"
+             xmlns:ViewModel="clr-namespace:Trendyol.ViewModels">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type ViewModel:MainViewModel}">
+                <View:MainWiew/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">
+                <View:LoginView/>
+            </DataTemplate> 
+            
+            <DataTemplate DataType="{x:Type ViewModel:WelcomeViewModel}">
+                <View:WelcomeView/>
+            </DataTemplate>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

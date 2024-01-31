@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Trendyol.Views.WelcomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trendyol.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="400">
+    
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0 120 0 0"
+            Width="400"
+            Height="300"
+            Foreground="Purple"
+            FontSize="50"
+            TextAlignment="Center"
+            FontFamily="Candara Light"
+            Name="Welcome">
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard Name="WelcomeAnimation" Completed="WelcomeAnimation_Completed">
+                            <StringAnimationUsingKeyFrames
+                                Storyboard.TargetName="Welcome"
+                                Storyboard.TargetProperty="Text"
+                                BeginTime="0:0:0"
+                                Duration="0:0:3">
+
+                                <DiscreteStringKeyFrame Value="" KeyTime="0:0:0"/>
+                                <DiscreteStringKeyFrame Value="W" KeyTime="0:0:0.375"/>
+                                <DiscreteStringKeyFrame Value="W e" KeyTime="0:0:0.5"/>
+                                <DiscreteStringKeyFrame Value="W e l" KeyTime="0:0:0.625"/>
+                                <DiscreteStringKeyFrame Value="W e l c" KeyTime="0:0:0.755"/>
+                                <DiscreteStringKeyFrame Value="W e l c o" KeyTime="0:0:0.875"/>
+                                <DiscreteStringKeyFrame Value="W e l c o m" KeyTime="0:0:1"/>
+                                <DiscreteStringKeyFrame Value="W e l c o m e" KeyTime="0:0:1.275"/>
+                                <DiscreteStringKeyFrame Value="W e l c o m e !" KeyTime="0:0:1.375"/>
+                                
+                            </StringAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Grid>
+</UserControl>
