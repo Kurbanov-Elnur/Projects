@@ -34,7 +34,7 @@ namespace Trendyol
         {
             Register();
 
-            MainWiew window = new();
+            MainView window = new();
 
             window.DataContext = Container.GetInstance<MainViewModel>();
 

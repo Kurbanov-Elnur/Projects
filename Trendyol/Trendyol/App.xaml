@@ -9,7 +9,7 @@
 
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type ViewModel:MainViewModel}">
-                <View:MainWiew/>
+                <View:MainView/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">

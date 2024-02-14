@@ -11,9 +11,9 @@ using System.Windows.Shapes;
 
 namespace Trendyol.Views;
 
-public partial class MainWiew : Window
+public partial class MainView : Window
 {
-    public MainWiew()
+    public MainView()
     {
         InitializeComponent();
     }
