@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:Trendyol"
         mc:Ignorable="d"
         WindowStyle="None"
-        Height="600"
-        Width="850"
+        Height="500"
+        Width="750"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True">
@@ -20,92 +20,24 @@
             CornerRadius="20">
         </Border>
 
-        
-        
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228"/>
-                <ColumnDefinition Width="622"/>
+                <ColumnDefinition Width="178"/>
+                <ColumnDefinition Width="572"/>
             </Grid.ColumnDefinitions>
 
-            <Grid
-                HorizontalAlignment="Left"
-                Width="228">
+            <Button
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                Click="Close"
+                Style="{DynamicResource MaterialDesignIconButton}">
 
-                <Border
-                    Background="#272B2F"
-                    CornerRadius="20 0 0 20">
-                </Border>
+                <md:PackIcon Kind="Logout"/>
+            </Button>
 
-                <StackPanel
-                    Height="400"
-                    Width="228">
-
-                    <RadioButton
-                        Style="{StaticResource MyBtn}"
-                        IsChecked="True">
-
-                        <Grid
-                            Height="40"
-                            Width="228">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="2.3*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <md:PackIcon
-                                Kind="HomeOutline"
-                                Foreground="#00ffff"
-                                Width="40"
-                                Height="40"
-                                Margin="12 0 0 0"/>
-
-                            <TextBlock
-                                Grid.Column="1"
-                                Text="Home"
-                                Foreground="White"
-                                VerticalAlignment="Center"
-                                FontSize="20"
-                                Margin="20 0 0 0">
-                                
-                            </TextBlock>
-                        </Grid>
-                    </RadioButton>
-
-                    <RadioButton
-                        Style="{StaticResource MyBtn}">
-
-                        <Grid
-                            Height="40"
-                            Width="228">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="2.3*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <md:PackIcon
-                                Kind="Person"
-                                Foreground="#00ffff"
-                                Width="40"
-                                Height="40"
-                                Margin="12 0 0 0"/>
-
-                            <TextBlock
-                                Grid.Column="1"
-                                Text="Profile"
-                                Foreground="White"
-                                VerticalAlignment="Center"
-                                FontSize="20"
-                                Margin="20 0 0 0">
-
-                            </TextBlock>
-                        </Grid>
-                    </RadioButton>
-                </StackPanel>
-            </Grid>
-
+            <ContentControl Content="{Binding CurrentMenu}"/>
             <ContentControl Grid.Column="1"  Content="{Binding CurrentView}"/>
         </Grid>
     </Grid>

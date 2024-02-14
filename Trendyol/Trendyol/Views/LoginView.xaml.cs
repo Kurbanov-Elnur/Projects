@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Trendyol.Views
 {
     /// <summary>
-    /// Interaction logic for RegistrationViewModel.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class RegistrationView : UserControl
+    public partial class LoginView : UserControl
     {
-        public RegistrationView()
+        public LoginView()
         {
             InitializeComponent();
         }

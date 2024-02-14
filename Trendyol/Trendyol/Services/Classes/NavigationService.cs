@@ -17,11 +17,20 @@ class NavigationService : Trendyol.Services.Interfaces.INavigationService
     {
         _messenger = messenger;
     }
+
     public void NavigateTo<T>() where T : BindableBase
     {
         _messenger.Send(new NavigationMessage()
         {
             ViewModelType = App.Container.GetInstance<T>()
+        });
+    }
+
+    public void NavigateToMenu<T>() where T : BindableBase
+    {
+        _messenger.Send(new NavigationMessage()
+        {
+            MenuModeltype = App.Container.GetInstance<T>()
         });
     }
 }

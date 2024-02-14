@@ -16,11 +16,10 @@ namespace Trendyol.ViewModels;
 
 class MainViewModel : BindableBase
 {
-    private readonly IMessenger? _messenger;
-    private readonly IDataService? _dataService;
-    private readonly INavigationService _navigationService;
+    private readonly IMessenger _messenger;
 
-    private BindableBase? currentView;
+    private BindableBase currentView;
+    private BindableBase currentMenu;
 
     public BindableBase CurrentView
     {
@@ -30,23 +29,30 @@ class MainViewModel : BindableBase
             SetProperty(ref currentView, value);
         }
     }
+    
+    public BindableBase CurrentMenu
+    {
+        get => currentMenu ?? throw new NullReferenceException();
+        set
+        {
+            SetProperty(ref currentMenu, value);
+        }
+    }
 
-    public MainViewModel(IMessenger messenger, IDataService dataService, INavigationService navigationService)
+    public MainViewModel(IMessenger messenger)
     {
         _messenger = messenger;
-        _dataService = dataService;
-        _navigationService = navigationService;
 
+        CurrentView = App.Container.GetInstance<LoginViewModel>();
+        CurrentMenu = App.Container.GetInstance<SignInUpMenuViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>
         {
-            CurrentView = message.ViewModelType;
-        });
+            if(message.ViewModelType != null)
+                CurrentView = message.ViewModelType;
 
-        Navigate = new(() =>
-        {
+            if (message.MenuModeltype != null)
+                CurrentMenu = message.MenuModeltype;
         });
     }
-
-    public DelegateCommand Navigate { get; private set; }
 }

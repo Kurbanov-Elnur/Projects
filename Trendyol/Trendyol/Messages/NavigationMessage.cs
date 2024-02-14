@@ -9,5 +9,6 @@ namespace Trendyol.Messages;
 
 class NavigationMessage
 {
-    public BindableBase? ViewModelType { get; set; }
+    public BindableBase ViewModelType { get; set; }
+    public BindableBase MenuModeltype { get; set; }
 }

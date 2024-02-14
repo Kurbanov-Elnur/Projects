@@ -8,5 +8,5 @@ namespace Trendyol.Messages;
 
 class DatasMessage
 {
-    public object[]? Datas { get; set; }
+    public object[] Datas { get; set; }
 }

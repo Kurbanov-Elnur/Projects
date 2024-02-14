@@ -22,6 +22,10 @@ namespace Trendyol
             Container.RegisterSingleton<IDataService, DataService>();
 
             Container.RegisterSingleton<MainViewModel>();
+            Container.RegisterSingleton<LoginViewModel>();
+            Container.RegisterSingleton<MainMenuViewModel>();
+            Container.RegisterSingleton<SignInUpMenuViewModel>();
+            Container.RegisterSingleton<RegistrationViewModel>();
 
             Container.Verify();
         }
