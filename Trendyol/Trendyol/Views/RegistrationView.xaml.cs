@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Trendyol.ViewModels;
 
 namespace Trendyol.Views
 {
-    public partial class WelcomeView : UserControl
+    /// <summary>
+    /// Interaction logic for RegistrationView.xaml
+    /// </summary>
+    public partial class RegistrationView : UserControl
     {
-        public WelcomeView()
+        public RegistrationView()
         {
             InitializeComponent();
-        }
-
-        private void WelcomeAnimation_Completed(object sender, EventArgs e)
-        {
-            WelcomeViewModel model = DataContext as WelcomeViewModel;
-
-            model.Completed();
         }
     }
 }

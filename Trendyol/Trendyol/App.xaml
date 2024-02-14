@@ -11,16 +11,9 @@
             <DataTemplate DataType="{x:Type ViewModel:MainViewModel}">
                 <View:MainWiew/>
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">
-                <View:LoginView/>
-            </DataTemplate> 
-            
-            <DataTemplate DataType="{x:Type ViewModel:WelcomeViewModel}">
-                <View:WelcomeView/>
-            </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MyBtnStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />

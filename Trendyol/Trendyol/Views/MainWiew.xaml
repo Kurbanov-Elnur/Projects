@@ -7,37 +7,106 @@
         xmlns:local="clr-namespace:Trendyol"
         mc:Ignorable="d"
         WindowStyle="None"
-        Height="800"
-        Width="500"
+        Height="600"
+        Width="850"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True">
 
-    <Border
-        Width="400"
-        Height="700"
-        CornerRadius="60"
-        Background="White"
-        MouseLeftButtonDown="DragWindow">
+    <Grid>
+        <Border 
+            Background="#212529"
+            MouseLeftButtonDown="DragWindow"
+            CornerRadius="20">
+        </Border>
 
+        
+        
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="622"/>
+            </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+            <Grid
+                HorizontalAlignment="Left"
+                Width="228">
 
-            <Button
-                HorizontalAlignment="Right"
-                Margin="0 0 20 0"
-                Foreground="Orange"
-                Click="Close"
-                Style="{DynamicResource MaterialDesignIconButton}">
+                <Border
+                    Background="#272B2F"
+                    CornerRadius="20 0 0 20">
+                </Border>
 
-                <md:PackIcon Kind="Close"/>
-            </Button>
+                <StackPanel
+                    Height="400"
+                    Width="228">
 
-            <ContentControl Grid.Row="1"  Content="{Binding CurrentView}"/>
+                    <RadioButton
+                        Style="{StaticResource MyBtn}"
+                        IsChecked="True">
+
+                        <Grid
+                            Height="40"
+                            Width="228">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2.3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <md:PackIcon
+                                Kind="HomeOutline"
+                                Foreground="#00ffff"
+                                Width="40"
+                                Height="40"
+                                Margin="12 0 0 0"/>
+
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="Home"
+                                Foreground="White"
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Margin="20 0 0 0">
+                                
+                            </TextBlock>
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton
+                        Style="{StaticResource MyBtn}">
+
+                        <Grid
+                            Height="40"
+                            Width="228">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2.3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <md:PackIcon
+                                Kind="Person"
+                                Foreground="#00ffff"
+                                Width="40"
+                                Height="40"
+                                Margin="12 0 0 0"/>
+
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="Profile"
+                                Foreground="White"
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Margin="20 0 0 0">
+
+                            </TextBlock>
+                        </Grid>
+                    </RadioButton>
+                </StackPanel>
+            </Grid>
+
+            <ContentControl Grid.Column="1"  Content="{Binding CurrentView}"/>
         </Grid>
-
-    </Border>
+    </Grid>
 </Window>

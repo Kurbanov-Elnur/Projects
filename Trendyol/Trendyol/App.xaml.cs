@@ -22,8 +22,6 @@ namespace Trendyol
             Container.RegisterSingleton<IDataService, DataService>();
 
             Container.RegisterSingleton<MainViewModel>();
-            Container.RegisterSingleton<LoginViewModel>();
-            Container.RegisterSingleton<WelcomeViewModel>();
 
             Container.Verify();
         }
@@ -37,7 +35,6 @@ namespace Trendyol
             window.DataContext = Container.GetInstance<MainViewModel>();
 
             window.ShowDialog();
-
         }
     }
 }
