@@ -17,15 +17,21 @@ namespace Trendyol
 
         public void Register()
         {
+            Container.RegisterSingleton<AppContext>();
+
             Container.RegisterSingleton<IMessenger, Messenger>();
             Container.RegisterSingleton<INavigationService, NavigationService>();
             Container.RegisterSingleton<IDataService, DataService>();
+            Container.RegisterSingleton<IUserService, UserService>();
+            Container.RegisterSingleton<IEmailVerificationService, EmailVerificationService>();
 
             Container.RegisterSingleton<MainViewModel>();
             Container.RegisterSingleton<LoginViewModel>();
             Container.RegisterSingleton<MainMenuViewModel>();
             Container.RegisterSingleton<SignInUpMenuViewModel>();
             Container.RegisterSingleton<RegistrationViewModel>();
+            Container.RegisterSingleton<VerificateViewModel>();
+            Container.RegisterSingleton<ForgotPasswordViewModel>();
 
             Container.Verify();
         }

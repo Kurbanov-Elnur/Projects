@@ -9,4 +9,12 @@ namespace Trendyol.ViewModels;
 
 class MainMenuViewModel : BindableBase
 {
+
+
+
+
+
+
+
+
 }

@@ -10,8 +10,8 @@ namespace Trendyol.Models;
 class User
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public string email { get; set; }
-    public string password { get; set; }
-    public string OrderId { get; set; }
-    public Order Order { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
 }

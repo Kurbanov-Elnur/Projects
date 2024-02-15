@@ -8,5 +8,5 @@ namespace Trendyol.Services.Interfaces;
 
 interface IEmailVerificationService
 {
-
+    public string EmailVerification(string email);
 }

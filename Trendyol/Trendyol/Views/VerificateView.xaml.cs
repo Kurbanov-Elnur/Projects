@@ -12,21 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Trendyol.Services.Interfaces;
 
 namespace Trendyol.Views
 {
-    public partial class LoginView : UserControl
+    public partial class VerificateView : UserControl
     {
-        public LoginView()
+        public VerificateView()
         {
             InitializeComponent();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        private void NumberCheck(object sender, TextCompositionEventArgs e)
         {
-            if (DataContext != null)
-            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+            TextBox textBox = (TextBox)sender;
+
+            if (!char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (textBox.Text.Length >= 4)
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

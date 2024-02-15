@@ -23,7 +23,7 @@ class MainViewModel : BindableBase
 
     public BindableBase CurrentView
     {
-        get => currentView ?? throw new NullReferenceException();
+        get => currentView;
         set
         {
             SetProperty(ref currentView, value);
@@ -32,7 +32,7 @@ class MainViewModel : BindableBase
     
     public BindableBase CurrentMenu
     {
-        get => currentMenu ?? throw new NullReferenceException();
+        get => currentMenu;
         set
         {
             SetProperty(ref currentMenu, value);
@@ -43,7 +43,7 @@ class MainViewModel : BindableBase
     {
         _messenger = messenger;
 
-        CurrentView = App.Container.GetInstance<LoginViewModel>();
+        CurrentView = App.Container.GetInstance<ForgotPasswordViewModel>();
         CurrentMenu = App.Container.GetInstance<SignInUpMenuViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Trendyol.Views
 {
-    /// <summary>
-    /// Interaction logic for SignInUpMenuView.xaml
-    /// </summary>
     public partial class SignInUpMenuView : UserControl
     {
         public SignInUpMenuView()

@@ -12,13 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Trendyol.Services.Interfaces;
 
 namespace Trendyol.Views
 {
-    public partial class LoginView : UserControl
+    public partial class ForgotPasswordView : UserControl
     {
-        public LoginView()
+        public ForgotPasswordView()
         {
             InitializeComponent();
         }
@@ -27,6 +26,12 @@ namespace Trendyol.Views
         {
             if (DataContext != null)
             { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+        }
+
+        private void PasswordBox_ConfirmPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            { ((dynamic)this.DataContext).ConfirmPassword = ((PasswordBox)sender).Password; }
         }
     }
 }

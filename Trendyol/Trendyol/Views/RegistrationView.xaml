@@ -40,6 +40,7 @@
             CornerRadius="15">
 
             <TextBox
+                Text="{Binding Name}"
                 CaretBrush="White"
                 Width="230"
                 FontSize="18"
@@ -56,19 +57,21 @@
             Foreground="White"
             Grid.Row="2"
             HorizontalAlignment="Center"
-            Margin="0 10 0 0">
+            Margin="0 50 0 0">
 
         </TextBlock>
 
         <Border
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             Background="#272B2F"
-            Grid.Row="2"
+            Grid.Row="3"
             Width="250"
             Height="50"
             CornerRadius="15">
 
             <PasswordBox
+                VerticalContentAlignment="Center"
+                PasswordChanged="PasswordBox_PasswordChanged"
                 CaretBrush="White"
                 Width="230"
                 FontSize="18"
@@ -100,6 +103,7 @@
             CornerRadius="15">
 
             <TextBox
+                Text="{Binding Surname}"
                 CaretBrush="White"
                 Width="230"
                 FontSize="18"
@@ -117,20 +121,22 @@
             Grid.Row="2"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            Margin="0 10 0 0">
+            Margin="0 50 0 0">
 
         </TextBlock>
 
         <Border
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             Background="#272B2F"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             Width="250"
             Height="50"
             CornerRadius="15">
 
             <PasswordBox
+                VerticalContentAlignment="Center"
+                PasswordChanged="PasswordBox_ConfirmPasswordChanged"
                 CaretBrush="White"
                 Width="230"
                 FontSize="18"
@@ -139,37 +145,6 @@
                 Style="{DynamicResource MaterialDesignOutlinedRevealPasswordBox}">
 
             </PasswordBox>
-        </Border>
-
-        <TextBlock
-            Text="Email"
-            FontSize="25"
-            Foreground="White"
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            Margin="0 10 0 0">
-
-        </TextBlock>
-
-        <Border
-            VerticalAlignment="Bottom"
-            Background="#272B2F"
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
-            Width="400"
-            Height="50"
-            CornerRadius="15">
-
-            <TextBox
-                CaretBrush="White"
-                Width="370"
-                FontSize="18"
-                VerticalAlignment="Center"
-                Foreground="White"
-                BorderThickness="0"
-                Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
-            </TextBox>
         </Border>
 
         <Border
@@ -181,6 +156,7 @@
             CornerRadius="10">
 
             <Button
+                Command="{Binding SignUp}"
                 Content="Sign Up"
                 Foreground="White"
                 FontSize="15"

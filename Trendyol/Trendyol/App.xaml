@@ -28,6 +28,14 @@
                 <View:RegistrationView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModel:VerificateViewModel}">
+                <View:VerificateView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:ForgotPasswordViewModel}">
+                <View:ForgotPasswordView/>
+            </DataTemplate>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MyBtnStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
