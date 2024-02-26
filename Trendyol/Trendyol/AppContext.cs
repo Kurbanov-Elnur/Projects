@@ -11,6 +11,8 @@ namespace Trendyol;
 class AppContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Warehouse> Warehouse { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,25 +21,85 @@ class AppContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var userEntity = modelBuilder.Entity<User>();
+        var order = modelBuilder.Entity<Order>();
+        var product = modelBuilder.Entity<Product>();
+        var user = modelBuilder.Entity<User>();
+        var warehouse = modelBuilder.Entity<Warehouse>();
 
-        userEntity
-            .HasKey(x => x.Id);
 
-        userEntity
-            .Property(x => x.Name)
+        order
+            .HasKey(o => o.Id);
+
+        order
+            .Property(o => o.PurchaseDate)
+            .IsRequired();
+
+        product
+            .HasKey(p => p.Id);
+
+        product
+            .Property(o => o.Name)
             .IsRequired();
         
-        userEntity
-            .Property(x => x.Surname)
+        product
+            .Property(o => o.Description)
+            .IsRequired();
+        
+        product
+            .Property(o => o.Brand)
+            .IsRequired();
+        
+        product
+            .Property(o => o.Price)
+            .IsRequired();
+        
+        product
+            .Property(o => o.Image)
             .IsRequired();
 
-        userEntity
-            .Property(x => x.Email)
+        product
+            .HasMany(o => o.Orders)
+            .WithOne(o => o.Product)
+            .HasForeignKey(o => o.ProductID);
+        
+        product
+            .HasMany(w => w.Warehouse)
+            .WithOne(w => w.Product)
+            .HasForeignKey(w => w.ProductID);
+
+        user
+            .HasKey(u => u.Id);
+
+        user
+            .Property(u => u.Name)
+            .IsRequired();
+        
+        user
+            .Property(u => u.Surname)
             .IsRequired();
 
-        userEntity
-            .Property(x => x.Password)
+        user
+            .Property(u => u.Email)
+            .IsRequired();
+
+        user
+            .Property(u => u.Password)
+            .IsRequired();
+
+        user
+            .Property(u => u.Role)
+            .IsRequired();
+
+        user
+            .HasMany(u => u.Orders)
+            .WithOne(u => u.User)
+            .HasForeignKey(u => u.UserID);
+
+        warehouse
+            .HasKey(w => w.Id);
+
+        warehouse
+            .Property(w => w.Count)
             .IsRequired();
     }
 }

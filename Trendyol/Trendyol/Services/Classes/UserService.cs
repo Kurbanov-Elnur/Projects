@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Trendyol.Models;
 using Trendyol.Services.Interfaces;
 
+using static BCrypt.Net.BCrypt;
+
 namespace Trendyol.Services.Classes;
 
 class UserService : IUserService
@@ -21,16 +23,16 @@ class UserService : IUserService
 
     public void AddUser(User newUser)
     {
+        newUser.Password = HashPassword(newUser.Password);
+
         _context.Users.Add(newUser);
 
         _context.SaveChanges();
     }
 
-    public void RestorePassword(string email, string password)
+    public void RestorePassword(User user, string password)
     {
-        User user = _context.Users.FirstOrDefault(x => x.Email == email);
-
-        user.Password = password;
+        user.Password = HashPassword(password);
 
         _context.SaveChanges();
     }

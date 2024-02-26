@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Trendyol.Messages;
+using Trendyol.Models;
 using Trendyol.Services.Interfaces;
 using Trendyol.Views;
 
@@ -18,21 +19,23 @@ class ForgotPasswordViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
+    private readonly IDataService _dataService;
     private readonly IUserService _userService;
 
-    private string Email;
+    private User User;
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
 
-    public ForgotPasswordViewModel(IMessenger messenger, INavigationService navigationService, IUserService userService)
+    public ForgotPasswordViewModel(IMessenger messenger, INavigationService navigationService, IDataService dataService, IUserService userService)
     {
         _messenger = messenger;
         _navigationService = navigationService;
+        _dataService = dataService;
         _userService = userService;
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            Email = message.Data.ToString();
+            User = message.Data as User;
         });
 
         Confirm = new(() =>
@@ -41,11 +44,21 @@ class ForgotPasswordViewModel : BindableBase
                 MessageBox.Show("Password mismatch!");
             else
             {
-                _userService.RestorePassword(Email, Password);
+                _userService.RestorePassword(User, Password);
                 _navigationService.NavigateTo<LoginViewModel>();
+
+                _dataService.SendData("Visible");
             }
+        });
+
+        Back = new(() =>
+        {
+            _navigationService.NavigateTo<LoginViewModel>();
+
+            _dataService.SendData("Visible");
         });
     }
 
     public DelegateCommand Confirm { get; set; }
+    public DelegateCommand Back { get; set; }
 }

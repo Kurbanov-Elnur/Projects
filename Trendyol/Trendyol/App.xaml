@@ -35,6 +35,10 @@
             <DataTemplate DataType="{x:Type ViewModel:ForgotPasswordViewModel}">
                 <View:ForgotPasswordView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ViewModel:GoodsViewModel}">
+                <View:GoodsView/>
+            </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MyBtnStyle.xaml"/>

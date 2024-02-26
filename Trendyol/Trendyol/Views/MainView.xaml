@@ -37,7 +37,7 @@
                 <md:PackIcon Kind="Logout"/>
             </Button>
 
-            <ContentControl Content="{Binding CurrentMenu}"/>
+            <ContentControl Visibility="{Binding MenuVisibility}" Content="{Binding CurrentMenu}"/>
             <ContentControl Grid.Column="1"  Content="{Binding CurrentView}"/>
         </Grid>
     </Grid>

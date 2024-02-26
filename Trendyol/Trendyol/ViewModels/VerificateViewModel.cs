@@ -23,10 +23,11 @@ class VerificateViewModel : BindableBase
     private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
     private readonly IUserService _userService;
-
+    
+    private AppContext _appContext;
     private string btnContent;
     private string sendCode;
-    private User User;
+    private User? User;
 
     public string BtnContent
     {
@@ -40,61 +41,102 @@ class VerificateViewModel : BindableBase
     public string Email { get; set; }
     public string EnterredCode { get; set; }
 
-    public VerificateViewModel(IMessenger messenger, INavigationService navigationService, IEmailVerificationService emailVerificationService, IDataService dataService, IUserService userService)
+    public VerificateViewModel(IMessenger messenger, INavigationService navigationService, IEmailVerificationService emailVerificationService, IDataService dataService, IUserService userService, AppContext appContext)
     {
         _messenger = messenger;
         _navigationService = navigationService;
         _emailVerificationService = emailVerificationService;
         _dataService = dataService;
         _userService = userService;
+        _appContext = appContext;
 
         BtnContent = "Send code";
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            if (message.Data as User != null)
-                User = message.Data as User;
+            User = message.Data as User;
         });
-
 
         Verificate = new(() =>
         {
-
             if (_userService.CheckEmail(Email))
             {
-                if (User != null)
-                {
-                    if (BtnContent == "Send code")
-                    {
-                        sendCode = _emailVerificationService.EmailVerification(Email);
-                        BtnContent = "Verify";
-                    }
+                bool registeredEmail = _appContext.Users.Any(u => u.Email == Email);
 
-                    else if (EnterredCode == sendCode)
+                if (User != null && !registeredEmail)
+                {
+                    SwitchBtn();
+
+                    if (EnterredCode == sendCode)
                     {
                         User.Email = Email;
                         userService.AddUser(User);
+
+                        _navigationService.NavigateTo<LoginViewModel>();
+                        Cleaning();
+                    }
+                }
+                else if (User != null && registeredEmail)
+                {
+                    MessageBox.Show("Email is registered");
+                    return;
+                }
+                else if(User == null && registeredEmail)
+                {
+                    SwitchBtn();
+
+                    if (EnterredCode == sendCode)
+                    {
+                        User = _appContext.Users.Single(u => u.Email == Email);
+
+                        _dataService.SendData(User);
+
+                        _navigationService.NavigateTo<ForgotPasswordViewModel>();
+                        Cleaning();
                     }
                 }
                 else
                 {
-                    if (BtnContent == "Send code")
-                    {
-                        sendCode = _emailVerificationService.EmailVerification(Email);
-                        BtnContent = "Verify";
-                    }
-                    else if (EnterredCode == sendCode)
-                    {
-                        _dataService.SendData(Email);
-
-                        _navigationService.NavigateTo<ForgotPasswordViewModel>();
-                    }
+                    MessageBox.Show("This email is not registered!");
+                    _navigationService.NavigateTo<RegistrationViewModel>();
+                    Cleaning();
+                    return;
                 }
             }
             else
                 MessageBox.Show("Wrong email!");
         });
+
+        Back = new(() =>
+        {
+            if(User != null)
+                _navigationService.NavigateTo<RegistrationViewModel>();
+            else
+                _navigationService.NavigateTo<LoginViewModel>();
+
+            _dataService.SendData("Visible");
+            BtnContent = "Send code";
+            Cleaning();
+        });
     }
 
     public DelegateCommand Verificate { get; private set; }
+    public DelegateCommand Back { get; private set; }
+
+    private void SwitchBtn()
+    {
+        if (BtnContent == "Send code")
+        {
+            sendCode = _emailVerificationService.EmailVerification(Email);
+            BtnContent = "Verify";
+        }
+        else
+            BtnContent = "Send code";
+    }
+
+    private void Cleaning()
+    {
+        Email = "";
+        EnterredCode = "";
+    }
 }

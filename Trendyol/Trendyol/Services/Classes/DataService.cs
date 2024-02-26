@@ -6,6 +6,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Trendyol.Messages;
+using Trendyol.Models;
 using Trendyol.Services.Interfaces;
 using static Trendyol.Services.Classes.DataService;
 

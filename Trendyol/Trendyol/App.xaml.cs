@@ -30,6 +30,7 @@ namespace Trendyol
             Container.RegisterSingleton<MainMenuViewModel>();
             Container.RegisterSingleton<SignInUpMenuViewModel>();
             Container.RegisterSingleton<RegistrationViewModel>();
+            Container.RegisterSingleton<GoodsViewModel>();
             Container.RegisterSingleton<VerificateViewModel>();
             Container.RegisterSingleton<ForgotPasswordViewModel>();
 
