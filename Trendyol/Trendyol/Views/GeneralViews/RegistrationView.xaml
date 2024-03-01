@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="Trendyol.Views.GeneralViews.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Trendyol.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="572">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Background="#272B2F"
+            Margin="30 0 0 0"
+            Width="300"
+            Height="50"
+            CornerRadius="15">
+
+            <TextBox
+                md:HintAssist.Hint="Name"
+                CaretBrush="White"
+                Width="270"
+                FontSize="20"
+                Foreground="White"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                Text="{Binding NewUser.Name}"
+                Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+            </TextBox>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Background="#272B2F"
+            Margin="30 0 0 0"
+            Width="300"
+            Height="50"
+            CornerRadius="15">
+
+            <TextBox
+                md:HintAssist.Hint="Surname"
+                CaretBrush="White"
+                Width="270"
+                FontSize="20"
+                Foreground="White"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                Text="{Binding NewUser.Surname}"
+                Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+            </TextBox>
+        </Border>
+
+        <Border
+            Grid.Row="2"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Background="#272B2F"
+            Margin="30 0 0 0"
+            Width="300"
+            Height="50"
+            CornerRadius="15">
+
+            <PasswordBox
+                md:HintAssist.Hint="Password"
+                CaretBrush="White"
+                Width="270"
+                FontSize="16"
+                Foreground="White"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                PasswordChanged="PasswordBox_PasswordChanged"
+                Style="{DynamicResource MaterialDesignOutlinedRevealPasswordBox}">
+            </PasswordBox>
+        </Border>
+
+        <Border
+            Grid.Row="3"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Background="#272B2F"
+            Margin="30 0 0 0"
+            Width="300"
+            Height="50"
+            CornerRadius="15">
+
+            <PasswordBox
+                md:HintAssist.Hint="Confirm password"
+                CaretBrush="White"
+                Width="270"
+                FontSize="16"
+                Foreground="White"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                PasswordChanged="PasswordBox_ConfirmPasswordChanged"
+                Style="{DynamicResource MaterialDesignOutlinedRevealPasswordBox}">
+            </PasswordBox>
+        </Border>
+
+        <Border
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Background="#272B2F"
+            Margin="0 0 30 0"
+            Width="150"
+            Height="150"
+            Grid.RowSpan="2"
+            CornerRadius="15">
+
+            <Image
+                Source="{Binding Image}"
+                Width="140"
+                Height="140">
+
+            </Image>
+        </Border>
+
+        <Border
+            HorizontalAlignment="Right"
+            Background="#272B2F"
+            Grid.Row="2"
+            Width="150"
+            Height="40"
+            Margin="0 0 30 0"
+            CornerRadius="10">
+
+            <Button
+                Command="{Binding AddImage}"
+                Content="Select  image"
+                Foreground="White"
+                FontSize="15"
+                BorderThickness="0"
+                Style="{DynamicResource MaterialDesignToolForegroundButton}">
+            </Button>
+        </Border>
+
+        <Border
+            HorizontalAlignment="Center"
+            Background="#272B2F"
+            Grid.Row="4"
+            Width="70"
+            Height="50"
+            Margin="0 0 30 0"
+            CornerRadius="10">
+
+            <Button
+                Command="{Binding Forward}"
+                Foreground="White"
+                FontSize="15"
+                BorderThickness="0"
+                Style="{DynamicResource MaterialDesignToolForegroundButton}">
+
+                <md:PackIcon Kind="Forward" Width="40" Height="30"/>
+            </Button>
+        </Border>
+    </Grid>
+</UserControl>

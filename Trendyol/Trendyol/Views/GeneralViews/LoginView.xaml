@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Trendyol.Views.GeneralViews.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trendyol.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="572">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Text="Email"
+            FontSize="25"
+            Foreground="White"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Margin="0 10 0 0">
+
+        </TextBlock>
+
+        <Border
+            VerticalAlignment="Bottom"
+            Background="#272B2F"
+            Grid.Row="1"
+            Width="350"
+            Height="50"
+            CornerRadius="15">
+
+            <TextBox
+                Text="{Binding Email}"
+                CaretBrush="White"
+                Width="330"
+                FontSize="18"
+                VerticalAlignment="Center"
+                Foreground="White"
+                BorderThickness="0"
+                Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
+            </TextBox>
+        </Border>
+
+        <TextBlock
+            Text="Password"
+            FontSize="25"
+            Foreground="White"
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            Margin="0 10 0 0">
+
+        </TextBlock>
+
+        <Border
+            VerticalAlignment="Bottom"
+            Background="#272B2F"
+            Grid.Row="2"
+            Width="350"
+            Height="50"
+            CornerRadius="15">
+
+            <PasswordBox
+                VerticalContentAlignment="Center"
+                PasswordChanged="PasswordBox_PasswordChanged"
+                CaretBrush="White"
+                Width="330"
+                FontSize="16"
+                Foreground="White"
+                BorderThickness="0"
+                Style="{DynamicResource MaterialDesignOutlinedRevealPasswordBox}">
+
+            </PasswordBox>
+        </Border>
+
+        <Border
+            Background="#272B2F"
+            Grid.Row="3"
+            Width="150"
+            Height="40"
+            CornerRadius="10">
+
+            <Button
+                Content="Sign In"
+                Command="{Binding SignIn}"
+                Foreground="White"
+                FontSize="15"
+                BorderThickness="0"
+                Style="{DynamicResource MaterialDesignToolForegroundButton}">
+            </Button>
+        </Border>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="150"
+            Height="30"
+            Content="Forgot password?"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Command="{Binding ForgotPassword}"
+            Style="{DynamicResource MaterialDesignToolForegroundButton}">
+
+        </Button>
+    </Grid>
+</UserControl>

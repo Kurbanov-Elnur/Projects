@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Trendyol.Models;
+using Trendyol.Data.Contexts;
+using Trendyol.Data.Models;
 using Trendyol.Services.Interfaces;
 
 using static BCrypt.Net.BCrypt;
@@ -14,9 +15,9 @@ namespace Trendyol.Services.Classes;
 
 class UserService : IUserService
 {
-    private readonly AppContext _context;
+    private readonly MyAppContext _context;
 
-    public UserService(AppContext context)
+    public UserService(MyAppContext context)
     {
         _context = context;
     }

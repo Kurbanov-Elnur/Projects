@@ -4,10 +4,13 @@ using System.Configuration;
 using System.Data;
 using System.Transactions;
 using System.Windows;
+using Trendyol.Data.Contexts;
 using Trendyol.Services.Classes;
 using Trendyol.Services.Interfaces;
-using Trendyol.ViewModels;
-using Trendyol.Views;
+using Trendyol.ViewModels.AdminViewModels;
+using Trendyol.ViewModels.GeneralViewModels;
+using Trendyol.ViewModels.MenuViewModels;
+using Trendyol.Views.GeneralViews;
 
 namespace Trendyol
 {
@@ -17,7 +20,7 @@ namespace Trendyol
 
         public void Register()
         {
-            Container.RegisterSingleton<AppContext>();
+            Container.RegisterSingleton<MyAppContext>();
 
             Container.RegisterSingleton<IMessenger, Messenger>();
             Container.RegisterSingleton<INavigationService, NavigationService>();
@@ -33,6 +36,9 @@ namespace Trendyol
             Container.RegisterSingleton<GoodsViewModel>();
             Container.RegisterSingleton<VerificateViewModel>();
             Container.RegisterSingleton<ForgotPasswordViewModel>();
+            Container.RegisterSingleton<ProductViewModel>();
+
+            Container.Register<AddProductViewModel>();
 
             Container.Verify();
         }
