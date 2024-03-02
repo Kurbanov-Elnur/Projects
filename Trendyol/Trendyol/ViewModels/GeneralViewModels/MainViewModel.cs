@@ -47,7 +47,7 @@ class MainViewModel : BindableBase
 
         App.Container.GetInstance<OrdersViewModel>();
 
-        CurrentView = App.Container.GetInstance<AddProductViewModel>();
+        CurrentView = App.Container.GetInstance<LoginViewModel>();
         CurrentMenu = App.Container.GetInstance<SignInUpMenuViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>

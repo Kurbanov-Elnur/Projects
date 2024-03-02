@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trendyol.Services.Interfaces;
 
-public interface INavigationService
+interface INavigationService
 {
     public void NavigateTo<T>() where T : BindableBase;
     public void NavigateToMenu<T>() where T : BindableBase;

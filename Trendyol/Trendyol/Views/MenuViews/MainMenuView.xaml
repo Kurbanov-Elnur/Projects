@@ -22,7 +22,8 @@
 
             <RadioButton
                 Style="{StaticResource MyBtn}"
-                IsChecked="True">
+                IsChecked="True"
+                Command="{Binding GoToGoods}">
 
                 <Grid
                     Height="40"
@@ -54,7 +55,75 @@
             </RadioButton>
 
             <RadioButton
-                Style="{StaticResource MyBtn}">
+                Style="{StaticResource MyBtn}"
+                Command="{Binding GoToOrders}">
+
+                <Grid
+                    Height="40"
+                    Width="228">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <md:PackIcon
+                        VerticalAlignment="Center"
+                        Kind="ListBoxOutline"
+                        Foreground="#00ffff"
+                        Width="30"
+                        Height="30"
+                        Margin="12 0 0 0"/>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="Orders"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Margin="5 0 0 0">
+
+                    </TextBlock>
+                </Grid>
+            </RadioButton>
+
+            <RadioButton
+                Style="{StaticResource MyBtn}"
+                Visibility="{Binding AdminMenuVisibility}"
+                Command="{Binding GoToAddProduct}">
+
+                <Grid
+                    Height="40"
+                    Width="228">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <md:PackIcon
+                        VerticalAlignment="Center"
+                        Kind="AddShoppingCart"
+                        Foreground="#00ffff"
+                        Width="30"
+                        Height="30"
+                        Margin="12 0 0 0"/>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="Add Product"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Margin="0 0 0 0">
+
+                    </TextBlock>
+                </Grid>
+            </RadioButton>
+
+            <RadioButton
+                Style="{StaticResource MyBtn}"
+                Command="{Binding GoToProfile}">
 
                 <Grid
                     Height="40"

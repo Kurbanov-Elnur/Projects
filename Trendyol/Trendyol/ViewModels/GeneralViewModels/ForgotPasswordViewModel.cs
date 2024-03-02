@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Interfaces;
@@ -45,20 +46,20 @@ class ForgotPasswordViewModel : BindableBase
             else
             {
                 _userService.RestorePassword(User, Password);
-                _navigationService.NavigateTo<LoginViewModel>();
 
-                _dataService.SendData("Visible");
+                Back();
             }
-        });
-
-        Back = new(() =>
-        {
-            _navigationService.NavigateTo<LoginViewModel>();
-
-            _dataService.SendData("Visible");
         });
     }
 
     public DelegateCommand Confirm { get; set; }
-    public DelegateCommand Back { get; set; }
+
+    public void Back()
+    {
+        _navigationService.NavigateTo<LoginViewModel>();
+
+        Password = "";
+        ConfirmPassword = "";
+        User = null;
+    }
 }

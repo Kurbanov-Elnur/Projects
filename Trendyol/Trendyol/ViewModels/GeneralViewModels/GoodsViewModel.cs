@@ -11,6 +11,8 @@ using System.Windows;
 using Trendyol.Data.Contexts;
 using Trendyol.Data.Models;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.MenuViewModels;
+using Trendyol.Views.MenuViews;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
 
@@ -28,15 +30,22 @@ class GoodsViewModel : BindableBase
         _dataService = dataService;
         _navigationService = navigationService;
 
-        Products = new ObservableCollection<Product>(_appContext.Products);
+        Products = new ObservableCollection<Product>(_appContext.Products.Where(p => p.Warehouse.Any(w => w.Count > 0)));
         _dataService.SendData(Products);
 
         MoreInfo = new((product) =>
         {
             _dataService.SendData(product);
             _navigationService.NavigateTo<ProductViewModel>();
+            _navigationService.NavigateToMenu<BackMenuViewModel>();
+
+            _dataService.SendData(new DelegateCommand(() =>
+            {
+                _navigationService.NavigateTo<GoodsViewModel>();
+                _navigationService.NavigateToMenu<MainMenuViewModel>();
+            }));
         });
     }
 
-    public DelegateCommand<Product> MoreInfo { get; set; } 
+    public DelegateCommand<Product> MoreInfo { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,14 +15,24 @@ namespace Trendyol.Services.Classes;
 
 class OrderService : IOrderService
 {
+    private readonly string[] _statuses = new string[4]
+    {
+        "The order is being processed",
+        "Accepted",
+        "Sent",
+        "At the post office"
+    };
+
     private readonly IMessenger _messenger;
+    private readonly IDataService _dataService;
     private readonly MyAppContext _appContext;
 
     private ObservableCollection<Order> _orders;
 
-    public OrderService(IMessenger messenger, MyAppContext appContext)
+    public OrderService(IMessenger messenger, IDataService dataService, MyAppContext appContext)
     {
         _messenger = messenger;
+        _dataService = dataService;
         _appContext = appContext;
 
         _messenger.Register<DataMessage>(this, message =>
@@ -56,6 +67,36 @@ class OrderService : IOrderService
         _orders.Remove(order);
 
         _appContext.Remove(order);
+        _appContext.SaveChanges();
+    }
+    
+    public void ChangeBackTheStatus(Order order)
+    {
+        for (int i = 0; i < _statuses.Length; i++)
+        {
+            if (order.Status == _statuses[i] && i > 0)
+            {
+                order.Status = _statuses[i - 1];
+                _dataService.SendData(order);
+                break;
+            }
+        }
+
+        _appContext.SaveChanges();
+    }
+
+    public void ChangeTheStatusForward(Order order)
+    {
+        for (int i = 0; i < _statuses.Length; i++)
+        {
+            if (order.Status == _statuses[i] && i < 3)
+            {
+                order.Status = _statuses[i + 1];
+                _dataService.SendData(order);
+                break;
+            }
+        }
+
         _appContext.SaveChanges();
     }
 }

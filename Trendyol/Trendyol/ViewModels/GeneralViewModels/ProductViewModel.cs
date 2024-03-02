@@ -11,6 +11,7 @@ using Trendyol.Data.Contexts;
 using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.MenuViewModels;
 using Trendyol.Views;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
@@ -80,10 +81,15 @@ class ProductViewModel : BindableBase
                 _goodsService.RemoveProduct(Product);
 
             ProductCount = 0;
+
             _navigationService.NavigateTo<GoodsViewModel>();
+
+            if(_currentUser.Role == "User")
+                _navigationService.NavigateToMenu<MainMenuViewModel>();
+            else
+                _navigationService.NavigateToMenu<MainMenuViewModel>();
         });
     }
 
     public DelegateCommand BtnCommand { get; set; }
-
 }

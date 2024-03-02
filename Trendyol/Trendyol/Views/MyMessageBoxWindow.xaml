@@ -13,7 +13,6 @@
         Background="Transparent"
         AllowsTransparency="True">
 
-
     <Border
         Background="#272B2F"
         CornerRadius="20">
@@ -36,6 +35,7 @@
             </md:PackIcon>
 
             <TextBlock
+                TextWrapping="Wrap"
                 Height="60"
                 Grid.Row="1"
                 Width="160"

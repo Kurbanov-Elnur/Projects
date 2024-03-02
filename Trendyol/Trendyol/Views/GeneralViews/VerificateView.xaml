@@ -21,18 +21,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button
-            Style="{DynamicResource MaterialDesignToolForegroundButton}"
-            VerticalAlignment="Top"
-            Foreground="White"
-            HorizontalAlignment="Left"
-            Width="50"
-            Height="30"
-            Command="{Binding Back}">
-
-            <md:PackIcon Width="40" Height="20"  Kind="ArrowBack"/>
-        </Button>
-        
         <TextBlock
             Text="Email"
             FontSize="25"

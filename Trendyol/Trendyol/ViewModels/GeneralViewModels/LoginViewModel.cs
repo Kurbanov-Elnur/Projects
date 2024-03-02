@@ -17,7 +17,7 @@ namespace Trendyol.ViewModels.GeneralViewModels;
 
 class LoginViewModel : BindableBase
 {
-    private readonly INavigationService _navigationServie;
+    private readonly INavigationService _navigationService;
     private readonly IDataService _dataService;
     private readonly MyAppContext _appContext;
 
@@ -26,7 +26,7 @@ class LoginViewModel : BindableBase
 
     public LoginViewModel(INavigationService navigationService, IDataService dataService, MyAppContext appContext)
     {
-        _navigationServie = navigationService;
+        _navigationService = navigationService;
         _dataService = dataService;
         _appContext = appContext;
 
@@ -38,8 +38,8 @@ class LoginViewModel : BindableBase
 
                 if (Verify(Password, currentUser.Password))
                 {
-                    _navigationServie.NavigateToMenu<MainMenuViewModel>();
-                    _navigationServie.NavigateTo<GoodsViewModel>();
+                    _navigationService.NavigateToMenu<MainMenuViewModel>();
+                    _navigationService.NavigateTo<GoodsViewModel>();
                     _dataService.SendData(currentUser);
                 }
                 else
@@ -51,8 +51,13 @@ class LoginViewModel : BindableBase
 
         ForgotPassword = new(() =>
         {
-            _navigationServie.NavigateTo<VerificateViewModel>();
-            _dataService.SendData("Hidden");
+            _navigationService.NavigateTo<VerificateViewModel>();
+            _navigationService.NavigateToMenu<BackMenuViewModel>();
+
+            _dataService.SendData(new DelegateCommand(() =>
+            {
+                App.Container.GetInstance<VerificateViewModel>().Back();
+            }));
         });
     }
 

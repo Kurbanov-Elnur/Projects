@@ -14,6 +14,7 @@ using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Classes;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.MenuViewModels;
 using Trendyol.Views;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
@@ -40,8 +41,8 @@ class VerificateViewModel : BindableBase
         }
     }
 
-    public string Email { get; set; }
-    public string EnterredCode { get; set; }
+    public string Email { get; set; } = "";
+    public string EnterredCode { get; set; } = "";
 
     public VerificateViewModel(IMessenger messenger, INavigationService navigationService, IEmailVerificationService emailVerificationService, IDataService dataService, IUserService userService, MyAppContext appContext)
     {
@@ -74,8 +75,7 @@ class VerificateViewModel : BindableBase
                         User.Email = Email;
                         userService.AddUser(User);
 
-                        _navigationService.NavigateTo<LoginViewModel>();
-                        Cleaning();
+                        Back();
                     }
                 }
                 else if (User != null && registeredEmail)
@@ -94,36 +94,26 @@ class VerificateViewModel : BindableBase
                         _dataService.SendData(User);
 
                         _navigationService.NavigateTo<ForgotPasswordViewModel>();
-                        Cleaning();
+
+                        _dataService.SendData(new DelegateCommand(() =>
+                        {
+                            App.Container.GetInstance<ForgotPasswordViewModel>().Back();
+                        }));
                     }
                 }
                 else
                 {
                     MyMessageBoxWindow.Show("This email is not registered!", "Error", "Red");
-                    _navigationService.NavigateTo<RegistrationViewModel>();
-                    Cleaning();
+                    Back();
                     return;
                 }
             }
             else
                 MyMessageBoxWindow.Show("Wrong email!", "Error", "Red");
         });
-
-        Back = new(() =>
-        {
-            if (User != null)
-                _navigationService.NavigateTo<RegistrationViewModel>();
-            else
-                _navigationService.NavigateTo<LoginViewModel>();
-
-            _dataService.SendData("Visible");
-            BtnContent = "Send code";
-            Cleaning();
-        });
     }
 
     public DelegateCommand Verificate { get; private set; }
-    public DelegateCommand Back { get; private set; }
 
     private void SwitchBtn()
     {
@@ -136,8 +126,16 @@ class VerificateViewModel : BindableBase
             BtnContent = "Send code";
     }
 
-    private void Cleaning()
+    public void Back()
     {
+        if (User != null)
+            _navigationService.NavigateTo<RegistrationViewModel>();
+        else
+            _navigationService.NavigateTo<LoginViewModel>();
+
+        _navigationService.NavigateToMenu<SignInUpMenuViewModel>();
+
+        BtnContent = "Send code";
         Email = "";
         EnterredCode = "";
     }

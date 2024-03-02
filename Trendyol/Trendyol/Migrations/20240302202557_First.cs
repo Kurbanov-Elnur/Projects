@@ -64,25 +64,27 @@ namespace Trendyol.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Products_ProductID",
+                        name: "FK_Orders_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Order_Users_UserID",
+                        name: "FK_Orders_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -90,13 +92,13 @@ namespace Trendyol.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ProductID",
-                table: "Order",
+                name: "IX_Orders_ProductID",
+                table: "Orders",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserID",
-                table: "Order",
+                name: "IX_Orders_UserID",
+                table: "Orders",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
@@ -109,7 +111,7 @@ namespace Trendyol.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Warehouse");

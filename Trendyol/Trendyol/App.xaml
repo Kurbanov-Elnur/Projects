@@ -51,9 +51,17 @@
             <DataTemplate DataType="{x:Type GeneralViewModels:ProductViewModel}">
                 <GeneralViews:ProductView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type GeneralViewModels:OrdersViewModel}">
                 <GeneralViews:OrdersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type MenuViewModels:BackMenuViewModel}">
+                <MenuViews:BackMenuView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type GeneralViewModels:OrderViewModel}">
+                <GeneralViews:OrderView/>
             </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>

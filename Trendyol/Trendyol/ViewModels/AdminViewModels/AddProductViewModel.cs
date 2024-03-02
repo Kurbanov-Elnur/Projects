@@ -15,6 +15,7 @@ namespace Trendyol.ViewModels.AdminViewModels;
 class AddProductViewModel : BindableBase
 {
     private readonly IGoodsService _goodsService;
+    private readonly INavigationService _navigationService;
 
     private byte[] image;
 
@@ -30,10 +31,11 @@ class AddProductViewModel : BindableBase
         }
     }
 
-    public AddProductViewModel(IGoodsService goodsService)
+    public AddProductViewModel(IGoodsService goodsService, INavigationService navigationService)
     {
         NewProduct = new();
         _goodsService = goodsService;
+        _navigationService = navigationService;
 
         AddProduct = new(() =>
         {
