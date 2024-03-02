@@ -51,6 +51,10 @@
             <DataTemplate DataType="{x:Type GeneralViewModels:ProductViewModel}">
                 <GeneralViews:ProductView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type GeneralViewModels:OrdersViewModel}">
+                <GeneralViews:OrdersView/>
+            </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MyBtnStyle.xaml"/>

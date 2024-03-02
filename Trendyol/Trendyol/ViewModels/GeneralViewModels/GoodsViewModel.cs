@@ -10,25 +10,33 @@ using System.Threading.Tasks;
 using System.Windows;
 using Trendyol.Data.Contexts;
 using Trendyol.Data.Models;
+using Trendyol.Services.Interfaces;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
 
 class GoodsViewModel : BindableBase
 {
     private readonly MyAppContext _appContext;
+    private readonly IDataService _dataService;
+    private readonly INavigationService _navigationService;
 
     public ObservableCollection<Product> Products { get; set; }
 
-    public GoodsViewModel(MyAppContext appContext)
+    public GoodsViewModel(MyAppContext appContext, IDataService dataService, INavigationService navigationService)
     {
         _appContext = appContext;
-        Products = new ObservableCollection<Product>(_appContext.Products);
+        _dataService = dataService;
+        _navigationService = navigationService;
 
-        Command = new(() =>
+        Products = new ObservableCollection<Product>(_appContext.Products);
+        _dataService.SendData(Products);
+
+        MoreInfo = new((product) =>
         {
-            MessageBox.Show("ads");
+            _dataService.SendData(product);
+            _navigationService.NavigateTo<ProductViewModel>();
         });
     }
 
-    public DelegateCommand Command { get; set; } 
+    public DelegateCommand<Product> MoreInfo { get; set; } 
 }

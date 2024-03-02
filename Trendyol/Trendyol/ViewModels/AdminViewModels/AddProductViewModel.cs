@@ -7,18 +7,19 @@ using System.Collections.Generic;
 using System.IO;
 using Trendyol.Data.Contexts;
 using Trendyol.Data.Models;
+using Trendyol.Services.Interfaces;
 using Trendyol.Views;
 
 namespace Trendyol.ViewModels.AdminViewModels;
 
 class AddProductViewModel : BindableBase
 {
-    private readonly MyAppContext _appContext;
+    private readonly IGoodsService _goodsService;
+
     private byte[] image;
-    private MyMessageBoxWindow myMessageBoxWindow;
 
     public Product NewProduct { get; set; }
-    public Warehouse Warehouse { get; set; }
+    public int ProductCount { get; set; } = 0;
 
     public byte[] Image
     {
@@ -29,23 +30,17 @@ class AddProductViewModel : BindableBase
         }
     }
 
-    public AddProductViewModel(MyAppContext appContext)
+    public AddProductViewModel(IGoodsService goodsService)
     {
-        _appContext = appContext;
         NewProduct = new();
-        Warehouse = new();
+        _goodsService = goodsService;
 
         AddProduct = new(() =>
         {
-            myMessageBoxWindow = new(NewProduct.Name, "SuccessCircleOutline", "Green");
+            MyMessageBoxWindow.Show(NewProduct.Name, "SuccessCircleOutline", "Green");
             NewProduct.Image = Image;
 
-            Warehouse.ProductID = NewProduct.Id;
-            Warehouse.Product = NewProduct;
-
-            _appContext.Products.Add(NewProduct);
-            _appContext.Warehouse.Add(Warehouse);
-            _appContext.SaveChanges();
+            _goodsService.AddProduct(NewProduct, ProductCount);
         });
 
         AddImage = new(() =>

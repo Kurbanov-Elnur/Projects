@@ -14,6 +14,7 @@ using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Classes;
 using Trendyol.Services.Interfaces;
+using Trendyol.Views;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
 
@@ -79,7 +80,7 @@ class VerificateViewModel : BindableBase
                 }
                 else if (User != null && registeredEmail)
                 {
-                    MessageBox.Show("Email is registered");
+                    MyMessageBoxWindow.Show("Email is registered", "Error", "Red");
                     return;
                 }
                 else if (User == null && registeredEmail)
@@ -98,14 +99,14 @@ class VerificateViewModel : BindableBase
                 }
                 else
                 {
-                    MessageBox.Show("This email is not registered!");
+                    MyMessageBoxWindow.Show("This email is not registered!", "Error", "Red");
                     _navigationService.NavigateTo<RegistrationViewModel>();
                     Cleaning();
                     return;
                 }
             }
             else
-                MessageBox.Show("Wrong email!");
+                MyMessageBoxWindow.Show("Wrong email!", "Error", "Red");
         });
 
         Back = new(() =>

@@ -38,5 +38,10 @@ namespace Trendyol.Views
         {
             this.Close();
         }
+
+        public static void Show(string message, string icon, string color)
+        {
+            MyMessageBoxWindow window = new(message, icon, color);
+        }
     }
 }

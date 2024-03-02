@@ -126,7 +126,7 @@
                 Foreground="White"
                 VerticalAlignment="Center"
                 BorderThickness="0"
-                Text="{Binding Warehouse.Count}"
+                Text="{Binding ProductCount}"
                 Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}">
             </TextBox>
         </Border>

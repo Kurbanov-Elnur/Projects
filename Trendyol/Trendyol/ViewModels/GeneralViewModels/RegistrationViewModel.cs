@@ -62,7 +62,7 @@ class RegistrationViewModel : BindableBase
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MyMessageBoxWindow.Show(e.Message, "Error", "Red");
             }
         });
 

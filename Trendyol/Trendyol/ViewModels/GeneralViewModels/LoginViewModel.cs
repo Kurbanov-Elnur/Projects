@@ -17,8 +17,6 @@ namespace Trendyol.ViewModels.GeneralViewModels;
 
 class LoginViewModel : BindableBase
 {
-    private MyMessageBoxWindow messageBox;
-
     private readonly INavigationService _navigationServie;
     private readonly IDataService _dataService;
     private readonly MyAppContext _appContext;
@@ -42,12 +40,13 @@ class LoginViewModel : BindableBase
                 {
                     _navigationServie.NavigateToMenu<MainMenuViewModel>();
                     _navigationServie.NavigateTo<GoodsViewModel>();
+                    _dataService.SendData(currentUser);
                 }
                 else
-                    messageBox = new("Wrong password!", "Error", "Red");
+                    MyMessageBoxWindow.Show("Wrong password!", "Error", "Red");
             }
             else
-                messageBox = new("Wrong email!", "Error", "Red");
+                MyMessageBoxWindow.Show("Wrong email!", "Error", "Red");
         });
 
         ForgotPassword = new(() =>

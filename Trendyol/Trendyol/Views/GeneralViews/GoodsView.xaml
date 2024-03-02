@@ -14,103 +14,90 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListBox
-            ScrollViewer.VerticalScrollBarVisibility="Hidden"
-            Background="Transparent"
-            BorderThickness="0"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            ItemsSource="{Binding Products}" Margin="0,45,0,0" Grid.RowSpan="3">
+        <ScrollViewer
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Hidden">
 
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <Border Background="Transparent">
-                                    <ContentPresenter />
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
+            <ItemsControl ItemsSource="{Binding Products}">
+                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Width="180"
+                            Height="220"
+                            Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.MoreInfo}"
+                            CommandParameter="{Binding}">
 
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                        Width="180"
-                        Height="220"
-                        Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.Command}">
+                            <Border
+                                Width="170"
+                                Height="200"
+                                Grid.Row="1"
+                                Background="#272B2F"
+                                CornerRadius="15">
 
-                        <Border
-                            Width="170"
-                            Height="200"
-                            Grid.Row="1"
-                            Background="#272B2F"
-                            CornerRadius="15">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*"/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*"/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.ColumnSpan="2"
+                                        Source="{Binding Image}">
+                                    </Image>
 
-                                <Image
-                                    Grid.ColumnSpan="2"
-                                    Source="{Binding Image}">
-                                </Image>
+                                    <TextBlock
+                                        Margin="20 0 0 0"
+                                        Text="Name: "
+                                        Grid.Row="1"
+                                        Foreground="White"
+                                        VerticalAlignment="Bottom"
+                                        FontSize="15">
+                                    </TextBlock>
 
-                                <TextBlock
-                                    Margin="20 0 0 0"
-                                    Text="Name: "
-                                    Grid.Row="1"
-                                    Foreground="White"
-                                    VerticalAlignment="Bottom"
-                                    FontSize="15">
-                                </TextBlock>
+                                    <TextBlock
+                                        Text="{Binding Name}"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Foreground="White"
+                                        VerticalAlignment="Bottom"
+                                        FontSize="15">
+                                    </TextBlock>
 
-                                <TextBlock
-                                    Text="{Binding Name}"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Foreground="White"
-                                    VerticalAlignment="Bottom"
-                                    FontSize="15">
-                                </TextBlock>
+                                    <TextBlock
+                                        Margin="20 0 0 0"
+                                        Text="Price: "
+                                        Grid.Row="3"
+                                        Foreground="White"
+                                        FontSize="15">
+                                    </TextBlock>
 
-                                <TextBlock
-                                    Margin="20 0 0 0"
-                                    Text="Price: "
-                                    Grid.Row="3"
-                                    Foreground="White"
-                                    FontSize="15">
-                                </TextBlock>
-
-                                <TextBlock
-                                    Text="{Binding Price}"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Foreground="White"
-                                    FontSize="15">
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                    </Button>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                    <TextBlock
+                                        Text="{Binding Price, StringFormat={}{0} $}"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Foreground="White"
+                                        FontSize="15">
+                                    </TextBlock>
+                                </Grid>
+                            </Border>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -22,7 +22,6 @@ class MainViewModel : BindableBase
 
     private BindableBase currentView;
     private BindableBase currentMenu;
-    private string menuVisibility = "Visible";
 
     public BindableBase CurrentView
     {
@@ -42,20 +41,13 @@ class MainViewModel : BindableBase
         }
     }
 
-    public string MenuVisibility
-    {
-        get => menuVisibility;
-        set
-        {
-            SetProperty(ref menuVisibility, value);
-        }
-    }
-
     public MainViewModel(IMessenger messenger)
     {
         _messenger = messenger;
 
-        CurrentView = App.Container.GetInstance<GoodsViewModel>();
+        App.Container.GetInstance<OrdersViewModel>();
+
+        CurrentView = App.Container.GetInstance<AddProductViewModel>();
         CurrentMenu = App.Container.GetInstance<SignInUpMenuViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>
@@ -65,12 +57,6 @@ class MainViewModel : BindableBase
 
             if (message.MenuModeltype != null)
                 CurrentMenu = message.MenuModeltype;
-        });
-
-        _messenger.Register<DataMessage>(this, message =>
-        {
-            if (message.Data.ToString() == "Hidden" || message.Data.ToString() == "Visible")
-                MenuVisibility = message.Data.ToString();
         });
     }
 }

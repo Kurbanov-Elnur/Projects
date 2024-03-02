@@ -40,9 +40,6 @@ class UserService : IUserService
     
     public bool CheckData(string name, string surname, string password, string confirmPassword)
     {
-        if (password != confirmPassword)
-            throw new ArgumentException("Password mismatch!");
-
         if (!Regex.IsMatch(name, @"^[a-zA-Z]"))
             throw new ArgumentException("Wrong name!");
 
@@ -51,6 +48,9 @@ class UserService : IUserService
 
         if (!Regex.IsMatch(password, @"^[a-zA-Z0-9.]{8,}$"))
             throw new ArgumentException("Wrong password!");
+
+        if (password != confirmPassword)
+            throw new ArgumentException("Password mismatch!");
 
         return true;
     }

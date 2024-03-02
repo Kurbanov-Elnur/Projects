@@ -41,7 +41,7 @@ class ForgotPasswordViewModel : BindableBase
         Confirm = new(() =>
         {
             if (Password != ConfirmPassword || !Regex.IsMatch(Password, @"^[a-zA-Z0-9.]{8,}$"))
-                MessageBox.Show("Password mismatch!");
+                MyMessageBoxWindow.Show("Password mismatch!", "Error", "Red");
             else
             {
                 _userService.RestorePassword(User, Password);
