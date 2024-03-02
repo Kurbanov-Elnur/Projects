@@ -10,7 +10,7 @@ cmake-build-debug
 .idea
 .vcxproj
 
-.appsettings.json
+appsettings.json
 
 *.idea
 *.vcxproj
