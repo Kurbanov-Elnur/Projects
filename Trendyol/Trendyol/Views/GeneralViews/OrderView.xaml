@@ -210,15 +210,13 @@
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="1"
-                    Text="{Binding Order.TrackId}"
+                    Text="{Binding Order.TrackID}"
                     FontSize="15"
                     Foreground="White"
                     TextWrapping="Wrap"
-                    Margin="0 10 0 0"
                     VerticalAlignment="Bottom">
 
                 </TextBlock>
-
 
                 <Button
                     Visibility="{Binding Visibility}"

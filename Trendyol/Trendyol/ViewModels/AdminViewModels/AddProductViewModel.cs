@@ -8,6 +8,7 @@ using System.IO;
 using Trendyol.Data.Contexts;
 using Trendyol.Data.Models;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.GeneralViewModels;
 using Trendyol.Views;
 
 namespace Trendyol.ViewModels.AdminViewModels;
@@ -41,6 +42,8 @@ class AddProductViewModel : BindableBase
         {
             NewProduct.Image = Image;
             _goodsService.AddProduct(NewProduct, ProductCount);
+
+            _navigationService.NavigateTo<GoodsViewModel>();
         });
 
         AddImage = new(() =>
