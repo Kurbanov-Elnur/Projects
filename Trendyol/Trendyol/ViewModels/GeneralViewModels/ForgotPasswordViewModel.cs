@@ -12,7 +12,9 @@ using System.Windows.Media.Animation;
 using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.MenuViewModels;
 using Trendyol.Views;
+using Trendyol.Views.MenuViews;
 
 namespace Trendyol.ViewModels.GeneralViewModels;
 
@@ -36,7 +38,8 @@ class ForgotPasswordViewModel : BindableBase
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            User = message.Data as User;
+            if(message.Data as User != null)
+                User = message.Data as User;
         });
 
         Confirm = new(() =>
@@ -57,6 +60,7 @@ class ForgotPasswordViewModel : BindableBase
     public void Back()
     {
         _navigationService.NavigateTo<LoginViewModel>();
+        _navigationService.NavigateToMenu<SignInUpMenuViewModel>();
 
         Password = "";
         ConfirmPassword = "";
