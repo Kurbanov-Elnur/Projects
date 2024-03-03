@@ -57,7 +57,8 @@ class VerificateViewModel : BindableBase
 
         _messenger.Register<DataMessage>(this, message =>
         {
-            User = message.Data as User;
+            if(message.Data as User != null)
+                User = message.Data as User;
         });
 
         Verificate = new(() =>
@@ -66,7 +67,7 @@ class VerificateViewModel : BindableBase
             {
                 bool registeredEmail = _appContext.Users.Any(u => u.Email == Email);
 
-                if (User != null && !registeredEmail)
+                if(User != null && !registeredEmail)
                 {
                     SwitchBtn();
 
@@ -78,11 +79,8 @@ class VerificateViewModel : BindableBase
                         Back();
                     }
                 }
-                else if (User != null && registeredEmail)
-                {
+                else if(User != null && registeredEmail)
                     MyMessageBoxWindow.Show("Email is registered", "Error", "Red");
-                    return;
-                }
                 else if (User == null && registeredEmail)
                 {
                     SwitchBtn();
@@ -109,7 +107,10 @@ class VerificateViewModel : BindableBase
                 }
             }
             else
-                MyMessageBoxWindow.Show("Wrong email!", "Error", "Red");
+            {
+                MyMessageBoxWindow.Show("Invalid email format", "Error", "Red");
+            }
+
         });
     }
 
