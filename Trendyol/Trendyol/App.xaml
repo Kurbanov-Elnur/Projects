@@ -64,8 +64,12 @@
                 <GeneralViews:OrderView/>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type GeneralViewModels:UsersViewModel}">
-                <GeneralViews:UsersView/>
+            <DataTemplate DataType="{x:Type AdminViewModels:UsersViewModel}">
+                <AdminViews:UsersView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type AdminViewModels:UserViewModel}">
+                <AdminViews:UserView/>
             </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>

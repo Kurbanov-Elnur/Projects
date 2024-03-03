@@ -129,7 +129,7 @@ class VerificateViewModel : BindableBase
 
     public void Back()
     {
-        if (User != null)
+        if (User == null)
             _navigationService.NavigateTo<RegistrationViewModel>();
         else
             _navigationService.NavigateTo<LoginViewModel>();

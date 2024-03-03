@@ -60,10 +60,17 @@ class MainMenuViewModel : BindableBase
         {
             _navigationService.NavigateTo<UsersViewModel>();
         });
+
+        ExitAccount = new(() =>
+        {
+            _navigationService.NavigateTo<LoginViewModel>();
+            _navigationService.NavigateToMenu<SignInUpMenuViewModel>();
+        });
     }
 
     public DelegateCommand GoToGoods { get; set; }
     public DelegateCommand GoToOrders { get; set; }
     public DelegateCommand GoToAddProduct { get; set; }
     public DelegateCommand GoToUsers { get; set; }
+    public DelegateCommand ExitAccount { get; set; }
 }

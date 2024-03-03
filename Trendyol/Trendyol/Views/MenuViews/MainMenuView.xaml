@@ -154,6 +154,39 @@
                     </TextBlock>
                 </Grid>
             </RadioButton>
+
+            <RadioButton
+                Style="{StaticResource MyBtn}"
+                Command="{Binding ExitAccount}">
+
+                <Grid
+                    Height="40"
+                    Width="228">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <md:PackIcon
+                        VerticalAlignment="Center"
+                        Kind="LogoutVariant"
+                        Foreground="#00ffff"
+                        Width="30"
+                        Height="30"
+                        Margin="12 0 0 0"/>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="Exit"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        Margin="0 0 0 0">
+
+                    </TextBlock>
+                </Grid>
+            </RadioButton>
         </StackPanel>
     </Grid>
 </UserControl>

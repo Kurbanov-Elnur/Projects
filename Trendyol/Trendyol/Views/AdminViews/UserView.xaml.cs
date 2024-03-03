@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Trendyol.Views.GeneralViews
+namespace Trendyol.Views.AdminViews
 {
     /// <summary>
-    /// Interaction logic for UsersViewModel.xaml
+    /// Interaction logic for UserView.xaml
     /// </summary>
-    public partial class UsersView : UserControl
+    public partial class UserView : UserControl
     {
-        public UsersView()
+        public UserView()
         {
             InitializeComponent();
         }

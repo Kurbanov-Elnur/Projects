@@ -12,5 +12,7 @@ interface IUserService
     public void AddUser(User newUser);
     public bool CheckData(string name, string surname, string password, string confirmPassword);
     public bool CheckEmail(string email);
+    public void ChangeBackTheRole(User user);
+    public void ChangeTheRoleForward(User user);
     public void RestorePassword(User user, string password);
 }

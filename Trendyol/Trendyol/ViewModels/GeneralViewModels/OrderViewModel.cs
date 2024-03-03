@@ -58,12 +58,12 @@ class OrderViewModel : BindableBase
             _orderService.ChangeBackTheStatus(Order);
         });
 
-        ChangetheStatusForward = new(() =>
+        ChangeTheStatusForward = new(() =>
         {
             _orderService.ChangeTheStatusForward(Order);
         });
     }
 
     public DelegateCommand ChangeBackTheStatus { get; set; }
-    public DelegateCommand ChangetheStatusForward { get; set; }
+    public DelegateCommand ChangeTheStatusForward { get; set; }
 }

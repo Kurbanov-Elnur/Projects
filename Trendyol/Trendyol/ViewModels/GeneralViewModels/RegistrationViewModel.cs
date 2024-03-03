@@ -43,7 +43,11 @@ class RegistrationViewModel : BindableBase
         _userService = userService;
         _dataService = dataService;
 
-        Image = Image = File.ReadAllBytes(@"C:\Projects\Trendyol\Trendyol\Data\Models\Profile.jpg");
+        string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string imagePath = Path.Combine(currentDirectory, "Data", "Models", "Profile.jpg");
+
+        Image = File.ReadAllBytes(imagePath);
+
         NewUser = new();
 
         Forward = new(() =>

@@ -35,5 +35,13 @@ class DataService : IDataService
         {
             Datas = data
         });
+    } 
+    
+    public void SendUser(User user)
+    {
+        _messenger.Send(new UserMessage()
+        {
+            User = user
+        });
     }
 }
