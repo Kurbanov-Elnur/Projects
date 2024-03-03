@@ -64,7 +64,7 @@ class GoodsService : IGoodsService
     {
         _products.Remove(product);
 
-        _appContext.Remove(product);
+        _appContext.Products.Remove(product);
         _appContext.SaveChanges();
     }
 

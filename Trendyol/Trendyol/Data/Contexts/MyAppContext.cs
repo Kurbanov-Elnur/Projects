@@ -42,7 +42,6 @@ class MyAppContext : DbContext
         var user = modelBuilder.Entity<User>();
         var warehouse = modelBuilder.Entity<Warehouse>();
 
-
         order
             .HasKey(o => o.Id);
         

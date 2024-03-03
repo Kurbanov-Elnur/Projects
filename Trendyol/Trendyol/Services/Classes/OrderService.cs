@@ -63,14 +63,6 @@ class OrderService : IOrderService
         _appContext.SaveChanges();
     }
 
-    public void RemoveOrder(Order order)
-    {
-        _orders.Remove(order);
-
-        _appContext.Remove(order);
-        _appContext.SaveChanges();
-    }
-    
     public void ChangeBackTheStatus(Order order)
     {
         for (int i = 0; i < _statuses.Length; i++)

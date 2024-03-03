@@ -11,7 +11,6 @@ namespace Trendyol.Services.Interfaces;
 interface IOrderService
 {
     public void AddOrder(Product product, User currentUser, int productCount);
-    public void RemoveOrder(Order order);
     public void ChangeBackTheStatus(Order order);
     public void ChangeTheStatusForward(Order order);
 }

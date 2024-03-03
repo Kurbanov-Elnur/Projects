@@ -12,8 +12,8 @@ using Trendyol.Data.Contexts;
 namespace Trendyol.Migrations
 {
     [DbContext(typeof(MyAppContext))]
-    [Migration("20240303050552_Second")]
-    partial class Second
+    [Migration("20240303123858_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
