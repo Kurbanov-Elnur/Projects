@@ -15,8 +15,9 @@ namespace Trendyol.Services.Classes;
 
 class OrderService : IOrderService
 {
-    private readonly string[] _statuses = new string[4]
+    private readonly string[] _statuses = new string[5]
     {
+        "Canceled",
         "The order is being processed",
         "Accepted",
         "Sent",

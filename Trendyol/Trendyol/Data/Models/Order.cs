@@ -9,6 +9,7 @@ namespace Trendyol.Data.Models;
 class Order
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string TrackID { get; set; } = Guid.NewGuid().ToString();
 
     public string UserID { get; set; }
     public User User { get; set; }

@@ -55,9 +55,15 @@ class MainMenuViewModel : BindableBase
         {
             _navigationService.NavigateTo<AddProductViewModel>();
         });
+
+        GoToProfile = new(() =>
+        {
+            _navigationService.NavigateTo<ProfileViewModel>();
+        });
     }
 
     public DelegateCommand GoToGoods { get; set; }
     public DelegateCommand GoToOrders { get; set; }
     public DelegateCommand GoToAddProduct { get; set; }
+    public DelegateCommand GoToProfile { get; set; }
 }

@@ -39,9 +39,7 @@ class AddProductViewModel : BindableBase
 
         AddProduct = new(() =>
         {
-            MyMessageBoxWindow.Show(NewProduct.Name, "SuccessCircleOutline", "Green");
             NewProduct.Image = Image;
-
             _goodsService.AddProduct(NewProduct, ProductCount);
         });
 

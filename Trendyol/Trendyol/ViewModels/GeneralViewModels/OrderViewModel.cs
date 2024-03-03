@@ -18,6 +18,7 @@ class OrderViewModel : BindableBase
     private readonly IOrderService _orderService;
     private string _orderStatus;
 
+    public string Visibility { get; set; }
     public Order Order { get; set; }
 
     public string OrderStatus
@@ -40,6 +41,15 @@ class OrderViewModel : BindableBase
             {
                 Order = message.Data as Order;
                 OrderStatus = Order.Status;
+            }
+            
+            if(message.Data as User != null)
+            {
+                User user = message.Data as User;
+                if (user.Role == "User")
+                    Visibility = "Hidden";
+                else
+                    Visibility = "Visible";
             }
         });
 

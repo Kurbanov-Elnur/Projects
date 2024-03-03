@@ -193,9 +193,35 @@
                     VerticalAlignment="Center">
 
                 </TextBlock>
+                
+                <TextBlock
+                    Grid.Row="2"
+                    Width="130"
+                    Height="30"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Text="TrackId: "
+                    FontSize="20"
+                    Margin="10 10 0 0"
+                    Foreground="White">
+
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding Order.TrackId}"
+                    FontSize="15"
+                    Foreground="White"
+                    TextWrapping="Wrap"
+                    Margin="0 10 0 0"
+                    VerticalAlignment="Bottom">
+
+                </TextBlock>
 
 
                 <Button
+                    Visibility="{Binding Visibility}"
                     Command="{Binding ChangeBackTheStatus}"
                     VerticalAlignment="Center"
                     Grid.Row="3"
@@ -213,6 +239,7 @@
                 </Button>
                 
                 <Border
+                    Visibility="{Binding Visibility}"
                     Grid.Row="3"
                     Background="#212529"
                     Width="150"
@@ -230,6 +257,7 @@
                 </Border>
 
                 <Button
+                    Visibility="{Binding Visibility}"
                     Command="{Binding ChangetheStatusForward}"
                     Grid.Row="3"
                     Grid.Column="1"

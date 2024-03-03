@@ -38,6 +38,10 @@ class MyAppContext : DbContext
 
         order
             .HasKey(o => o.Id);
+        
+        order
+            .Property(o => o.TrackID)
+            .IsRequired();
 
         order
             .Property(o => o.PurchaseDate)
