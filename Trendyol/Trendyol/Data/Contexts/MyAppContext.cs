@@ -12,10 +12,10 @@ namespace Trendyol.Data.Contexts;
 class MyAppContext : DbContext
 {
     /*
-     * Admin - magsudluefgan@gmail.com
-     * Password - Afqan123
-     * User - mursalzadeh99@gmail.com
+     * Admin - mursalzadeh99@gmail.com
      * Password - Elnur123
+     * 
+     * User - Зарегистрируйтесь)
      */
 
     public DbSet<User> Users { get; set; }
