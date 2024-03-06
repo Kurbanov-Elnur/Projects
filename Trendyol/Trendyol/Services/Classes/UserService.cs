@@ -34,6 +34,13 @@ class UserService : IUserService
         _context.SaveChanges();
     }
 
+    public void DeleteUser(User User)
+    {
+        _context.Users.Remove(User);
+
+        _context.SaveChanges();
+    }
+
     public void RestorePassword(User user, string password)
     {
         user.Password = HashPassword(password);

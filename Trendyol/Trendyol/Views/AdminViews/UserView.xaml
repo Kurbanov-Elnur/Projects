@@ -199,6 +199,27 @@
 
                     </md:PackIcon>
                 </Button>
+
+                <Button
+                    Visibility="{Binding Visibility}"
+                    Command="{Binding DeleteUser}"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="40"
+                    Height="40"
+                    VerticalAlignment="Center"
+                    Margin="0 0 10 0"
+                    HorizontalAlignment="Right"
+                    Style="{DynamicResource MaterialDesignToolForegroundButton}">
+
+                    <md:PackIcon
+                        Foreground="White"
+                        Width="30"
+                        Height="30"
+                        Kind="Trashcan">
+
+                    </md:PackIcon>
+                </Button>
             </Grid>
         </Border>
     </Grid>

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Trendyol.Data.Models;
 using Trendyol.Messages;
 using Trendyol.Services.Interfaces;
+using Trendyol.ViewModels.MenuViewModels;
+using Trendyol.Views.MenuViews;
 
 namespace Trendyol.ViewModels.AdminViewModels;
 
@@ -16,6 +18,7 @@ class UserViewModel : BindableBase
 {
     private readonly IMessenger _messenger;
     private readonly IUserService _userService;
+    private readonly INavigationService _navigationService;
     private string _userRole;
 
     public string Visibility { get; set; }
@@ -32,10 +35,11 @@ class UserViewModel : BindableBase
 
     public User User { get; set; }
 
-    public UserViewModel(IMessenger messenger, IUserService userService)
+    public UserViewModel(IMessenger messenger, IUserService userService, INavigationService navigationService)
     {
         _messenger = messenger;
         _userService = userService;
+        _navigationService = navigationService;
 
         _messenger.Register<UserMessage>(this, message =>
         {
@@ -68,8 +72,17 @@ class UserViewModel : BindableBase
         {
             _userService.ChangeTheRoleForward(User);
         });
+
+        DeleteUser = new(() =>
+        {
+            _userService.DeleteUser(User);
+
+            _navigationService.NavigateTo<UsersViewModel>();
+            _navigationService.NavigateToMenu<MainMenuViewModel>();
+        });
     }
 
     public DelegateCommand ChangeBackTheRole { get; set; }
     public DelegateCommand ChangeTheRoleForward { get; set; }
+    public DelegateCommand DeleteUser { get; set; }
 }
