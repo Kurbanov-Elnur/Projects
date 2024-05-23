@@ -21,6 +21,8 @@ class UserViewModel : BindableBase
     private readonly INavigationService _navigationService;
     private string _userRole;
 
+    public User currentUser;
+
     public string Visibility { get; set; }
     public Order Order { get; set; }
 
@@ -47,6 +49,8 @@ class UserViewModel : BindableBase
             {
                 User = message.User;
                 UserRole = User.Role;
+                if (User.Role == "Super Admin")
+                    Visibility = "Hidden";
             }
         });
         
@@ -54,7 +58,7 @@ class UserViewModel : BindableBase
         {
             if (message.Data as User != null)
             {
-                User currentUser = message.Data as User;
+                currentUser = message.Data as User;
 
                 if (currentUser.Role == "Super Admin")
                     Visibility = "Visible";

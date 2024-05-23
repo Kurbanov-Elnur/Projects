@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\GeneralViews\OrderView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminViews\AddProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\ForgotPasswordView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\GoodsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\OrdersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\ProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminViews\UsersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminViews\UserView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MenuViews\BackMenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MenuViews\MainMenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\RegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MenuViews\SignInUpMenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GeneralViews\VerificateView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\MyBtnStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\OrderView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AdminViews\AddProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\ForgotPasswordView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\GoodsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\OrdersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\ProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AdminViews\UsersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AdminViews\UserView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MenuViews\BackMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MenuViews\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\RegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MenuViews\SignInUpMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GeneralViews\VerificateView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MyMessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

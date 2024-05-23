@@ -32,11 +32,7 @@ class UsersViewModel : BindableBase
         _navigationService = navigationService;
         _messenger = messenger;
 
-        _messenger.Register<DataMessage>(this, message =>
-        {
-            if (message.Data as User != null)
-                Users = new ObservableCollection<User>(_appContext.Users);
-        });
+        Users = new ObservableCollection<User>(_appContext.Users);
 
         MoreInfo = new((user) =>
         {
@@ -49,6 +45,9 @@ class UsersViewModel : BindableBase
             {
                 _navigationService.NavigateTo<UsersViewModel>();
                 _navigationService.NavigateToMenu<MainMenuViewModel>();
+
+                if (App.Container.GetInstance<UserViewModel>().currentUser.Role == "Super Admin")
+                    App.Container.GetInstance<UserViewModel>().Visibility = "Visible";
             }));
         });
     }
