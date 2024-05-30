@@ -1,0 +1,49 @@
+.line {
+    position: relative;
+    width: 170px;
+    height: 2px;
+    background-color: rgb(199, 16, 16);
+}
+
+.line::before,
+.line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 15px;
+    height: 15px; 
+    background-color: rgb(199, 16, 16);
+    border-radius: 50%;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.line::before {
+    left: -10px;
+    transform: translateX(-85px);
+    animation-name: moveCircleLeft;
+}
+
+.line::after {
+    right: -10px;
+    transform: translateX(85px);
+    animation-name: moveCircleRight;
+}
+
+@keyframes moveCircleLeft {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(170px);
+    }
+}
+
+@keyframes moveCircleRight {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(-170px);
+    }
+}
