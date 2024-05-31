@@ -130,3 +130,12 @@ input[name="r"] {
     font-size: 18px;
     color: #CCCCCC;
 }
+
+@media screen and (max-width: 873px) {
+    .slider {
+        border-radius: 3%;
+        width: 400px;
+        height: 308px;
+        overflow: hidden;
+    }
+}

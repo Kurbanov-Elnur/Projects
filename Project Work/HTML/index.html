@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="../CSS/line-animation.css">
     <link rel="stylesheet" href="../CSS/statistics.css">
     <link rel="stylesheet" href="../CSS/our-classes.css">
+    <link rel="stylesheet" href="../CSS/trainners.css">
+    <link rel="stylesheet" href="../CSS/testimonial.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="../Swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../CSS/fonts.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,23 +23,32 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
     <header class="header">
-        <img src="../assets/Header/elnur.png" class="bodyForgeIcon">
+        <img src="../assets/Header/logo.png" class="bodyForgeLogo">
         <nav class="navbar">
             <a class="nav-item" href="#home">HOME</a>
-            <a class="nav-item" href="#about">ABOUT</a>
+            <a class="nav-item" href="#classes">CLASSES</a>
+            <a class="nav-item" href="#trainners">TRAINNERS</a>
             <a class="nav-item" href="#shop">SHOP</a>
             <div class="dropdown">
                 <a class="nav-item" href="#contact">CONTACT</a>
@@ -165,26 +179,226 @@
         </div>
 
         <div class="our-classes-surface">
+            <span class="our-classes-text">OUR CLASSES</span>
+            <div class="line"></div>
+            <span class="our-classes-text" id="bold">Fitness Classes For Every Goal</span>
             <div class="our-classes">
                 <div class="class">
-                    <img src="../assets/Classes/classes1.jpg">
+                    <img src="../assets/Classes/classes1.jpg" class="class-img">
+                    <span class="class-text">BODY BUILDING</span>
                 </div>
                 <div class="class">
-                    <img src="../assets/Classes/classes2.jpg">
+                    <img src="../assets/Classes/classes2.webp" class="class-img">
+                    <span class="class-text">CARDIO</span>
                 </div>
                 <div class="class">
-                    <img src="../assets/Classes/classes3.jpg">
+                    <img src="../assets/Classes/classes3.jpg" class="class-img">
+                    <span class="class-text">WEIGHT LIFTING</span>
                 </div>
                 <div class="class">
-                    <img src="../assets/Classes/classes4.jpg">
+                    <img src="../assets/Classes/classes4.jpeg" class="class-img">
+                    <span class="class-text">YOGA</span>
                 </div>
             </div>
         </div>
 
+        <div class="testimonial-surface">
+            <span class="testimonial-text">TESTIMONIAL</span>
+            <div class="line"></div>
+            <span class="testimonial-text" id="bold">What's Client Says</span>
+
+            <div class="testimonial-container">
+                <div class="testimonial-wrapper">
+                    <div class="testimonial">
+                        <div class="client-info">
+                            <img src="../assets/Clients/client1.jpg" class="client-info-img">
+                            <div class="testimonial-span">
+                                <span>John Smith</span>
+                                <span>Client</span>
+                            </div>
+                        </div>
+                        <div class="client-review">
+                            <p>Excellent gym! The staff is very friendly and helpful. The facilities are clean and
+                                well-maintained. I've been coming here for months and have seen great results.
+                                Highly
+                                recommend!</p>
+                        </div>
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="client-info">
+                            <img src="../assets/Clients/client2.jpg" class="client-info-img">
+                            <div class="testimonial-span">
+                                <span>Jane Doe</span>
+                                <span>Client</span>
+                            </div>
+                        </div>
+                        <div class="client-review">
+                            <p>Amazing experience! The trainers are incredibly knowledgeable and supportive. The gym
+                                equipment is top-notch, and the atmosphere is always motivating. I've achieved great
+                                results!</p>
+                        </div>
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="client-info">
+                            <img src="../assets/Clients/client3.jpg" class="client-info-img">
+                            <div class="testimonial-span">
+                                <span>Michael Jonson</span>
+                                <span>Client</span>
+                            </div>
+                        </div>
+                        <div class="client-review">
+                            <p>I've been a member of this gym for years, and it's been an integral part of my fitness
+                                journey. The staff is friendly, the facilities are always clean, and the variety of
+                                classes keeps me engaged.</p>
+                        </div>
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-pagination"></div>
+            </div>
+        </div>
+
+        <div class="trainers-surface">
+            <span class="trainer-text">TEAM EXPERT</span>
+            <div class="line"></div>
+            <span class="trainer-text" id="bold">Team Of Expert Coaches</span>
+
+            <section class="swiper trainer-swiper">
+                <div class="swiper-wrapper">
+                    <div class="trainer swiper-slide">
+                        <img class="trainer-img" src="../assets/Coaches/Coach1.jpg">
+                        <div class="trainer-data">
+                            <h3>MATT ROBERTS</h3>
+                            <p>Body building Coach.</p>
+                        </div>
+                    </div>
+
+                    <div class="trainer swiper-slide">
+                        <img class="trainer-img" src="../assets/Coaches/Coach2.jpg">
+                        <div class="trainer-data">
+                            <h3>LOUISE PARKER</h3>
+                            <p>Cardio Coach</p>
+                        </div>
+                    </div>
+
+                    <div class="trainer swiper-slide">
+                        <img class="trainer-img" src="../assets/Coaches/Coach3.jpg">
+                        <div class="trainer-data">
+                            <h3>DANIEL NOAH</h3>
+                            <p>Weight lifting Coach.</p>
+                        </div>
+                    </div>
+
+                    <div class="trainer swiper-slide">
+                        <img class="trainer-img" src="../assets/Coaches/Coach4.jpg">
+                        <div class="trainer-data">
+                            <h3>EMILY CARTER</h3>
+                            <p>Yoga Coach.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
+
+    <footer class="footer">
+        <div class="section">
+            <div class="logo"></div>
+
+            <div class="description">
+                <span>
+                    The key to success is to start from where you are, use what you have, and do what you can. It won't
+                    always be easy, but it will always be worth it.
+                </span>
+            </div>
+
+            <div class="social-icons">
+                <a href="ссылка_на_facebook" class="icon" id="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="ссылка_на_twitter" class="icon" id="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="ссылка_на_linkedin" class="icon" id="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/aliyevv.094/" class="icon" id="instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/+9940516054122" class="icon" id="whatsapp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="section-name">Latest Posts <div class="line"></div></span>
+
+            <div class="post">
+                <img class="post-img" src="../assets/News/news1.jpg">
+                <div class="post-content">
+                    <span class="post-desc">YOUR FUTURE IS CREATED BY WHAT YOU DO TODAY</span>
+                    <span class="post-date"><br>26 MAY 2024</br></span>
+                </div>
+            </div>
+
+            <div class="post">
+                <img class="post-img" src="../assets/News/news2.jpg">
+                <div class="post-content">
+                    <span class="post-desc">NEW EQUIPMENT IN THE GYM</span>
+                    <span class="post-date"><br>15 APRIL 2024</br></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="section-name">Our Services <div class="line"></div></span>
+
+            <div class="content">
+                <ul class="data">
+                    <li class="data-li-services">WEIGHT LOSS</li>
+                    <li class="data-li-services">FAT BURN</li>
+                    <li class="data-li-services">STRENGTH TRAINNING</li>
+                    <li class="data-li-services">SELF DEFENSE</li>
+                    <li class="data-li-services">BODY BUILDING</li>
+                    <li class="data-li-services">PSYCHO TRAINNING</li>
+            </div>
+        </div>
+        </div>
+
+        <div class="section">
+            <span class="section-name">Working hours <div class="line"></div></span>
+
+            <ul class="data">
+                <li class="data-li-working">Monday-Friday
+                    <br class="data-li">08:00-23:00</br>
+                </li>
+
+                <li class="data-li-working">Saturday
+                    <br class="data-li">08:00-15:00</br>
+                </li>
+
+                <li class="data-li-working" id="sun">SUNDAY CLOSED</li>
+            </ul>
+        </div>
+    </footer>
 
     <script src="../JS/banner.js"></script>
     <script src="../JS/welcome.js"></script>
     <script src="../JS/statistics.js"></script>
+    <script src="../JS/trainners.js"></script>
+    <script src="../JS/testimonial.js"></script>
+    <script src="../Swiper/swiper-bundle.min.js"></script>
 </body>
+
 </html>

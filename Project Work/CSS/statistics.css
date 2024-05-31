@@ -6,7 +6,7 @@
 }
 
 .statistics {
-    height: 400px;
+    height: 80%;
     width: 100%;
     background-color: rgba(255, 0, 0, 0.5); 
     display: flex;
