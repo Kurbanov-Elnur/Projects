@@ -126,6 +126,7 @@
 
 .post-desc:hover{
     color:red;
+    cursor: pointer;
 }
 
 .post-date{

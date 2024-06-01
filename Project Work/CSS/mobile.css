@@ -1,0 +1,217 @@
+/* Banner.css */
+
+@media (min-width: 1920px) {
+    #content2 {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 448px) {
+    .banner-div {
+        position: relative;
+        margin-top: 50%;
+        margin-left: 7%;
+        z-index: 2;
+    }
+
+    .banner-btn{
+        width: 40%;
+    }
+
+    .banner{
+        height: 100vh;
+    }
+}
+
+/* Footer.css */
+
+@media (max-width: 448px) {
+    .section-name{
+        font-size: 20px;
+    }
+
+    .footer{
+        height: 200vh;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .section{
+        margin-top: 5%;
+        margin-left: 6%;
+        width: 100%;
+    }
+}
+
+/* Header.css */
+
+@media (max-width: 448px) {
+    .bodyForgeLogo {
+        margin-left: 0;
+        width: 30%;
+        height: 50%;
+        margin-right: 20%;
+    }      
+    
+    .navbar{
+        display: none;
+    }
+
+    .header-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+/* Line-animation.css */
+
+@media (max-width: 448px) {
+    .line{
+        width: 100px;
+    }
+
+    @keyframes moveCircleLeft {
+        0%, 100% {
+            transform: translateY(-50%) translateX(0);
+        }
+        50% {
+            transform: translateY(-50%) translateX(100px);
+        }
+    }
+    
+    @keyframes moveCircleRight {
+        0%, 100% {
+            transform: translateY(-50%) translateX(0);
+        }
+        50% {
+            transform: translateY(-50%) translateX(-100px);
+        }
+    }
+}
+
+/* Our-classes.css */
+
+@media (max-width: 448px) {
+    .statistic-icon {
+        font-size: 28px;
+    }
+
+    .stat-number{
+        font-size: 24px;
+    }
+
+    .statistic-text{
+        font-size: 14px;
+    }
+
+    .statistics-surface{
+        width: 99%;
+    }
+}
+
+/* Statistics.css */
+
+@media (max-width: 448px) {
+    .statistic-icon {
+        font-size: 28px;
+    }
+
+    .stat-number{
+        font-size: 24px;
+    }
+
+    .statistic-text{
+        font-size: 14px;
+    }
+
+    .statistics-surface{
+        width: 99%;
+    }
+}
+
+/* Testimonial.css */
+
+@media (max-width: 448px) {
+    .testimonial{
+        min-width: 96%;
+    }
+
+    .testimonial-surface{
+        width: 430px;
+    }
+}
+
+/* Trainners.css */
+
+@media (max-width: 448px) {
+    .trainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 5%;
+        max-width: 90%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .trainer-text-bold{
+        font-size: 2.2rem;
+    }
+}
+
+/* Welcome.css */
+
+@media screen and (max-width: 873px) {
+    .slider {
+        border-radius: 3%;
+        width: 400px;
+        height: 308px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 448px) {    
+    .welcome{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    } 
+    
+    .slide-container{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navigation {
+        margin-left: calc(7% + 40px);
+    }
+
+    .welcome-content{
+        width: 100%;
+        height: 100%;
+    }
+
+    .welcome-content-h2{
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .welcome-content .line{
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+    }
+
+    .welcome-content-bold{
+        text-align: center;
+    }
+
+    .about-content{
+        justify-content: start;
+    }
+}

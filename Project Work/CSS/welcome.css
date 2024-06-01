@@ -1,6 +1,7 @@
 .welcome {
     margin-top: 7%;
     height: 90vh;
+    
     display: flex;
 }
 
@@ -129,13 +130,4 @@ input[name="r"] {
 .about-content-text-mid{
     font-size: 18px;
     color: #CCCCCC;
-}
-
-@media screen and (max-width: 873px) {
-    .slider {
-        border-radius: 3%;
-        width: 400px;
-        height: 308px;
-        overflow: hidden;
-    }
 }

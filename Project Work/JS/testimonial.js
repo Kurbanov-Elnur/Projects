@@ -5,11 +5,34 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let currentIndex = 0;
     const totalSlides = slides.length;
-    const slidesPerView = 3;
+    let slidesPerView;
 
-    for (let i = 0; i < slidesPerView; i++) {
-        sliderWrapper.appendChild(slides[i].cloneNode(true));
+    if(document.documentElement.clientWidth > 448){
+        slidesPerView = 3;
+    }else{
+        slidesPerView = 1;
     }
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth <= 448) {
+            slidesPerView = 1;
+            sliderWrapper.innerHTML = '';
+    
+            clone();
+            totalSlides = sliderWrapper.querySelectorAll('.testimonial').length;
+            updateSlider();
+        } else {
+            slidesPerView = 3;
+        }
+    });
+
+    function clone(){
+        for (let i = 0; i < slidesPerView; i++) {
+            sliderWrapper.appendChild(slides[i].cloneNode(true));
+        }
+    }
+
+    clone();
 
     for (let i = 0; i < totalSlides; i++) {
         const bullet = document.createElement('div');
@@ -22,7 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const bullets = document.querySelectorAll('.testimonial-pagination-bullet');
 
     function updateSlider() {
-        sliderWrapper.style.transform = `translateX(-${currentIndex * (100 / slidesPerView)}%)`;
+        if (slidesPerView == 1) {
+            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        } else {
+            sliderWrapper.style.transform = `translateX(-${currentIndex * (100 / slidesPerView)}%)`;
+        }
         bullets.forEach(bullet => bullet.classList.remove('active'));
         if (currentIndex < totalSlides) {
             bullets[currentIndex].classList.add('active');
@@ -30,11 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
             bullets[0].classList.add('active');
         }
     }
+    
 
     function goToNextSlide() {
-        if (currentIndex < totalSlides) {
-            currentIndex++;
-        } else {
+        currentIndex++;
+        if (currentIndex >= totalSlides + slidesPerView) {
             currentIndex = 1;
             sliderWrapper.style.transition = 'none';
             sliderWrapper.style.transform = `translateX(0%)`;
@@ -46,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         updateSlider();
     }
+    
 
     bullets.forEach(bullet => {
         bullet.addEventListener('click', () => {
