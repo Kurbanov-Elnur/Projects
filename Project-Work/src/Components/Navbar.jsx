@@ -1,28 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
+import NavItems from "../Routes";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
     const [activeItem, setActiveItem] = useState('Home');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const menuRef = useRef(null);
 
-    const navItems = ['Home', 'Blog', 'Portfolio', 'About', 'Contact'];
+    const navItems = NavItems[0].children.slice(1);
 
     const moreItems = [
-        { title: 'Appearance', description: 'Easy customization' },
-        { title: 'Comments', description: 'Check your latest comments' },
-        { title: 'Analytics', description: 'Take a look at your statistics' },
+        { id: 1, title: 'Appearance', description: 'Easy customization' },
+        { id: 2, title: 'Comments', description: 'Check your latest comments' },
+        { id: 3, title: 'Analytics', description: 'Take a look at your statistics' },
     ];
 
+    useEffect(() => {
+        const storedActiveItem = localStorage.getItem('activeNavItem') || 'Home';
+        setActiveItem(storedActiveItem);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const handleItemClick = (item) => {
+        setActiveItem(item);
+        localStorage.setItem('activeNavItem', item);
+    };
+
     return (
-        <div className="min-h-screen">
+        <div className="fixed top-0 left-0 w-full z-50">
             <div className="antialiased bg-gray-100 dark:bg-gray-900">
                 <div className="w-full text-gray-700 bg-white dark:text-gray-200 dark:bg-gray-800">
                     <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
                         <div className="flex flex-row items-center justify-between p-4">
                             <span className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
-                                Flowtrail UI
+                                Project Work
                             </span>
                             <button
                                 className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
@@ -40,20 +62,23 @@ export default function Navbar() {
                             </button>
                         </div>
                         <nav className={`flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row ${open ? 'flex' : 'hidden'}`}>
-                            {navItems.map((item) => (
-                                <button
-                                    key={item}
-                                    className={`cursor-pointer px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
-                                    ${activeItem === item ? 'bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white dark:focus:text-white'}`}
-                                    onClick={() => setActiveItem(item)}
-                                >
-                                    {item}
-                                </button>
+                            {navItems.map((item, index) => (
+                                <Link to={`/${item.path.toLowerCase()}`} key={index}>
+                                    <button
+                                        style={{ textTransform: "capitalize" }}
+                                        className={`cursor-pointer px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
+                                        ${activeItem === item.path ? 'bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white dark:focus:text-white'}`}
+                                        onClick={() => handleItemClick(item.path)}
+                                    >
+                                        {item.path}
+                                    </button>
+                                </Link>
                             ))}
-                            <div className="relative" onMouseLeave={() => setOpen(false)}>
+                            <div className="relative" ref={menuRef}>
                                 <button
                                     onClick={() => setOpen(!open)}
-                                    className="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-300 rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:text-white cursor-pointer"
+                                    className="flex flex-row items-center px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
+                                    bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white dark:focus:text-white"
                                 >
                                     <span>More</span>
                                     <svg
@@ -72,9 +97,9 @@ export default function Navbar() {
                                     <div className="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
                                         <div className="px-2 pt-2 pb-4 bg-white rounded-md shadow-lg dark:bg-gray-700">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {moreItems.map(({ title, description }) => (
+                                                {moreItems.map(({ id, title, description }) => (
                                                     <button
-                                                        key={title}
+                                                        key={id}
                                                         className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer"
                                                     >
                                                         <div className="bg-teal-500 text-white rounded-lg p-3">
@@ -101,23 +126,15 @@ export default function Navbar() {
                                     </div>
                                 )}
                             </div>
-                            {!isLoggedIn && (
-                                <div className="flex items-center ml-4 space-x-4">
-                                    <button
-                                        className="cursor-pointer p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
-                                        onClick={() => console.log('Login')}
-                                    >
-                                        <FontAwesomeIcon icon={faSignInAlt} className="w-6 h-6" />
-                                    </button>
-                                    <button
-                                        className="cursor-pointer p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
-                                        onClick={() => console.log('Register')}
-                                    >
-                                        <FontAwesomeIcon icon={faUserPlus} className="w-6 h-6" />
-                                    </button>
-                                </div>
-                            )}
                         </nav>
+                        <div className="absolute right-0 mr-5 p-5">
+                            <button className="p-2 rounded-full text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 text-xl">
+                                <FontAwesomeIcon icon={faUserCircle} />
+                            </button>
+                            <button className="p-2 rounded-full text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 text-xl">
+                                <FontAwesomeIcon icon={faCog} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

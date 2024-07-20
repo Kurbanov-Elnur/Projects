@@ -3,5 +3,20 @@
 @tailwind utilities;
 
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; 
+}
+
+main {
+  padding-top: 4rem;
+  flex: 1;
 }
