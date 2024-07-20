@@ -6,7 +6,7 @@ import NavItems from "../Routes";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-    const [activeItem, setActiveItem] = useState('Home');
+    const [activeItem, setActiveItem] = useState("Home");
     const menuRef = useRef(null);
 
     const navItems = NavItems[0].children.slice(1);

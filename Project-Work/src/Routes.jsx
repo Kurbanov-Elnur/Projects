@@ -2,7 +2,7 @@ import App from "./App";
 import Catalog from "./Components/Catalog";
 import Home from "./Components/Home";
 
-const routes = [
+const appRoutes = [
     {
         path: "/",
         element: <Home />,
@@ -19,8 +19,9 @@ const routes = [
 
 const app = [
     {
-    element: <App />,
-    children: routes
-}];
+        element: <App />,
+        children: appRoutes
+    }
+];
 
 export default app;
