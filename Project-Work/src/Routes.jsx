@@ -1,6 +1,6 @@
 import App from "./App";
-import Catalog from "./Components/Catalog";
-import Home from "./Components/Home";
+import Catalog from "./Pages/Catalog";
+import Home from "./Pages/Home";
 
 const appRoutes = [
     {
