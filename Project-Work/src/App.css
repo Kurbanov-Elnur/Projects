@@ -5,18 +5,15 @@
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background: linear-gradient(to right, #f0f4f8, #e6eff1);
+  height: 100%;
 }
 
-
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000; 
+  height: 60px;
+  z-index: 1000;
 }
 
 main {
-  padding-top: 4rem;
   flex: 1;
 }

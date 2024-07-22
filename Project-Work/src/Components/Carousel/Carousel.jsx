@@ -6,13 +6,13 @@ import '../Carousel/Carousel.css';
 
 import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
 
-import slide_image_1 from '../Carousel/Assets/img_1.jpg';
-import slide_image_2 from '../Carousel/Assets/img_2.jpg';
-import slide_image_3 from '../Carousel/Assets/img_3.jpg';
-import slide_image_4 from '../Carousel/Assets/img_4.jpg';
-import slide_image_5 from '../Carousel/Assets/img_5.jpg';
-import slide_image_6 from '../Carousel/Assets/img_6.jpg';
-import slide_image_7 from '../Carousel/Assets/img_7.jpg';
+import slide_image_1 from '../../Assets/img_1.jpg';
+import slide_image_2 from '../../Assets/img_2.jpg';
+import slide_image_3 from '../../Assets/img_3.jpg';
+import slide_image_4 from '../../Assets/img_4.jpg';
+import slide_image_5 from '../../Assets/img_5.jpg';
+import slide_image_6 from '../../Assets/img_6.jpg';
+import slide_image_7 from '../../Assets/img_7.jpg';
 
 const images = [slide_image_1, slide_image_2, slide_image_3, slide_image_4, slide_image_5, slide_image_6, slide_image_7];
 
@@ -26,7 +26,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container-surface">
       <Swiper
         ref={swiperRef}
         effect={'coverflow'}

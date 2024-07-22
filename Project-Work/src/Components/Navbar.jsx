@@ -9,7 +9,7 @@ export default function Navbar() {
     const [activeItem, setActiveItem] = useState("Home");
     const menuRef = useRef(null);
 
-    const navItems = NavItems[0].children.slice(1);
+    const navItems = NavItems[0].children.slice(1, -1);
 
     const moreItems = [
         { id: 1, title: 'Appearance', description: 'Easy customization' },
@@ -39,11 +39,11 @@ export default function Navbar() {
 
     return (
         <div className="fixed top-0 left-0 w-full z-50">
-            <div className="antialiased bg-gray-100 dark:bg-gray-900">
-                <div className="w-full text-gray-700 bg-white dark:text-gray-200 dark:bg-gray-800">
+            <div className="bg-teal-50 shadow-md dark:bg-teal-900 dark:shadow-lg">
+                <div className="w-full text-gray-700 dark:text-gray-200">
                     <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
                         <div className="flex flex-row items-center justify-between p-4">
-                            <span className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
+                            <span className="text-lg font-semibold tracking-widest text-teal-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
                                 Project Work
                             </span>
                             <button
@@ -67,7 +67,7 @@ export default function Navbar() {
                                     <button
                                         style={{ textTransform: "capitalize" }}
                                         className={`cursor-pointer px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
-                                        ${activeItem === item.path ? 'bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white dark:focus:text-white'}`}
+                                        ${activeItem === item.path ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
                                         onClick={() => handleItemClick(item.path)}
                                     >
                                         {item.path}
@@ -78,7 +78,7 @@ export default function Navbar() {
                                 <button
                                     onClick={() => setOpen(!open)}
                                     className="flex flex-row items-center px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
-                                    bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white dark:focus:text-white"
+                                    bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white"
                                 >
                                     <span>More</span>
                                     <svg
@@ -94,13 +94,13 @@ export default function Navbar() {
                                     </svg>
                                 </button>
                                 {open && (
-                                    <div className="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
+                                    <div className="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-500">
                                         <div className="px-2 pt-2 pb-4 bg-white rounded-md shadow-lg dark:bg-gray-700">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {moreItems.map(({ id, title, description }) => (
                                                     <button
                                                         key={id}
-                                                        className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer"
+                                                        className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none focus:shadow-outline cursor-pointer"
                                                     >
                                                         <div className="bg-teal-500 text-white rounded-lg p-3">
                                                             <svg
@@ -127,11 +127,19 @@ export default function Navbar() {
                                 )}
                             </div>
                         </nav>
-                        <div className="absolute right-0 mr-5 p-5">
-                            <button className="p-2 rounded-full text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 text-xl">
-                                <FontAwesomeIcon icon={faUserCircle} />
-                            </button>
-                            <button className="p-2 rounded-full text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 text-xl">
+                        <div className="absolute right-0 mr-5 p-5 flex space-x-4">
+                            <Link to={'/auth'}>
+                                <button
+                                    onClick={() => handleItemClick('Profile')}
+                                    className={`p-2 rounded-full text-xl ${activeItem === 'Profile' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
+                                >
+                                    <FontAwesomeIcon icon={faUserCircle} />
+                                </button>
+                            </Link>
+                            <button
+                                onClick={() => handleItemClick('Settings')}
+                                className={`p-2 rounded-full text-xl ${activeItem === 'Settings' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
+                            >
                                 <FontAwesomeIcon icon={faCog} />
                             </button>
                         </div>
