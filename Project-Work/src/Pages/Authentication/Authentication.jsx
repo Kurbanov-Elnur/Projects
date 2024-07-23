@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Authentication.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -6,12 +6,18 @@ export default function Authentication() {
     const [isSignUp, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    
+
     const handleToggle = () => {
         setIsSignUp(!isSignUp);
     };
 
     const handlePasswordVisibility = () => {
         setShowPassword(!showPassword);
+    };
+
+    const signIn = () =>{
+        console.log(name.current.value);
     };
 
     return (
@@ -27,7 +33,7 @@ export default function Authentication() {
                             <button type="button" className="icon"><i className="fa-brands fa-linkedin-in"></i></button>
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" />
+                        <input type="text" placeholder="Name" ref={name}/>
                         <input type="email" placeholder="Email" />
                         <div className="password-container">
                             <input
@@ -42,7 +48,7 @@ export default function Authentication() {
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                             </button>
                         </div>
-                        <button type="button" className="button-primary">Sign Up</button>
+                        <button type="button" className="button-primary" onClick={signIn}>Sign Up</button>
                     </form>
                 </div>
                 <div className={`panel sign-in ${!isSignUp ? 'active' : ''}`}>
@@ -55,7 +61,7 @@ export default function Authentication() {
                             <button type="button" className="icon"><i className="fa-brands fa-linkedin-in"></i></button>
                         </div>
                         <span>or use your email and password</span>
-                        <input type="email" placeholder="Email" /> 
+                        <input type="email" placeholder="Email" />
                         <div className="password-container">
                             <input
                                 type={showPassword ? 'text' : 'password'}
