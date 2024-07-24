@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faCog } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { toggleMenu, closeMenu, setActiveItem, selectNavbar } from '../Store/navbarSlice';
 import NavItems from "../Routes";
 
 export default function Navbar() {
-    const [open, setOpen] = useState(false);
-    const [activeItem, setActiveItem] = useState("Home");
+    const dispatch = useDispatch();
+
+    const {open, activeItem} = useSelector(selectNavbar);
     const menuRef = useRef(null);
 
     const navItems = NavItems[0].children.slice(1, -1);
@@ -18,24 +21,14 @@ export default function Navbar() {
     ];
 
     useEffect(() => {
-        const storedActiveItem = localStorage.getItem('activeNavItem') || 'Home';
-        setActiveItem(storedActiveItem);
-    }, []);
-
-    useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setOpen(false);
+                dispatch(closeMenu());
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
-
-    const handleItemClick = (item) => {
-        setActiveItem(item);
-        localStorage.setItem('activeNavItem', item);
-    };
+    }, [dispatch]);
 
     return (
         <div className="fixed top-0 left-0 w-full z-50">
@@ -48,7 +41,7 @@ export default function Navbar() {
                             </span>
                             <button
                                 className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
-                                onClick={() => setOpen(!open)}
+                                onClick={() => dispatch(toggleMenu())}
                             >
                                 <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
                                     <path
@@ -68,7 +61,7 @@ export default function Navbar() {
                                         style={{ textTransform: "capitalize" }}
                                         className={`cursor-pointer px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
                                         ${activeItem === item.path ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
-                                        onClick={() => handleItemClick(item.path)}
+                                        onClick={() => dispatch(setActiveItem(item.path))}
                                     >
                                         {item.path}
                                     </button>
@@ -76,7 +69,7 @@ export default function Navbar() {
                             ))}
                             <div className="relative" ref={menuRef}>
                                 <button
-                                    onClick={() => setOpen(!open)}
+                                    onClick={() => dispatch(toggleMenu())}
                                     className="flex flex-row items-center px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 focus:outline-none focus:shadow-outline 
                                     bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white"
                                 >
@@ -130,14 +123,14 @@ export default function Navbar() {
                         <div className="absolute right-0 mr-5 p-5 flex space-x-4">
                             <Link to={'/auth'}>
                                 <button
-                                    onClick={() => handleItemClick('Profile')}
+                                    onClick={() => dispatch(setActiveItem('Profile'))}
                                     className={`p-2 rounded-full text-xl ${activeItem === 'Profile' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
                                 >
                                     <FontAwesomeIcon icon={faUserCircle} />
                                 </button>
                             </Link>
                             <button
-                                onClick={() => handleItemClick('Settings')}
+                                onClick={() => dispatch(setActiveItem('Settings'))}
                                 className={`p-2 rounded-full text-xl ${activeItem === 'Settings' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
                             >
                                 <FontAwesomeIcon icon={faCog} />

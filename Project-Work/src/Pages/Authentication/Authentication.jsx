@@ -1,24 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSignUp, togglePasswordVisibility, selectAuth } from '../../Store/authSlice';
 import './Authentication.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Authentication() {
-    const [isSignUp, setIsSignUp] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-
-    
-
-    const handleToggle = () => {
-        setIsSignUp(!isSignUp);
-    };
-
-    const handlePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const signIn = () =>{
-        console.log(name.current.value);
-    };
+    const dispatch = useDispatch();
+    const { isSignUp, showPassword } = useSelector(selectAuth);
 
     return (
         <div className='login-body'>
@@ -33,7 +21,7 @@ export default function Authentication() {
                             <button type="button" className="icon"><i className="fa-brands fa-linkedin-in"></i></button>
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" ref={name}/>
+                        <input type="text" placeholder="Name" />
                         <input type="email" placeholder="Email" />
                         <div className="password-container">
                             <input
@@ -43,12 +31,12 @@ export default function Authentication() {
                             <button
                                 type="button"
                                 className="password-toggle"
-                                onClick={handlePasswordVisibility}
+                                onClick={() => dispatch(togglePasswordVisibility())}
                             >
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                             </button>
                         </div>
-                        <button type="button" className="button-primary" onClick={signIn}>Sign Up</button>
+                        <button type="button" className="button-primary">Sign Up</button>
                     </form>
                 </div>
                 <div className={`panel sign-in ${!isSignUp ? 'active' : ''}`}>
@@ -70,7 +58,7 @@ export default function Authentication() {
                             <button
                                 type="button"
                                 className="password-toggle"
-                                onClick={handlePasswordVisibility}
+                                onClick={() => dispatch(togglePasswordVisibility())}
                             >
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                             </button>
@@ -84,12 +72,12 @@ export default function Authentication() {
                         <div className="toggle-panel toggle-left">
                             <h1 className='text-4xl font-bold'>Welcome Back!</h1>
                             <p>Enter your personal details to use all of site features</p>
-                            <button className="hiddenBtn" onClick={handleToggle}>Sign In</button>
+                            <button className="hiddenBtn" onClick={() => dispatch(toggleSignUp())}>Sign In</button>
                         </div>
                         <div className="toggle-panel toggle-right">
                             <h1 className='text-4xl font-bold'>Hello, Friend!</h1>
                             <p>Register with your personal details to use all of site features</p>
-                            <button className="hiddenBtn" onClick={handleToggle}>Sign Up</button>
+                            <button className="hiddenBtn" onClick={() => dispatch(toggleSignUp())}>Sign Up</button>
                         </div>
                     </div>
                 </div>
