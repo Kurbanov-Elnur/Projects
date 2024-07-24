@@ -17,7 +17,6 @@ const images = [
 ];
 
 export default function Carousel() {
-
   return (
     <div className="container-surface" style={{ userSelect: 'none' }}>
       <Swiper
