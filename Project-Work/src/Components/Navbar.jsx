@@ -107,12 +107,12 @@ export default function Navbar() {
                                 </button>
                                 {menus.moreMenu && (
                                     <div className="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-500">
-                                        <div className="px-2 pt-2 pb-4 bg-white rounded-md shadow-lg dark:bg-gray-700">
+                                        <div className="px-2 pt-2 pb-4 bg-teal-50 rounded-md shadow-lg dark:bg-teal-900">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {moreItems.map(({ id, title, description }) => (
                                                     <button
                                                         key={id}
-                                                        className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none focus:shadow-outline cursor-pointer"
+                                                        className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none focus:shadow-outline cursor-pointer"
                                                     >
                                                         <div className="bg-teal-500 text-white rounded-lg p-3">
                                                             <svg

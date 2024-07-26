@@ -19,7 +19,7 @@ const appRoutes = [
     {
         path: "auth",
         element: <Authentication /> 
-    }
+    },
 ];
 
 const app = [

@@ -3,17 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import '../Carousel/Carousel.css';
-
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
 
 const images = [
-  require('../../Assets/img_1.jpg'),
-  require('../../Assets/img_2.jpg'),
-  require('../../Assets/img_3.jpg'),
-  require('../../Assets/img_4.jpg'),
-  require('../../Assets/img_5.jpg'),
-  require('../../Assets/img_6.jpg'),
-  require('../../Assets/img_7.jpg')
+  require('../../Assets/Products/chanel.png'),
+  require('../../Assets/Products/macbook.png'),
+  require('../../Assets/Products/man-mix.png'),
+  require('../../Assets/Products/nike.png'),
+  require('../../Assets/Products/watch.png'),
+  require('../../Assets/Products/woman-mix.png'),
 ];
 
 export default function Carousel() {
