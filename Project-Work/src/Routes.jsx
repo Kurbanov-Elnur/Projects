@@ -2,6 +2,7 @@ import App from "./App";
 import Catalog from "./Pages/Catalog";
 import Home from "./Pages/Home";
 import Authentication from "./Pages/Authentication/Authentication";
+import AboutUs from "./Pages/AboutUs";
 
 const appRoutes = [
     {
@@ -15,6 +16,10 @@ const appRoutes = [
     {
         path: "catalog",
         element: <Catalog />,
+    },
+    {
+        path: "aboutus",
+        element: <AboutUs />,
     },
     {
         path: "auth",

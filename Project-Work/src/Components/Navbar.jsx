@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { toggleMenu, closeMenu, setActiveItem, selectNavbar } from '../Store/navbarSlice';
 import NavItems from "../Routes";
 
@@ -26,7 +26,6 @@ export default function Navbar() {
             if (moreMenuRef.current && !moreMenuRef.current.contains(event.target)) {
                 if (menus.moreMenu) {
                     dispatch(closeMenu('moreMenu'));
-                    console.log('More menu closed because clicked outside.');
                 }
             }
         };
@@ -148,12 +147,6 @@ export default function Navbar() {
                                             <FontAwesomeIcon icon={faUserCircle} />
                                         </button>
                                     </Link>
-                                    <button
-                                        onClick={() => dispatch(setActiveItem('settings'))}
-                                        className={`p-2 rounded-full text-xl ${activeItem === 'settings' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
-                                    >
-                                        <FontAwesomeIcon icon={faCog} />
-                                    </button>
                                 </div>
                             )}
                         </nav>
@@ -166,12 +159,6 @@ export default function Navbar() {
                                     <FontAwesomeIcon icon={faUserCircle} />
                                 </button>
                             </Link>
-                            <button
-                                onClick={() => dispatch(setActiveItem('settings'))}
-                                className={`p-2 rounded-full text-xl ${activeItem === 'settings' ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
-                            >
-                                <FontAwesomeIcon icon={faCog} />
-                            </button>
                         </div>
                     </div>
                 </div>

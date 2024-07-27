@@ -21,9 +21,8 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
+    width: 70%;
+    height: 90%;
 }
 
 .container-form {
@@ -68,7 +67,7 @@
 }
 
 .button-primary {
-    background-color: #6a59ff;
+    background-color: #009B77;
     color: #ffffff;
     font-size: 14px;
     padding: 12px 50px;
@@ -172,9 +171,8 @@
 }
 
 .toggle {
-    background-color: #a3d2a1;
     height: 100%;
-    background: linear-gradient(to right, #b7e3d0, #a3d2a1);
+    background: #41b482;
     color: #ffffff;
     position: relative;
     left: -100%;
@@ -203,7 +201,7 @@
 }
 
 .toggle-left {
-    background-color: #b7e3d0;
+    background-color: #41b482;
     transform: translateX(-200%);
 }
 
@@ -212,7 +210,7 @@
 }
 
 .toggle-right {
-    background-color: #a3d2a1;
+    background-color: #41b482;
     right: 0;
     transform: translateX(0);
 }
@@ -230,6 +228,10 @@
     padding-right: 40px;
 }
 
+.password-container input[type="password"] {
+    font-family: 'text-security-disc', sans-serif;
+}
+
 .password-toggle {
     position: absolute;
     right: 10px;
@@ -238,7 +240,6 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #6a59ff;
 }
 
 .password-toggle i {

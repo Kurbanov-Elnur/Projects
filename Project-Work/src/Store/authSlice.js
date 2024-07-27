@@ -5,6 +5,7 @@ const authSlice = createSlice({
     initialState: {
         isSignUp: false,
         showPassword: false,
+        users: JSON.parse(localStorage.getItem('users')) || [],
     },
     reducers: {
         toggleSignUp: (state) => {
@@ -13,10 +14,19 @@ const authSlice = createSlice({
         togglePasswordVisibility: (state) => {
             state.showPassword = !state.showPassword;
         },
+        signIn: (state, action) => {
+
+        },
+        signUp: (state, action) => {
+            const newUser = action.payload;
+
+            state.users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(state.users));
+        }
     },
 });
 
-export const { toggleSignUp, togglePasswordVisibility } = authSlice.actions;
+export const { toggleSignUp, togglePasswordVisibility, signUp } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth;
 
