@@ -11,14 +11,17 @@ const appRoutes = [
     },
     {
         path: "home",
+        name: "Home",
         element: <Home />,
     },
     {
         path: "catalog",
+        name: "Catalog",
         element: <Catalog />,
     },
     {
         path: "aboutus",
+        name: "About Us",
         element: <AboutUs />,
     },
     {

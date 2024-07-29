@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
   background: linear-gradient(to right, #f0f4f8, #e6eff1);
+  min-height: 100vh;
   height: 100%;
+  user-select: none;
 }
 
 header {

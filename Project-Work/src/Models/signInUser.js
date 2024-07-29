@@ -4,3 +4,5 @@ class signInUser {
         this.Password = password;
     }
 }
+
+export default signInUser;

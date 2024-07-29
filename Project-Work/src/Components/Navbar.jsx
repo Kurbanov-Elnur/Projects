@@ -13,7 +13,7 @@ export default function Navbar() {
     const { menus, activeItem } = useSelector(selectNavbar);
     const moreMenuRef = useRef(null);
 
-    const navItems = NavItems[0].children.slice(1, -1);
+    const navItems = NavItems[0].children.filter(item => item.name);
 
     const moreItems = [
         { id: 1, title: 'Appearance', description: 'Easy customization' },
@@ -81,7 +81,7 @@ export default function Navbar() {
                                         ${activeItem === item.path ? 'bg-teal-100 text-teal-900 dark:bg-teal-600 dark:text-white' : 'bg-transparent text-gray-700 dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:hover:text-white dark:focus:text-white'}`}
                                         onClick={() => dispatch(setActiveItem(item.path))}
                                     >
-                                        {item.path}
+                                        {item.name}
                                     </button>
                                 </Link>
                             ))}
@@ -137,6 +137,11 @@ export default function Navbar() {
                                     </div>
                                 )}
                             </div>
+
+                            <button className="text-gray-600 focus:outline-none">
+                                <i className="fas fa-shopping-cart h-6 w-6"></i>
+                            </button>
+                            
                             {menus.mobileMenu && (
                                 <div className="flex flex-row items-center justify-end mt-4 space-x-4">
                                     <Link to={'/auth'}>
