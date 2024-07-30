@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCatalog, setSearchTerm } from '../Store/catalogSlice';
+import { selectCatalog, setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity, getTotalPrice } from '../Store/catalogSlice';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Catalog() {
   const dispatch = useDispatch();
-  const { searchTerm, filteredProducts } = useSelector(selectCatalog);
+  const { searchTerm, filteredProducts, cartOpen, cartItems } = useSelector(selectCatalog);
 
-  const [cartOpen, setCartOpen] = useState(false);
-  const toggleCart = () => setCartOpen(!cartOpen);
+  const totalPrice = useSelector(state => getTotalPrice(state)).toFixed(2);
 
   return (
     <div>
+      <div className="flex justify-end p-4">
+        <button
+          onClick={() => dispatch(toggleCart())}
+          className="text-gray-600 focus:outline-none hover:text-gray-800 transition ease-in-out duration-300 mr-5"
+        >
+          <i className="fas fa-shopping-cart text-2xl"></i>
+        </button>
+      </div>
+
       <div className="relative mt-6 max-w-lg mx-auto">
         <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
           <svg className="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
@@ -23,7 +31,7 @@ export default function Catalog() {
           type="text"
           placeholder="Search"
           value={searchTerm}
-          onChange={e => dispatch(setSearchTerm(e.target.value))}
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
       </div>
 
@@ -32,53 +40,66 @@ export default function Catalog() {
       >
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>
-          <button onClick={toggleCart} className="text-gray-600 focus:outline-none">
+          <button onClick={() => dispatch(toggleCart())} className="text-gray-600 focus:outline-none">
             <i className="fas fa-times h-6 w-6" />
           </button>
         </div>
         <hr className="my-3" />
-        <div className="flex justify-between mt-6">
-          <div className="flex">
-            <img className="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="" />
-            <div className="mx-3">
-              <h3 className="text-sm text-gray-600">Mac Book Pro</h3>
-              <div className="flex items-center mt-2">
-                <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                  <i className="fas fa-minus h-5 w-5" />
-                </button>
-                <span className="text-gray-700 mx-2">2</span>
-                <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                  <i className="fas fa-plus h-5 w-5" />
-                </button>
+        {cartItems.length === 0 ? (
+          <p className="text-gray-700">Your cart is empty.</p>
+        ) : (
+          cartItems.map((item) => (
+            <div key={item.id} className="flex justify-between mt-6">
+              <div className="flex">
+                <img className="h-20 w-20 object-cover rounded" src={item.imageUrl} alt={item.name} />
+                <div className="mx-3">
+                  <h3 className="text-sm text-gray-600">{item.name}</h3>
+                  <div className="flex items-center mt-2">
+                    <button onClick={() => dispatch(decrementQuantity(item.id))} className="text-gray-500 focus:outline-none focus:text-gray-600">
+                      <i className="fas fa-minus h-5 w-5" />
+                    </button>
+                    <span className="text-gray-700 mx-2">{item.quantity}</span>
+                    <button onClick={() => dispatch(incrementQuantity(item.id))} className="text-gray-500 focus:outline-none focus:text-gray-600">
+                      <i className="fas fa-plus h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
               </div>
+              <span className="text-gray-600">{item.price * item.quantity}</span>
+              <button onClick={() => dispatch(removeFromCart(item.id))} className="text-gray-600 focus:outline-none">
+                <i className="fas fa-trash-alt h-5 w-5" />
+              </button>
             </div>
-          </div>
-          <span className="text-gray-600">20$</span>
-        </div>
+          ))
+        )}
         <div className="mt-8">
-          <form className="flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <input className="form-input w-48" type="text" placeholder="Add promocode" />
             <button className="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
               <span>Apply</span>
             </button>
-          </form>
+          </div>
         </div>
-        <a className="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+        <div className="mt-8 flex justify-between items-center text-gray-700">
+          <span className="text-lg font-semibold">Total:</span>
+          <span className="text-lg font-semibold">${totalPrice}</span>
+        </div>
+        <button className="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
           <span>Checkout</span>
           <i className="fas fa-chevron-right ml-2" />
-        </a>
+        </button>
       </div>
 
       <div className="mt-16 px-4">
         <h3 className="text-gray-600 text-2xl font-medium">Products</h3>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-6">
-          {filteredProducts.map((product, index) => (
-            <div key={index} className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
               <div
                 className="flex items-end justify-end h-56 w-full bg-cover"
                 style={{ backgroundImage: `url('${product.imageUrl}')` }}
               >
-                <button className="p-2 rounded-full bg-indigo-600 text-white mx-5 -mb-4 hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+                <button onClick={() => dispatch(addToCart(product))} className="p-2 rounded-full bg-indigo-600 text-white mx-5 -mb-4 hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
                   <svg
                     className="h-5 w-5"
                     fill="none"
@@ -93,13 +114,13 @@ export default function Catalog() {
                 </button>
               </div>
               <div className="px-5 py-3">
-                <h3 className="text-gray-700 uppercase">{product.name}</h3>
-                <span className="text-gray-500 mt-2">{product.price}</span>
+                <h4 className="text-lg font-medium text-gray-800">{product.name}</h4>
+                <p className="text-gray-600 mt-2">${product.price}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </div >
+    </div>
   );
 }

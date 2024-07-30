@@ -137,10 +137,6 @@ export default function Navbar() {
                                     </div>
                                 )}
                             </div>
-
-                            <button className="text-gray-600 focus:outline-none">
-                                <i className="fas fa-shopping-cart h-6 w-6"></i>
-                            </button>
                             
                             {menus.mobileMenu && (
                                 <div className="flex flex-row items-center justify-end mt-4 space-x-4">

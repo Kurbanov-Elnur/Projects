@@ -24,6 +24,8 @@ const navbarSlice = createSlice({
     },
 });
 
+
+
 export const { toggleMenu, closeMenu, setActiveItem } = navbarSlice.actions;
 export const selectNavbar = (state) => state.navbar;
 

@@ -5,19 +5,52 @@ const catalogSlice = createSlice({
     initialState: {
         searchTerm: '',
         products: [
-            { name: 'Chanel', price: '$36', imageUrl: require('../Assets/Products/chanel.png') },
-            { name: 'Mac Book', price: '$2000', imageUrl: require('../Assets/Products/macbook.png') },
-            { name: 'Man Mix', price: '$12', imageUrl: require('../Assets/Products/man-mix.png') },
-            { name: 'Nike', price: '$120', imageUrl: require('../Assets/Products/nike.png') },
-            { name: 'Watch', price: '$80', imageUrl: require('../Assets/Products/watch.png') },
-            { name: 'Woman Mix', price: '$20', imageUrl: require('../Assets/Products/woman-mix.png') },
+            { id: 1, name: 'Chanel', price: 36, imageUrl: require('../Assets/Products/chanel.png') },
+            { id: 2, name: 'Mac Book', price: 2000, imageUrl: require('../Assets/Products/macbook.png') },
+            { id: 3, name: 'Man Mix', price: 12, imageUrl: require('../Assets/Products/man-mix.png') },
+            { id: 4, name: 'Nike', price: 120, imageUrl: require('../Assets/Products/nike.png') },
+            { id: 5, name: 'Watch', price: 80, imageUrl: require('../Assets/Products/watch.png') },
+            { id: 6, name: 'Woman Mix', price: 20, imageUrl: require('../Assets/Products/woman-mix.png') },
         ],
         filteredProducts: [],
+        cartOpen: false,
+        cartItems: [],
     },
     reducers: {
-        setSearchTerm(state, action) {
+        setSearchTerm: (state, action) => {
             state.searchTerm = action.payload;
             state.filteredProducts = filterProducts(state.products, state.searchTerm);
+        },
+        toggleCart: (state) => {
+            state.cartOpen = !state.cartOpen;
+        },
+        addToCart: (state, action) => {
+            const product = action.payload;
+            const existingItem = state.cartItems.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                state.cartItems.push({ ...product, quantity: 1 });
+            }
+        },
+        removeFromCart: (state, action) => {
+            const productId = action.payload;
+            state.cartItems = state.cartItems.filter(item => item.id !== productId);
+        },
+        incrementQuantity: (state, action) => {
+            const productId = action.payload;
+            const item = state.cartItems.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+            }
+        },
+        decrementQuantity: (state, action) => {
+            const productId = action.payload;
+            const item = state.cartItems.find(item => item.id === productId);
+            if (item) {
+                item.quantity = item.quantity > 1 ? item.quantity - 1 : 1;
+            }
         },
     },
     extraReducers: (builder) => {
@@ -33,7 +66,10 @@ function filterProducts(products, searchTerm) {
     );
 }
 
-export const { setSearchTerm } = catalogSlice.actions;
+export const getTotalPrice = (state) => 
+    state.catalog.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+export const { setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity } = catalogSlice.actions;
 
 export const selectCatalog = (state) => state.catalog;
 
