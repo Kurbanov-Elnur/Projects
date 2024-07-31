@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCatalog, setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity, getTotalPrice } from '../Store/catalogSlice';
+import { selectCatalog, setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity, getTotalPrice } from '../Store/productsSlice';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Catalog() {
@@ -36,7 +36,7 @@ export default function Catalog() {
       </div>
 
       <div
-        className={`fixed right-0 top-16 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300 rounded-lg ${cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'}`}
+        className={`fixed right-0 top-16 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300 rounded-lg ${cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'} z-50`}
       >
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>

@@ -14,12 +14,7 @@ export default function Navbar() {
     const moreMenuRef = useRef(null);
 
     const navItems = NavItems[0].children.filter(item => item.name);
-
-    const moreItems = [
-        { id: 1, title: 'Appearance', description: 'Easy customization' },
-        { id: 2, title: 'Comments', description: 'Check your latest comments' },
-        { id: 3, title: 'Analytics', description: 'Take a look at your statistics' },
-    ];
+    const moreItems = NavItems[0].children.find(item => item.path === "more").children;
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -108,36 +103,27 @@ export default function Navbar() {
                                     <div className="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-500">
                                         <div className="px-2 pt-2 pb-4 bg-teal-50 rounded-md shadow-lg dark:bg-teal-900">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {moreItems.map(({ id, title, description }) => (
-                                                    <button
-                                                        key={id}
-                                                        className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none focus:shadow-outline cursor-pointer"
-                                                    >
-                                                        <div className="bg-teal-500 text-white rounded-lg p-3">
-                                                            <svg
-                                                                fill="none"
-                                                                stroke="currentColor"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth="2"
-                                                                viewBox="0 0 24 24"
-                                                                className="md:h-6 md:w-6 h-4 w-4"
-                                                            >
-                                                                <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                                            </svg>
-                                                        </div>
-                                                        <div className="ml-3">
-                                                            <p className="font-semibold">{title}</p>
-                                                            <p className="text-sm">{description}</p>
-                                                        </div>
-                                                    </button>
+                                                {moreItems.map(({ title, description, path, icon }) => (
+                                                    <Link key={title} to={`more/${path}`}>
+                                                        <button
+                                                            className="flex flex-row items-start rounded-lg bg-transparent p-2 dark:hover:bg-teal-700 dark:focus:bg-teal-700 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none focus:shadow-outline cursor-pointer"
+                                                        >
+                                                            <div className="bg-teal-500 text-white rounded-lg p-3">
+                                                                <FontAwesomeIcon icon={icon} className="md:h-6 md:w-6 h-4 w-4" />
+                                                            </div>
+                                                            <div className="ml-3">
+                                                                <p className="font-semibold">{title}</p>
+                                                                <p className="text-sm">{description}</p>
+                                                            </div>
+                                                        </button>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>
                                     </div>
                                 )}
                             </div>
-                            
+
                             {menus.mobileMenu && (
                                 <div className="flex flex-row items-center justify-end mt-4 space-x-4">
                                     <Link to={'/auth'}>

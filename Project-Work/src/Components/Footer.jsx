@@ -56,36 +56,32 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold text-pink-500 py-1 uppercase">Contact</h3>
                         <p className="text-base my-2">Email: elnur-mamedov@mail.ru</p>
-                        <p className="text-base my-2">Phone: +994 77 777 77 77</p>
+                        <p className="text-base my-2">Phone: +994 70 123 45 67</p>
                         <div className="flex space-x-4 mt-2">
-                            <a
+                            <button
                                 className="text-white hover:text-[#ff007f] transform hover:scale-150 
                                 transition-transform duration-500 ease-in-out"
-                                href="#"
                             >
                                 <i className="fab fa-facebook-f cursor-pointer" />
-                            </a>
-                            <a
+                            </button>
+                            <button
                                 className="text-white hover:text-[#ff007f] transform hover:scale-150
                                 transition-transform duration-500 ease-in-out"
-                                href="#"
                             >
                                 <i className="fab fa-twitter cursor-pointer" />
-                            </a>
-                            <a
+                            </button>
+                            <button
                                 className="text-white hover:text-[#ff007f] transform hover:scale-150
                                 transition-transform duration-500 ease-in-out"
-                                href="#"
                             >
                                 <i className="fab fa-instagram cursor-pointer" />
-                            </a>
-                            <a
+                            </button>
+                            <button
                                 className="text-white hover:text-[#ff007f] transform hover:scale-150
                                 transition-transform duration-500 ease-in-out"
-                                href="#"
                             >
                                 <i className="fab fa-linkedin-in cursor-pointer" />
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -94,7 +90,7 @@ export default function Footer() {
                     <div className="h-full flex items-center justify-center mb-4">
                         <div className="w-80 relative">
                             <input
-                                placeholder="Subscribe to our newsletter"
+                                placeholder="Contact Us"
                                 className="w-full text-gray-800 p-3 h-8 rounded-full focus:outline-none 
                                 focus:border border-pink-800"
                             />
@@ -102,7 +98,7 @@ export default function Footer() {
                                 className="bg-pink-400 px-6 py-1 rounded-full text-white
                                 absolute top-0 right-0"
                             >
-                                Submit
+                                Send
                             </button>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import navbarSlice from './navbarSlice';
-import catalogSlice from './catalogSlice';
+import catalogSlice from './productsSlice';
 
 const store = configureStore({
   reducer: {

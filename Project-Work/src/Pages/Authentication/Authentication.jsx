@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSignUp, togglePasswordVisibility, signUp, signIn, selectAuth } from '../../Store/authSlice';
 import './Authentication.css';
@@ -11,7 +11,11 @@ export default function Authentication() {
     const loginUser = useRef(new signInUser());
 
     const dispatch = useDispatch();
-    const { isSignUp, showPassword } = useSelector(selectAuth);
+    const { isSignUp, showPassword, errors } = useSelector(selectAuth);
+
+    useEffect (() =>{
+        console.log(errors)
+    });
 
     return (
         <div className='login-body'>
@@ -28,6 +32,7 @@ export default function Authentication() {
                         <span className="text-lg">or use your email for registration</span>
                         <input ref={(u) => (newUser.current.UserName = u)} type="text" placeholder="User name" className="input-large" />
                         <input ref={(e) => newUser.current.Email = e} type="email" placeholder="Email" className="input-large" />
+                        { errors.emailError.hasError && <div className="text-red-500">{errors.emailError.message}</div>}
                         <div className="password-container">
                             <input
                                 ref={(p) => newUser.current.Password = p}
@@ -58,6 +63,7 @@ export default function Authentication() {
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                             </button>
                         </div>
+                        { errors.passwordError.hasError && <div className="text-red-500">{errors.passwordError.message}</div>}
                         <button onClick={() => dispatch(signUp({
                             UserName: newUser.current.UserName.value,
                             Email: newUser.current.Email.value,
@@ -77,6 +83,7 @@ export default function Authentication() {
                         </div>
                         <span className="text-lg">or use your email and password</span>
                         <input ref={(e) => (loginUser.current.Email = e)} type="email" placeholder="Email" className="input-large" />
+                        { errors.emailError.hasError && <div className="text-red-500">{errors.emailError.message}</div>}
                         <div className="password-container">
                             <input
                                 ref={(p) => (loginUser.current.Password = p)}
@@ -92,6 +99,7 @@ export default function Authentication() {
                                 <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                             </button>
                         </div>
+                        { errors.passwordError.hasError && <div className="text-red-500">{errors.passwordError.message}</div>}
                         <button type="button" className="link-primary text-lg">Forgot Your Password?</button>
                         <button onClick={() => dispatch(signIn({
                             Email: loginUser.current.Email.value,

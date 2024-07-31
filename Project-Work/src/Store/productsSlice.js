@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const catalogSlice = createSlice({
-    name: 'catalog',
+const productsSlice = createSlice({
+    name: 'products',
     initialState: {
         searchTerm: '',
         products: [
@@ -69,8 +69,8 @@ function filterProducts(products, searchTerm) {
 export const getTotalPrice = (state) => 
     state.catalog.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-export const { setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity } = catalogSlice.actions;
+export const { setSearchTerm, toggleCart, addToCart, removeFromCart, incrementQuantity, decrementQuantity } = productsSlice.actions;
 
 export const selectCatalog = (state) => state.catalog;
 
-export default catalogSlice.reducer;
+export default productsSlice.reducer;
