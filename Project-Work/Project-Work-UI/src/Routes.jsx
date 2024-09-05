@@ -1,21 +1,30 @@
 import App from "./App";
 import Home from "./Pages/Home";
-import Register from "./Components/Register"
+import Forgot from "./Components/Forgot"
 import Auth from "./Pages/Auth";
-import Login from "./Components/Login";
+import SignIn from "./Components/SignIn";
+
+const moreItems = [
+    {
+        path: "news",
+        title: 'News',
+        description: "Stay updated with the latest news",
+
+    },
+];
 
 const authChildren = [
     {
         index: true,
-        element: <Login />
+        element: <SignIn />
     },
     {
-        path: "login",
-        element: <Login />
+        path: "signin",
+        element: <SignIn />
     },
     {
-        path: "register",
-        element: <Register />
+        path: "forgot",
+        element: <Forgot />
     }
 ];
 
@@ -27,7 +36,12 @@ const appRoutes = [
     },
     {
         path: "home",
+        name: "Home",
         element: <Home />,
+    },
+    {
+        path: "more",
+        children: moreItems,
     },   
     {
         path: "auth",

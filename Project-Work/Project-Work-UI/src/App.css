@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .App {
+    height: 100vh;
     user-select: none;
+    background: url('/src/Assets/back.jpg');
+    background-size: cover;
+    background-position: center; 
 }
