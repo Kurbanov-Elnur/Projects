@@ -12,8 +12,8 @@ using Project_Work_API.Data.Contexts;
 namespace Project_Work_API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240826090230_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240907110420_InitialState")]
+    partial class InitialState
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,16 +31,18 @@ namespace Project_Work_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("FacultyId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FacultyId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Departments");
                 });
@@ -52,9 +54,12 @@ namespace Project_Work_API.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Faculties");
                 });
@@ -65,20 +70,21 @@ namespace Project_Work_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("DepartmentId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("TeacherId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("TeacherId");
 
@@ -91,7 +97,6 @@ namespace Project_Work_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("GroupId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserId")
@@ -102,7 +107,8 @@ namespace Project_Work_API.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Students");
                 });
@@ -113,7 +119,6 @@ namespace Project_Work_API.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("FacultyId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserId")
@@ -124,7 +129,8 @@ namespace Project_Work_API.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Teachers");
                 });
@@ -149,7 +155,7 @@ namespace Project_Work_API.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("Role")
@@ -172,8 +178,7 @@ namespace Project_Work_API.Migrations
                     b.HasOne("Project_Work_API.Data.Models.DBModels.Faculty", "Faculty")
                         .WithMany("Departments")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Faculty");
                 });
@@ -183,14 +188,12 @@ namespace Project_Work_API.Migrations
                     b.HasOne("Project_Work_API.Data.Models.DBModels.Department", "Department")
                         .WithMany("Groups")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Project_Work_API.Data.Models.DBModels.Teacher", "Teacher")
                         .WithMany("Groups")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Department");
 
@@ -202,12 +205,11 @@ namespace Project_Work_API.Migrations
                     b.HasOne("Project_Work_API.Data.Models.DBModels.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Project_Work_API.Data.Models.DBModels.User", "User")
-                        .WithMany("Students")
-                        .HasForeignKey("UserId")
+                        .WithOne("Student")
+                        .HasForeignKey("Project_Work_API.Data.Models.DBModels.Student", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -221,12 +223,11 @@ namespace Project_Work_API.Migrations
                     b.HasOne("Project_Work_API.Data.Models.DBModels.Faculty", "Faculty")
                         .WithMany("Teachers")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Project_Work_API.Data.Models.DBModels.User", "User")
-                        .WithMany("Teachers")
-                        .HasForeignKey("UserId")
+                        .WithOne("Teacher")
+                        .HasForeignKey("Project_Work_API.Data.Models.DBModels.Teacher", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -259,9 +260,11 @@ namespace Project_Work_API.Migrations
 
             modelBuilder.Entity("Project_Work_API.Data.Models.DBModels.User", b =>
                 {
-                    b.Navigation("Students");
+                    b.Navigation("Student")
+                        .IsRequired();
 
-                    b.Navigation("Teachers");
+                    b.Navigation("Teacher")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

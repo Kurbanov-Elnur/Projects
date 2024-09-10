@@ -11,8 +11,8 @@ public class User
     public string Password { get; set; } 
     public Role Role { get; set; } 
     public string? RefreshToken { get; set; }
-    public DateTime RefreshTokenExpiryTime { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
 
-    public ICollection<Teacher> Teachers { get; set; }
-    public ICollection<Student> Students { get; set; }
+    public Teacher Teacher { get; set; }
+    public Student Student { get; set; }
 }

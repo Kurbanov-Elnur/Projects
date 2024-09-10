@@ -2,14 +2,14 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faFileInvoice, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faFileInvoice, faUsers, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 const menuItems = [
     {
-        href: "/dashboard",
-        icon: faTachometerAlt,
-        label: "Dashboard",
-        description: "Data overview",
+        href: "/home",
+        icon: faGraduationCap,
+        label: "Home",
+        description: "Home page",
         count: null
     },
     {
@@ -17,7 +17,7 @@ const menuItems = [
         icon: faFileInvoice,
         label: "Invoices",
         description: "Manage invoices",
-        count: 23
+        count: null
     },
     {
         href: "/users",
@@ -36,7 +36,7 @@ const Navbar = () => {
 
     return (
         <div className="fixed top-0 left-0 h-full w-64 bg-[#303841]/60 border border-[#3ec9a7] rounded-md p-5 shadow-lg backdrop-filter backdrop-blur-sm">
-            <div className="p-4 bg-gray-900/40 rounded-b-lg">
+            <div className="p-4 bg-gray-600/40 rounded-b-lg">
                 <h1 className="font-bold text-lg lg:text-3xl bg-gradient-to-br from-gray-50 via-gray-150 to-transparent bg-clip-text text-transparent">
                     Dashboard<span className="text-[#3ec9a7]">.</span>
                 </h1>
@@ -57,17 +57,17 @@ const Navbar = () => {
                     <a
                         key={item.href}
                         href={item.href}
-                        className={`hover:bg-[#3ec9a7]/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${isActive(item.href) ? 'bg-[#3ec9a7] text-gray-400' : ''}`}
+                        className={`hover:bg-[#3ec9a7]/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${isActive(item.href) ? 'bg-[#3ec9a7]/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group' : ''}`}
                     >
                         <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                             <div>
                                 <FontAwesomeIcon
                                     icon={item.icon}
-                                    className={`w-6 h-6 ${isActive(item.href) ? 'text-gray-400' : 'group-hover:text-[#3ec9a7]'}`}
+                                    className={`w-6 h-6 ${isActive(item.href) ? 'text-[#3ec9a7]' : 'group-hover:text-[#3ec9a7]'}`}
                                 />
                             </div>
                             <div>
-                                <p className={`font-bold text-base lg:text-lg leading-4 ${isActive(item.href) ? 'text-gray-400' : 'group-hover:text-[#3ec9a7]'}`}>
+                                <p className={`font-bold text-base lg:text-lg leading-4 ${isActive(item.href) ? 'text-[#3ec9a7]' : 'group-hover:text-[#3ec9a7]'}`}>
                                     {item.label}
                                 </p>
                                 {item.description && (

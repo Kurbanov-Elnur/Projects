@@ -4,15 +4,6 @@ import Forgot from "./Components/Forgot"
 import Auth from "./Pages/Auth";
 import SignIn from "./Components/SignIn";
 
-const moreItems = [
-    {
-        path: "news",
-        title: 'News',
-        description: "Stay updated with the latest news",
-
-    },
-];
-
 const authChildren = [
     {
         index: true,
@@ -39,10 +30,6 @@ const appRoutes = [
         name: "Home",
         element: <Home />,
     },
-    {
-        path: "more",
-        children: moreItems,
-    },   
     {
         path: "auth",
         element: <Auth />,

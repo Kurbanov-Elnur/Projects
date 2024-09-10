@@ -55,15 +55,17 @@ public class AppDBContext : DbContext
 
         userEntity.Property(u => u.RefreshTokenExpiryTime);
 
-        userEntity.HasMany(u => u.Teachers)
+        userEntity.HasOne(u => u.Teacher)
             .WithOne(t => t.User)
-            .HasForeignKey(t => t.UserId)
-            .IsRequired();
+            .HasForeignKey<Teacher>(t => t.UserId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
-        userEntity.HasMany(u => u.Students)
+        userEntity.HasOne(u => u.Student)
             .WithOne(s => s.User)
-            .HasForeignKey(s => s.UserId)
-            .IsRequired();
+            .HasForeignKey<Student>(s => s.UserId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         departmentEntity.HasKey(d => d.Id);
 
@@ -72,15 +74,18 @@ public class AppDBContext : DbContext
 
         departmentEntity.Property(d => d.Name)
             .IsRequired();
+        departmentEntity.HasIndex(d => d.Name)
+            .IsUnique();
 
         departmentEntity.HasOne(d => d.Faculty)
             .WithMany(f => f.Departments)
             .HasForeignKey(d => d.FacultyId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         departmentEntity.HasMany(d => d.Groups)
             .WithOne(g => g.Department)
-            .HasForeignKey(g => g.DepartmentId);
+            .HasForeignKey(g => g.DepartmentId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         facultyEntity.HasKey(f => f.Id);
 
@@ -89,19 +94,18 @@ public class AppDBContext : DbContext
 
         facultyEntity.Property(f => f.Name)
             .IsRequired();
-
         facultyEntity.HasIndex(f => f.Name)
             .IsUnique();
 
         facultyEntity.HasMany(f => f.Departments)
             .WithOne(d => d.Faculty)
             .HasForeignKey(d => d.FacultyId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         facultyEntity.HasMany(f => f.Teachers)
             .WithOne(t => t.Faculty)
             .HasForeignKey(t => t.FacultyId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         groupEntity.HasKey(g => g.Id);
 
@@ -110,21 +114,23 @@ public class AppDBContext : DbContext
 
         groupEntity.Property(g => g.Name)
             .IsRequired();
+        groupEntity.HasIndex(g => g.Name)
+            .IsUnique();
 
         groupEntity.HasOne(g => g.Teacher)
             .WithMany(t => t.Groups)
             .HasForeignKey(g => g.TeacherId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);  
 
         groupEntity.HasOne(g => g.Department)
             .WithMany(d => d.Groups)
             .HasForeignKey(g => g.DepartmentId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         groupEntity.HasMany(g => g.Students)
             .WithOne(s => s.Group)
             .HasForeignKey(s => s.GroupId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         studentEntity.HasKey(s => s.Id);
 
@@ -132,14 +138,14 @@ public class AppDBContext : DbContext
             .IsRequired();
 
         studentEntity.HasOne(s => s.User)
-            .WithMany(u => u.Students)
-            .HasForeignKey(s => s.UserId)
-            .IsRequired();
+            .WithOne(u => u.Student)
+            .HasForeignKey<Student>(s => s.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         studentEntity.HasOne(s => s.Group)
             .WithMany(g => g.Students)
             .HasForeignKey(s => s.GroupId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         teacherEntity.HasKey(t => t.Id);
 
@@ -147,18 +153,18 @@ public class AppDBContext : DbContext
             .IsRequired();
 
         teacherEntity.HasOne(t => t.User)
-            .WithMany(u => u.Teachers)
-            .HasForeignKey(t => t.UserId)
-            .IsRequired();
+            .WithOne(u => u.Teacher)
+            .HasForeignKey<Teacher>(t => t.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         teacherEntity.HasOne(t => t.Faculty)
             .WithMany(f => f.Teachers)
             .HasForeignKey(t => t.FacultyId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
 
         teacherEntity.HasMany(t => t.Groups)
             .WithOne(g => g.Teacher)
             .HasForeignKey(g => g.TeacherId)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
