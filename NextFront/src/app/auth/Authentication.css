@@ -1,0 +1,247 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../Fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 91.5vh;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #e6eff1);
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    width: 70%;
+    height: 90%;
+}
+
+.container-form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container-form input {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin: 12px 0;
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.container p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+    color: white;
+}
+
+.container span {
+    font-size: 14px;
+    color: #6a59ff;
+}
+
+.link-primary {
+    color: #6a59ff;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.button-primary {
+    background-color: #009B77;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 12px 50px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.hiddenBtn {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 12px 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.social-icons {
+    margin: 20px 0;
+}
+
+.icon {
+    border: 1px solid #ddd;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    width: 50px;
+    height: 50px;
+    background-color: #f9f9f9;
+}
+
+.panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.panel.sign-in {
+    left: 0;
+    z-index: 2;
+}
+
+.panel.sign-up {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .panel.sign-in {
+    transform: translateX(100%);
+}
+
+.container.active .panel.sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move {
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 100;
+}
+
+.container.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle {
+    height: 100%;
+    background: #41b482;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle {
+    transform: translateX(50%);
+}
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left {
+    background-color: #41b482;
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    background-color: #41b482;
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    padding-right: 40px;
+}
+
+.password-container input[type="password"] {
+    font-family: 'text-security-disc', sans-serif;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.password-toggle i {
+    font-size: 18px;
+}
